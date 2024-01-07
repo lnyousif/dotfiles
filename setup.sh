@@ -1,4 +1,4 @@
-curl -s https://ohmyposh.dev/install.sh | bash -s -- -d ~/bin
+curl -s https://ohmyposh.dev/install.sh | bash -s -- -d ~/
 
 # powerline fonts for zsh agnoster theme
 git clone https://github.com/powerline/fonts.git
