@@ -1,5 +1,5 @@
 export PATH=$PATH:~/
-curl -s https://ohmyposh.dev/install.sh | bash -s -- -d ~/
+curl -s https://ohmyposh.dev/install.sh | bash -s
 
 # powerline fonts for zsh agnoster theme
 git clone https://github.com/powerline/fonts.git
