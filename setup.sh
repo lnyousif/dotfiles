@@ -1,8 +1,6 @@
-export PATH=$PATH:~/
-
 export PATH=$PATH:/home/vscode
 
-curl -s https://ohmyposh.dev/install.sh | bash -s -- -d ~/
+curl -s https://ohmyposh.dev/install.sh | bash -s -- -d /home/vscode
 
 # powerline fonts for zsh agnoster theme
 git clone https://github.com/powerline/fonts.git
