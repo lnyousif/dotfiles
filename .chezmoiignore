@@ -1,0 +1,29 @@
+lib/
+README.md
+LICENSE
+install.sh
+
+**/.git
+**/.gitmodules
+
+{{ if ne .chezmoi.os "darwin" }}
+.1password/agent.sock
+.chezmoiscripts/darwin/
+Library/
+{{ end }}
+
+{{ if ne .chezmoi.os "linux" }}
+.chezmoiscripts/linux/
+# VisualStudio Code
+.config/Code
+{{ end }}
+
+{{ if ne .chezmoi.os "windows" }}
+.chezmoiscripts/windows/
+{{ end }}
+
+
+## GitHub Codespaces
+{{ if .github.is_codespaces }}
+.kaf/
+{{ end }}
