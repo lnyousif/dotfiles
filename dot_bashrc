@@ -1,3 +1,3 @@
 PATH=$PATH:/home/laith/bin
 
-eval "$(oh-my-posh init bash --config https://raw.githubusercontent.com/lnyousif/dotfiles/refs/heads/main/configs/oh-my-posh/theme.omp.json )"
+eval "$(oh-my-posh init bash --config https://raw.githubusercontent.com/lnyousif/dotfiles/refs/heads/main/.support/oh-my-posh/theme.omp.json )"
