@@ -4,7 +4,7 @@ packages:
       - "git"
     casks:
       - "google-chrome"
-linux:
+  linux:
     dnfs:
       - "git"
       - "Code"
