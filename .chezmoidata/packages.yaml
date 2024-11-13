@@ -4,3 +4,10 @@ packages:
       - "git"
     casks:
       - "google-chrome"
+linux:
+    dnfs:
+      - "git"
+      - "Code"
+      - "docker-desktop"
+    apts:
+      - "docker-desktop"
