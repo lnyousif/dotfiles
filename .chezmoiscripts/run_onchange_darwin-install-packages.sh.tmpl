@@ -8,9 +8,7 @@ brew {{ . | quote }}
 {{ range .packages.darwin.casks -}}
 cask {{ . | quote }}
 {{ end -}}
-EOF
 {{ end -}}
-
 {{ if eq .chezmoi.os "linux" -}}
 #!/bin/bash
 
@@ -19,15 +17,14 @@ APT_GET_CMD=$(which apt-get)
   
 if [[ ! -z $DNF_CMD ]]; then
 {{ range .packages.linux.dnfs -}}
-dnf install {{ . | quote }}
+sudo dnf install {{ . | quote }}
 {{ end -}}
 elif [[ ! -z $APT_GET_CMD ]]; then
 {{ range .packages.linux.apts -}}
-apt get {{ . | quote }}
+sudo apt-get {{ . | quote }}
 {{ end -}}
  else
     echo "error can't install package $PACKAGE"
     exit 1;
  fi
-EOF
 {{ end -}}
