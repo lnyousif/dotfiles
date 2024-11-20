@@ -7,7 +7,5 @@ packages:
   linux:
     dnfs:
       - "git"
-      - "Code"
-      - "docker-desktop"
     apts:
       - "docker-desktop"
