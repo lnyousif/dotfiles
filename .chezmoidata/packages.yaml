@@ -9,3 +9,5 @@ packages:
       - "git"
     apts:
       - "docker-desktop"
+    curls:
+      - "curl -s https://ohmyposh.dev/install.sh | sudo bash -s -- -d ~/bin"

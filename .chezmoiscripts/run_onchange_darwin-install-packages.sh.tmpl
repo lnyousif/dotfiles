@@ -13,18 +13,22 @@ cask {{ . | quote }}
 #!/bin/bash
 
 DNF_CMD=$(which dnf)
-APT_GET_CMD=$(which apt-get)
-  
+APT_CMD=$(which apt-get)
+CURL_CMD=$(which curl)
+
 if [[ ! -z $DNF_CMD ]]; then
 {{ range .packages.linux.dnfs -}}
 sudo dnf install {{ . | quote }}
 {{ end -}}
-elif [[ ! -z $APT_GET_CMD ]]; then
+elif [[ ! -z $APT_CMD ]]; then
 {{ range .packages.linux.apts -}}
 sudo apt-get {{ . | quote }}
 {{ end -}}
- else
-    echo "error can't install package $PACKAGE"
-    exit 1;
- fi
+fi
+
+if [[ ! -z $CURL_CMD ]]; then
+{{ range .packages.linux.curls -}}
+{{ . | quote }}
+{{ end -}}
+fi
 {{ end -}}
