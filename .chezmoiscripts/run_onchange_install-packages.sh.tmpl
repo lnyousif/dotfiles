@@ -1,0 +1,39 @@
+# hash: {{ include ".chezmoidata/packages.yaml" | sha256sum }}
+
+
+{{ if eq .chezmoi.os "darwin" -}}
+    #!/bin/bash
+
+    brew bundle --no-lock --file=/dev/stdin <<EOF
+    {{ range .packages.darwin.brews -}}
+        brew {{ . | quote }}
+    {{ end -}}
+
+    {{ range .packages.darwin.casks -}}
+        cask {{ . | quote }}
+    {{ end -}}
+{{ end -}}
+{{ if eq .chezmoi.os "linux" -}}
+    #!/bin/bash
+
+    DNF_CMD=$(which dnf)
+    APT_CMD=$(which apt-get)
+    CURL_CMD=$(which curl)
+
+    if [[ ! -z $CURL_CMD ]]; then
+        {{ range .packages.linux.curls -}}
+            {{ . | quote }}
+        {{ end -}}
+    fi
+
+    if [[ ! -z $DNF_CMD ]]; then
+        {{ range .packages.linux.dnfs -}}
+            sudo dnf install {{ . | quote }}
+        {{ end -}}
+    elif [[ ! -z $APT_CMD ]]; then
+        {{ range .packages.linux.apts -}}
+            sudo apt-get {{ . | quote }}
+        {{ end -}}
+    fi
+
+{{ end -}}

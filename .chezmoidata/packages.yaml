@@ -1,13 +1,13 @@
 packages:
+  linux:
+    curls:
+      - "curl -s https://ohmyposh.dev/install.sh | sudo bash -s -- -d ~/bin"
+    dnfs:
+      - "git"
+    apts:
+      - "docker-desktop"
   darwin:
     brews:
       - "git"
     casks:
       - "google-chrome"
-  linux:
-    dnfs:
-      - "git"
-    apts:
-      - "docker-desktop"
-    curls:
-      - "curl -s https://ohmyposh.dev/install.sh | sudo bash -s -- -d ~/bin"
