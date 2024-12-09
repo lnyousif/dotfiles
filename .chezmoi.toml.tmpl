@@ -14,6 +14,17 @@
 # {{- $email := promptString "Git email address for the author/committer" }}
 # {{- $name := promptString "Git username for the author/committer" }}
 
+{{- $editor := promptStringOnce . "editor" "Editor (code/zed, default code)" -}}
+{{- if not $editor }}{{ $editor = "code" }}{{ end -}}
+{{- $keepassxcdb := promptStringOnce . "keepassxcdb" "KeepassXC DB Path" -}}
+{{- $osid := .chezmoi.os -}}
+{{- if hasKey .chezmoi.osRelease "id" -}}
+{{-   $osid = printf "%s-%s" .chezmoi.os .chezmoi.osRelease.id -}}
+{{- end -}}
+{{- if hasKey .chezmoi.osRelease "idLike" -}}
+{{-   $osid = printf "%s-%s" .chezmoi.os .chezmoi.osRelease.idLike -}}
+{{- end -}}
+
 encryption = "age"
 [age]
     identity = "~/.config/chezmoi/key.txt"
@@ -23,3 +34,20 @@ encryption = "age"
 [data]
     email = "{{ $email }}"
     name = "{{ $name }}"
+
+[edit]
+command = {{ $editor | quote }}
+args = ["--wait"]
+
+[keepassxc]
+database = {{ $keepassxcdb | quote }}
+
+
+
+[hooks.read-source-state.pre]
+{{- if eq .chezmoi.os "windows" }}
+command = "powershell"
+args = [".local/share/chezmoi/.chezmoiscripts/windows/.install-password-manager.ps1"]
+{{ else }}
+command = ".local/share/chezmoi/.chezmoiscripts/linux/.install-password-manager.sh"
+{{ end -}}
