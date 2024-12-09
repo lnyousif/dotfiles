@@ -43,12 +43,10 @@ packages:
         - python3-virtualenv
       dnf5_url:
         - https://code.visualstudio.com/sha/download?build=stable&os=linux-rpm-x64
-        - https://release.gitkraken.com/linux/gitkraken-amd64.rpm
       dra:
         appimage:
         bin:
         package:
-          - Heroic-Games-Launcher/HeroicGamesLauncher --select heroic-{tag}.x86_64.rpm
       flatpak:
     linux_common:
       dra:
@@ -66,7 +64,6 @@ packages:
     winget:
       - 7zip.7zip
       - Git.Git
-      - GitHub.cli
       - JanDeDobbeleer.OhMyPosh
       - KeePassXCTeam.KeePassXC
       - Microsoft.VisualStudioCode
