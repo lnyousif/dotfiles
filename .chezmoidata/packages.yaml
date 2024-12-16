@@ -57,9 +57,6 @@ packages:
       linux_url:
         - if ! type -P oh-my-posh >/dev/null 2>&1; then curl -s https://ohmyposh.dev/install.sh | bash -s; else oh-my-posh upgrade; fi
       tablet_only:
-  python3:
-    pipx:
-  vs_code_extensions:
   windows:
     winget:
       - 7zip.7zip

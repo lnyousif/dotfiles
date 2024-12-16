@@ -148,23 +148,3 @@ echo "Installing self installing packages"
 bash -c {{ . | quote }}
 {{ end }}
 
-# Python3 packages
-
-if type -P pipx >/dev/null 2>&1; then
-  pip install pipx
-fi
-
-echo "Installing pipx packages"
-pipx install {{ range .packages.python3.pipx }} {{.}}{{ end }}
-
-# VS Code Extensions
-
-installed_extensions=$(code --list-extensions)
-
-{{ range .packages.vs_code_extensions }}
-if [[ ! "${installed_extensions[*]}" =~ {{.}} ]]; then
-  code --install-extension {{.}}
-else
-  echo "{{.}} is already installed"
-fi
-{{ end }}
