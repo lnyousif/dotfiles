@@ -1,7 +1,0 @@
-PATH=$PATH:/home/laith/bin
-
-eval "$(oh-my-posh init bash --config https://raw.githubusercontent.com/lnyousif/dotfiles/refs/heads/main/.support/oh-my-posh/theme.omp.json )"
-
-### MANAGED BY RANCHER DESKTOP START (DO NOT EDIT)
-export PATH="/home/laith/.rd/bin:$PATH"
-### MANAGED BY RANCHER DESKTOP END (DO NOT EDIT)
