@@ -3,7 +3,6 @@ packages:
     arch:
       aur:
       core:
-        - gnupg
         - python
       extra:
         - dra
@@ -36,7 +35,6 @@ packages:
     fedora:
       dnf5:
         - git
-        - gnupg2
         - keepassxc
         - python3
         - python3-pip
