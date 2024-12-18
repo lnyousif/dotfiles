@@ -11,10 +11,16 @@
 #
 # {{- /* This file supports Go's text/template language. */}}
 
-# {{- $email := promptString "Git email address for the author/committer" }}
-# {{- $name := promptString "Git name for the author/committer" }}
 
-{{- $editor := promptStringOnce . "editor" "Editor (code/zed, default code)" -}}
+{{- $email := promptString "Git email address for the author/committer (Default: Laith@tmobi.link)" }}
+{{- if not $email }}{{ $email = "Laith@tmobi.link" }}{{ end -}}
+
+
+{{- $name := promptString "Git name for the author/committer (Default: Laith Yousif)" }}
+{{- if not $name }}{{ $name = "Laith Yousif" }}{{ end -}}
+
+
+{{- $editor := promptStringOnce . "editor" "Editor (code/nano, default code)" -}}
 {{- if not $editor }}{{ $editor = "code" }}{{ end -}}
 {{- $keepassxcdb := promptStringOnce . "keepassxcdb" "KeepassXC DB Path" -}}
 {{- $osid := .chezmoi.os -}}
@@ -24,6 +30,22 @@
 {{- if hasKey .chezmoi.osRelease "idLike" -}}
 {{-   $osid = printf "%s-%s" .chezmoi.os .chezmoi.osRelease.idLike -}}
 {{- end -}}
+
+{{/* boolean feature tags */}}
+{{- $ephemeral := false -}}{{/* true if this machine is ephemeral, e.g. a cloud or VM instance */}}
+{{- $headless := false -}}{{/* true if this machine does not have a screen and keyboard */}}
+{{- $personal := true -}}{{/* true if this machine should have personal secrets */}}
+{{- "" -}}
+
+
+{{/* detect GitHub codespaces, VSCode remote containers, Docker containers, Multipass VMs, and Vagrant boxes */}}
+{{- if or (env "CODESPACES") (env "REMOTE_CONTAINERS_IPC") (eq .chezmoi.username "root" "ubuntu" "vagrant" "vscode") -}}
+{{-   $ephemeral = true -}}
+{{-   $headless = true -}}
+{{- end -}}
+
+
+# The values exist below
 
 encryption = "age"
 [age]
@@ -35,6 +57,9 @@ encryption = "age"
     email = "{{ $email }}"
     name = "{{ $name }}"
     osid = {{ $osid | quote }}
+    ephemeral = {{ $ephemeral }}
+    headless = {{ $headless }}
+    personal = {{ $personal }}
 
 [edit]
 command = {{ $editor | quote }}
