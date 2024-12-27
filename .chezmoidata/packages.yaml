@@ -63,6 +63,58 @@ packages:
       - KeePassXCTeam.KeePassXC
       - Microsoft.VisualStudioCode
       - Python.Python.3.10
+    junk:
+      - Clipchamp.Clipchamp
+      - Microsoft.549981C3F5F10
+      - Microsoft.BingNews
+      - Microsoft.BingWeather
+      - Microsoft.GamingApp
+      - Microsoft.GetHelp
+      - Microsoft.Getstarted | Remove-AppPackage
+      - Microsoft.Microsoft3DViewer
+      - Microsoft.MicrosoftOfficeHub
+      - Microsoft.MicrosoftSolitaireCollection
+      - Microsoft.MicrosoftStickyNotes
+      - Microsoft.MixedReality.Portal
+      - Microsoft.MSPaint
+      - Microsoft.OutlookForWindows
+      - Microsoft.Paint
+      - Microsoft.People
+      - Microsoft.ScreenSketch
+      - Microsoft.SkypeApp
+      - Microsoft.StorePurchaseApp
+      - Microsoft.Windows.Photos
+      - Microsoft.WindowsAlarms
+      - Microsoft.WindowsCalculator
+      - Microsoft.WindowsCamera
+      - Microsoft.WindowsCommunicationsApps
+      - Microsoft.WindowsFeedbackHub | Remove-AppPackage
+      - Microsoft.WindowsMaps
+      - Microsoft.WindowsSoundRecorder
+      - Microsoft.WindowsStore
+      - Microsoft.Xbox.TCUI
+      - Microsoft.XboxApp
+      - Microsoft.XboxGameOverlay
+      - Microsoft.XboxGamingOverlay
+      - Microsoft.XboxIdentityProvider
+      - Microsoft.XboxSpeechToTextOverlay
+      - Microsoft.YourPhone
+      - Microsoft.ZuneMusic
+      - Microsoft.ZuneVideo
+      - xbox
+      - phone
+      - disney
+      - skype
+      - spotify
+      - groove
+      - solitaire
+      - zune
+      - mixedreality -
+      - tiktok 
+      - adobe
+      - prime
+      - soundrecorder 
+      - bingweather!3dviewer
   darwin:
     brew:
       - age
@@ -78,3 +130,22 @@ packages:
       - tailscale
       - visual-studio-code
       - keepassxc
+    junk:
+      - Launchpad
+      - Safari
+      - Messages
+      - Mail
+      - Maps
+      - Photos
+      - FaceTime
+      - Calendar
+      - Contacts
+      - Reminders
+      - Notes
+      - Freeform
+      - TV
+      - Music
+      - Keynote
+      - Numbers
+      - Pages
+      - App Store
