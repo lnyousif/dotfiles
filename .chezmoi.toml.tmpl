@@ -68,12 +68,3 @@ args = ["--wait"]
 [keepassxc]
 database = {{ $keepassxcdb | quote }}
 
-
-
-#[hooks.read-source-state.pre]
-#{{- if eq .chezmoi.os "windows" }}
-#command = "powershell"
-#args = [".local/share/chezmoi/.chezmoiscripts/windows/.install-password-manager.ps1"]
-#{{ else }}
-#command = ".local/share/chezmoi/.chezmoiscripts/linux/.install-password-manager.sh"
-#{{ end -}}
