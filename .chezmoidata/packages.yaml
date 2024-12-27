@@ -63,3 +63,18 @@ packages:
       - KeePassXCTeam.KeePassXC
       - Microsoft.VisualStudioCode
       - Python.Python.3.10
+  darwin:
+    brew:
+      - age
+      - bat
+      - btop
+      - curl
+      - git
+      - git-lfs
+      - gnupg
+    casks:
+      - 1password-cli
+      - google-chrome
+      - tailscale
+      - visual-studio-code
+      - keepassxc
