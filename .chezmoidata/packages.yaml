@@ -116,7 +116,7 @@ packages:
       - soundrecorder 
       - bingweather!3dviewer
   darwin:
-    brew:
+    brews:
       - age
       - bat
       - btop
