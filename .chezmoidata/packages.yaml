@@ -124,12 +124,16 @@ packages:
       - git
       - git-lfs
       - gnupg
+      - jandedobbeleer/oh-my-posh/oh-my-posh
+      - podman
+      - podman-compose
     casks:
       - 1password-cli
       - google-chrome
       - tailscale
       - visual-studio-code
       - keepassxc
+      - podman-desktop
     junk:
       - Launchpad
       - Safari
