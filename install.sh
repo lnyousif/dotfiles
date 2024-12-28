@@ -2,32 +2,33 @@
 
 # -e: exit on error
 # -u: exit on unset variables
-set -eu
+
+set -eufo pipefail
 
 # Clone git submodules
 git submodule update --init --recursive
 
-if ! chezmoi="$(command -v chezmoi)"; then
-	bin_dir="${HOME}/.local/bin"
-	chezmoi="${bin_dir}/chezmoi"
-	echo "Installing chezmoi to '${chezmoi}'" >&2
-	if command -v curl >/dev/null; then
-		chezmoi_install_script="$(curl -fsSL get.chezmoi.io)"
-	elif command -v wget >/dev/null; then
-		chezmoi_install_script="$(wget -qO- get.chezmoi.io)"
-	else
-		echo "To install chezmoi, you must have curl or wget installed." >&2
-		exit 1
-	fi
-	sh -c "${chezmoi_install_script}" -- -b "${bin_dir}"
-	unset chezmoi_install_script bin_dir
+
+echo ""
+echo "🤚  This script will setup .dotfiles for you."
+read -n 1 -r -s -p $'    Press any key to continue or Ctrl+C to abort...\n\n'
+
+
+# Install Homebrew
+command -v brew >/dev/null 2>&1 || \
+  (echo '🍺  Installing Homebrew' && /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)")
+
+# Install chezmoi
+command -v chezmoi >/dev/null 2>&1 || \
+  (echo '👊  Installing chezmoi' && brew install chezmoi)
+
+if [ -d "$HOME/.local/share/chezmoi/.git" ]; then
+  echo "🚸  chezmoi already initialized"
+  echo "    Reinitialize with: 'chezmoi init https://github.com/chimurai/dotfiles.git'"
+else
+  echo "🚀  Initialize dotfiles with:"
+  echo "    chezmoi init https://github.com/chimurai/dotfiles.git"
 fi
 
-# POSIX way to get script's dir: https://stackoverflow.com/a/29834779/12156188
-script_dir="$(cd -P -- "$(dirname -- "$(command -v -- "$0")")" && pwd -P)"
-
-set -- init --apply --source="${script_dir}"
-
-echo "Running 'chezmoi $*'" >&2
-# exec: replace current process with chezmoi
-exec "$chezmoi" "$@"
+echo ""
+echo "Done."
