@@ -18,6 +18,7 @@ packages:
       flatpak:
         - com.visualstudio.code
         - app/org.chromium.Chromium/aarch64/stable
+        - io.podman_desktop.PodmanDesktop
       kde:
       linux_url:
         - if ! type -P oh-my-posh >/dev/null 2>&1; then curl -s https://ohmyposh.dev/install.sh | bash -s; else oh-my-posh upgrade; fi
