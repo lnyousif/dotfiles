@@ -15,35 +15,35 @@ echo "installing"
 ## Debian
 echo "Installing Debian Packages"
 
-sudo nala install --update -y -o APT::Get::AllowUnauthenticated=true {{ range .packages.linux.debian.nala }} {{.}}{{ end }}
-sudo nala install --update -y -o APT::Get::AllowUnauthenticated=true {{ range .packages.linux.debian.nala_url }}{{. | quote}} {{ end }}
+sudo nala install --update -y -o APT::Get::AllowUnauthenticated=true {{ range .packages.linux.common.nala }} {{.}}{{ end }}
+sudo nala install --update -y -o APT::Get::AllowUnauthenticated=true {{ range .packages.linux.common.nala_url }}{{. | quote}} {{ end }}
 
 if [[ $XDG_SESSION_DESKTOP == "KDE" ]]; then
-  sudo nala install --update -y -o APT::Get::AllowUnauthenticated=true {{ range .packages.linux.linux_common.kde }} {{.}}{{ end }}
-  sudo nala install --update -y -o APT::Get::AllowUnauthenticated=true {{ range .packages.linux.debian.kde }} {{.}}{{ end }}
+  sudo nala install --update -y -o APT::Get::AllowUnauthenticated=true {{ range .packages.linux.common.kde }} {{.}}{{ end }}
+  sudo nala install --update -y -o APT::Get::AllowUnauthenticated=true {{ range .packages.linux.common.kde }} {{.}}{{ end }}
 fi
 
 if hostnamectl | grep -iq 'starlite'; then
   echo "Installing tablet specific packages"
-  sudo nala install --update -y -o APT::Get::AllowUnauthenticated=true {{ range .packages.linux.linux_common.tablet_only }} {{.}}{{ end }}
+  sudo nala install --update -y -o APT::Get::AllowUnauthenticated=true {{ range .packages.linux.common.tablet_only }} {{.}}{{ end }}
 fi
 echo "Downloading packages via dra"
-{{ range .packages.linux.debian.dra.appimage }}
+{{ range .packages.linux.common.dra.appimage }}
 echo "Downloading {{.}}"
 dra download -o "$appimagedir" -i {{.}}
 {{ end }}
 
-{{ range .packages.linux.debian.dra.bin }}
+{{ range .packages.linux.common.dra.bin }}
 echo "Downloading {{.}}"
 dra download -o "$bindir" -i {{.}}
 {{ end }}
 
-{{ range .packages.linux.debian.dra.package }}
+{{ range .packages.linux.common.dra.package }}
 echo "Downloading {{.}}"
 sudo dra download -i {{.}}
 {{ end }}
 
-{{ range .packages.linux.debian.dra.raw }}
+{{ range .packages.linux.common.dra.raw }}
 echo "Downloading {{.}}"
 dra download {{.}}
 {{ end }}
@@ -51,38 +51,38 @@ dra download {{.}}
 echo "Installing Flatpak packages"
 flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
-flatpak install -y flathub {{ range .packages.linux.debian.flatpak }} {{.}}{{ end }}
+flatpak install -y flathub {{ range .packages.linux.common.flatpak }} {{.}}{{ end }}
 
 {{ else if eq .osid "linux-fedora" }}
 ## Fedora
 echo "Installing RPM packages"
 
-sudo dnf5 install -y {{ range .packages.linux.fedora.dnf5 }} {{.}}{{ end }}
-{{ range .packages.linux.fedora.dnf5_url }}
+sudo dnf5 install -y {{ range .packages.linux.common.apt }} {{.}}{{ end }}
+{{ range .packages.linux.fedora.apt_url }}
 sudo dnf5 install -y {{ . | quote }}
 {{ end }}
 
 if [[ $XDG_SESSION_DESKTOP == "KDE" ]]; then
-  sudo dnf5 install -y {{ range .packages.linux.linux_common.kde }} {{.}}{{ end }}
+  sudo dnf5 install -y {{ range .packages.linux.common.kde }} {{.}}{{ end }}
 fi
 
 if hostnamectl | grep -iq 'starlite'; then
   echo "Installing tablet specific packages"
-  sudo dnf5 install -y {{ range .packages.linux.linux_common.tablet_only }} {{.}}{{ end }}
+  sudo dnf5 install -y {{ range .packages.linux.common.tablet_only }} {{.}}{{ end }}
 fi
 
 echo "Downloading packages via dra"
-{{ range .packages.linux.fedora.dra.appimage }}
+{{ range .packages.linux.common.dra.appimage }}
 echo "Downloading {{.}}"
 dra download -o "$appimagedir" -i {{.}}
 {{ end }}
 
-{{ range .packages.linux.fedora.dra.bin }}
+{{ range .packages.linux.common.dra.bin }}
 echo "Downloading {{.}}"
 dra download -o "$bindir" -i {{.}}
 {{ end }}
 
-{{ range .packages.linux.fedora.dra.package }}
+{{ range .packages.linux.common.dra.package }}
 echo "Downloading {{.}}"
 dra download -i {{.}}
 {{ end }}
@@ -90,21 +90,21 @@ dra download -i {{.}}
 echo "Installing Flatpak packages"
 flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
-flatpak install -y flathub {{ range .packages.linux.fedora.flatpak }} {{.}}{{ end }}
+flatpak install -y flathub {{ range .packages.linux.common.flatpak }} {{.}}{{ end }}
 
 {{ else if eq .osid "linux-arch" }}
 ## Arch
 echo "Installing Arch packages"
 
-sudo pacman -Syu --needed {{ range .packages.linux.arch.core }} {{.}}{{end}} {{ range .packages.linux.arch.extra }} {{.}}{{end}} {{ range .packages.linux.arch.multilib }} {{.}}{{end}}
+sudo pacman -Syu --needed {{ range .packages.linux.common }} {{.}}{{end}} {{ range .packages.linux.arch.extra }} {{.}}{{end}}
 
 if [[ $XDG_SESSION_DESKTOP == "KDE" ]]; then
-  sudo pacman -Syu --needed {{ range .packages.linux.arch.kde }} {{.}}{{ end }} {{ range .packages.linux.linux_common.kde }} {{.}}{{ end }}
+  sudo pacman -Syu --needed {{ range .packages.linux.common.kde }} {{.}}{{ end }} {{ range .packages.linux.common.kde }} {{.}}{{ end }}
 fi
 
 if hostnamectl | grep -iq 'starlite'; then
   echo "Installing tablet specific packages"
-  sudo pacman -Syu --needed {{ range .packages.linux.linux_common.tablet_only }} {{.}}{{ end }}
+  sudo pacman -Syu --needed {{ range .packages.linux.common.tablet_only }} {{.}}{{ end }}
 fi
 
 if type -P yay >/dev/null 2>&1; then
@@ -116,7 +116,7 @@ fi
 echo "Installing Flatpak packages"
 flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
-flatpak install -y flathub {{ range .packages.linux.arch.flatpak }} {{.}}{{ end }}
+flatpak install -y flathub {{ range .packages.linux.common.flatpak }} {{.}}{{ end }}
 
 {{ end }}
 
@@ -125,14 +125,14 @@ echo "Installing executables from GitHub"
 
 ## Appimages
 echo "Installing AppImages"
-{{ range .packages.linux.linux_common.dra.appimage }}
+{{ range .packages.linux.common.dra.appimage }}
 echo "Downloading {{.}}"
 dra download -o "$HOME"/AppImages/ -i {{.}}
 {{ end }}
 
 ## Binaries
 echo "Installing binary executables"
-{{ range .packages.linux.linux_common.dra.bin }}
+{{ range .packages.linux.common.dra.bin }}
 echo "Downloading {{.}}"
 dra download -o "$HOME"/.local/bin/ -i {{.}}
 {{ end }}
@@ -141,11 +141,11 @@ dra download -o "$HOME"/.local/bin/ -i {{.}}
 echo "Installing Common Flatpaks"
 flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
-flatpak install -y flathub {{ range .packages.linux.linux_common.flatpak }} {{.}}{{ end }}
+flatpak install -y flathub {{ range .packages.linux.common.flatpak }} {{.}}{{ end }}
 
 # Linux self installing packages
 echo "Installing self installing packages"
-{{ range .packages.linux.linux_common.linux_url }}
+{{ range .packages.linux.common.linux_url }}
 bash -c {{ . | quote }}
 {{ end }}
 
