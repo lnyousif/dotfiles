@@ -1,55 +1,13 @@
 packages:
   linux:
-    arch:
-      aur:
-      core:
-        - python
-      extra:
-        - dra
-        - keepassxc
-        - unzip
-        - vlc
-      flatpak:
-        - com.visualstudio.code
-      kde:
-      multilib:
-    debian:
-      dra:
-        appimage:
-        bin:
-        package:
-          - davidbannon/libqt6pas --select libqt6pas6_{tag}-1_amd64.deb
-          - devmatteini/dra --select dra_{tag}-1_amd64.deb
-          - Heroic-Games-Launcher/HeroicGamesLauncher --select heroic_{tag}_amd64.deb
-          - sharkdp/bat --select bat_{tag}_amd64.deb
-        raw:
-      kde:
-      flatpak:
-        - com.visualstudio.code
-      nala:
-        - git
-        - keepassxc
-        - python3
-        - python3-pip
-        - python3-venv
-      nala_url:
-        - https://code.visualstudio.com/sha/download?build=stable&os=linux-deb-x64
-    fedora:
-      dnf5:
+    common:
+      apt:
         - git
         - keepassxc
         - python3
         - python3-pip
         - python3-virtualenv
-      dnf5_url:
-        - https://code.visualstudio.com/sha/download?build=stable&os=linux-rpm-x64
-      dra:
-        appimage:
-        bin:
-        package:
-      flatpak:
-        - com.visualstudio.code
-    linux_common:
+        - podman
       dra:
         appimage:
         bin:
@@ -67,6 +25,8 @@ packages:
       - KeePassXCTeam.KeePassXC
       - Microsoft.VisualStudioCode
       - Python.Python.3.10
+      - RedHat.Podman
+      - RedHat.Podman-Desktop
     junk:
       - Clipchamp.Clipchamp
       - Microsoft.549981C3F5F10
