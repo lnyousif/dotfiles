@@ -8,7 +8,9 @@ packages:
         - python3-pip
         - python3-virtualenv
         - podman
+      apt_url:
       dra:
+        package:
         appimage:
         bin:
       flatpak:
