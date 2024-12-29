@@ -10,6 +10,7 @@ packages:
         - unzip
         - vlc
       flatpak:
+        - com.visualstudio.code
       kde:
       multilib:
     debian:
@@ -24,6 +25,7 @@ packages:
         raw:
       kde:
       flatpak:
+        - com.visualstudio.code
       nala:
         - git
         - keepassxc
@@ -46,11 +48,13 @@ packages:
         bin:
         package:
       flatpak:
+        - com.visualstudio.code
     linux_common:
       dra:
         appimage:
         bin:
       flatpak:
+        - com.visualstudio.code
       kde:
       linux_url:
         - if ! type -P oh-my-posh >/dev/null 2>&1; then curl -s https://ohmyposh.dev/install.sh | bash -s; else oh-my-posh upgrade; fi
