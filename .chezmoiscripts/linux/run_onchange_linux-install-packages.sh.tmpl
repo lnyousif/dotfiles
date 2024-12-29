@@ -8,6 +8,7 @@ mkdir -p "$bindir"
 mkdir -p "$appimagedir"
 mkdir -p "$HOME/bin/"
 
+echo "installing"
 # Native packages
 
 {{ if or (eq .osid "linux-debian") (eq .osid "linux-ubuntu") (eq .osid "linux-debian ubuntu") (eq .osid "linux-ubuntu debian") }}
