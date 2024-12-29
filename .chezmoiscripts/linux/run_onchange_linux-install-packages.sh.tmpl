@@ -20,7 +20,6 @@ sudo nala install --update -y -o APT::Get::AllowUnauthenticated=true {{ range .p
 
 if [[ $XDG_SESSION_DESKTOP == "KDE" ]]; then
   sudo nala install --update -y -o APT::Get::AllowUnauthenticated=true {{ range .packages.linux.common.kde }} {{.}}{{ end }}
-  sudo nala install --update -y -o APT::Get::AllowUnauthenticated=true {{ range .packages.linux.common.kde }} {{.}}{{ end }}
 fi
 
 if hostnamectl | grep -iq 'starlite'; then
@@ -30,12 +29,12 @@ fi
 echo "Downloading packages via dra"
 {{ range .packages.linux.common.dra.appimage }}
 echo "Downloading {{.}}"
-dra download -o "$appimagedir" -i {{.}}
+  sudo dra download -o "$appimagedir" -i {{.}}
 {{ end }}
 
 {{ range .packages.linux.common.dra.bin }}
 echo "Downloading {{.}}"
-dra download -o "$bindir" -i {{.}}
+  sudo dra download -o "$bindir" -i {{.}}
 {{ end }}
 
 {{ range .packages.linux.common.dra.package }}
@@ -45,7 +44,7 @@ sudo dra download -i {{.}}
 
 {{ range .packages.linux.common.dra.raw }}
 echo "Downloading {{.}}"
-dra download {{.}}
+sudo dra download {{.}}
 {{ end }}
 
 echo "Installing Flatpak packages"
