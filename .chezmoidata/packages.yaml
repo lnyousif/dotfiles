@@ -17,7 +17,7 @@ packages:
         bin:
       flatpak:
         - com.visualstudio.code
-        - app/org.chromium.Chromium/aarch64/stable
+        - app/org.chromium.Chromium
         - io.podman_desktop.PodmanDesktop
       kde:
       linux_url:
@@ -98,7 +98,6 @@ packages:
       - podman
       - podman-compose
     casks:
-      - 1password-cli
       - google-chrome
       - tailscale
       - visual-studio-code
