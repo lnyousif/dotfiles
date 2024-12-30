@@ -11,6 +11,8 @@ packages:
       apt_url:
       apt_junk:
         - firefox
+        - gnome-software
+        - libreoffice-data
       dra:
         package:
         appimage:
