@@ -13,3 +13,11 @@ fi
 # Install Nerd font
 oh-my-posh font install meslo
 #oh-my-posh enable autoupgrade
+
+
+sudo tee -a /usr/local/bin/docker <<EOF
+ #!/bin/bash
+ exec podman "\$@"
+EOF
+
+sudo chmod +x /usr/local/bin/docker
