@@ -22,7 +22,10 @@
 
 {{- $editor := promptStringOnce . "editor" "Editor (code/nano, default code)" -}}
 {{- if not $editor }}{{ $editor = "code" }}{{ end -}}
-{{- $keepassxcdb := promptStringOnce . "keepassxcdb" "KeepassXC DB Path" -}}
+{{- $keepassxcdb := promptStringOnce . "keepassxcdb" "KeepassXC DB Path (default .keepassxc/chezmoi.kdbx) " -}}
+{{- if not $keepassxcdb }}{{ $keepassxcdb = ".keepassxc/chezmoi.kdbx" }}{{ end -}}
+
+
 {{- $osid := .chezmoi.os -}}
 {{- if hasKey .chezmoi.osRelease "id" -}}
 {{-   $osid = printf "%s-%s" .chezmoi.os .chezmoi.osRelease.id -}}
@@ -67,4 +70,5 @@ args = ["--wait"]
 
 [keepassxc]
 database = {{ $keepassxcdb | quote }}
+prompt = true
 
