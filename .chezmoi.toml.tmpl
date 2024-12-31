@@ -65,10 +65,11 @@ encryption = "age"
     personal = {{ $personal }}
 
 [edit]
-command = {{ $editor | quote }}
+command = {{ $editor }}
 args = ["--wait"]
 
 [keepassxc]
-database = {{ $keepassxcdb | quote }}
-prompt = true
+database = {{ $keepassxcdb }}
+args = ["--no-password"]
+prompt = false
 
