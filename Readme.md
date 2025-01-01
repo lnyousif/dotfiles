@@ -1,11 +1,6 @@
-# github.com/lnyousif/dotfiles
-
 dotfiles, managed with [`chezmoi`](https://github.com/twpayne/chezmoi).
 
 ## Install
-
-
-
 
 Mac Setup
 This'll install Homebrew and chezmoi. After installation `chezmoi` will be initialized.
@@ -30,8 +25,6 @@ This'll install chezmoi.
 $ScriptFromGitHub = Invoke-WebRequest https://raw.githubusercontent.com/lnyousif/dotfiles/refs/heads/main/.support/win-install.ps1
 Invoke-Expression $($ScriptFromGitHub.Content)
 ```
-
-
 
 
 
