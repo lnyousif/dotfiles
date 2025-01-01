@@ -1,4 +1,4 @@
-# github.com/chimurai/dotfiles
+# github.com/lnyousif/dotfiles
 
 dotfiles, managed with [`chezmoi`](https://github.com/twpayne/chezmoi).
 
