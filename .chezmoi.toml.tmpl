@@ -47,7 +47,6 @@
 {{-   $headless = true -}}
 {{- end -}}
 
-
 # The values exist below
 
 encryption = "age"
@@ -55,21 +54,20 @@ encryption = "age"
     identity = "~/.config/chezmoi/key.txt"
     recipient = "age14t6vfqtd0f2z9gth0tsnw3qwh6nxgkvem5exjzs3x9juyp5659wqh47sfw"
 
-
 [data]
     email = "{{ $email }}"
     name = "{{ $name }}"
-    osid = {{ $osid | quote }}
+    osid = "{{ $osid }}"
     ephemeral = {{ $ephemeral }}
     headless = {{ $headless }}
     personal = {{ $personal }}
 
+
 [edit]
-command = {{ $editor }}
+command = {{ $editor | quote }}
 args = ["--wait"]
 
 [keepassxc]
-database = {{ $keepassxcdb }}
-args = ["--no-password"]
+database = {{ $keepassxcdb | quote }}
+args = ["--no-password","-k",".keepassxc/keypass.keyx"]
 prompt = false
-
