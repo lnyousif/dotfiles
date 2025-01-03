@@ -9,4 +9,17 @@
     {{ range .packages.darwin.casks -}}
         cask {{ . | quote }}
     {{ end -}}
+
+    {{ if eq .powerful true -}}
+
+        {{ range .packages.darwin.brews -}}
+            brew {{ . | quote }}
+        {{ end -}}
+
+        {{ range .packages.darwin.casks -}}
+            cask {{ . | quote }}
+        {{ end -}}
+
+    {{ end -}}
+
 {{ end -}}

@@ -12,6 +12,12 @@
 # {{- /* This file supports Go's text/template language. */}}
 
 
+{{/* boolean feature tags */}}
+{{- $ephemeral := false -}}{{/* true if this machine is ephemeral, e.g. a cloud or VM instance */}}
+{{- $headless := false -}}{{/* true if this machine does not have a screen and keyboard */}}
+{{- $keepassxcdb := "" -}}{{/* empty if this machine does not have secrets */}}
+{{- "" -}}
+
 {{- $email := promptString "Git email address for the author/committer (Default: Laith@tmobi.link)" }}
 {{- if not $email }}{{ $email = "Laith@tmobi.link" }}{{ end -}}
 
@@ -22,8 +28,20 @@
 
 {{- $editor := promptStringOnce . "editor" "Editor (code/nano, default code)" -}}
 {{- if not $editor }}{{ $editor = "code" }}{{ end -}}
+
+
+{{/* personal=true if this machine should have personal secrets */}}
+{{- $personal := promptStringOnce . "personal" "Personal - Should I setup pass manager locally  (true/false, default true)" -}}  
+{{- if not $personal }}{{ $personal = true }}{{ end -}}
+
+{{/* powerful=true otherwise light if this machine should have work tools & secrets */}}
+{{- $powerful := promptStringOnce . "powerful" "Powerful - Should I setup heavy tools locally  (true/false, default true)" -}}  
+{{- if not $powerful }}{{ $powerful = true }}{{ end -}}
+
+{{- if $personal -}}
 {{- $keepassxcdb := promptStringOnce . "keepassxcdb" "KeepassXC DB Path (default .keepassxc/chezmoi.kdbx) " -}}
 {{- if not $keepassxcdb }}{{ $keepassxcdb = ".keepassxc/chezmoi.kdbx" }}{{ end -}}
+{{- end -}}
 
 
 {{- $osid := .chezmoi.os -}}
@@ -33,12 +51,6 @@
 {{- if hasKey .chezmoi.osRelease "idLike" -}}
 {{-   $osid = printf "%s-%s" .chezmoi.os .chezmoi.osRelease.idLike -}}
 {{- end -}}
-
-{{/* boolean feature tags */}}
-{{- $ephemeral := false -}}{{/* true if this machine is ephemeral, e.g. a cloud or VM instance */}}
-{{- $headless := false -}}{{/* true if this machine does not have a screen and keyboard */}}
-{{- $personal := true -}}{{/* true if this machine should have personal secrets */}}
-{{- "" -}}
 
 
 {{/* detect GitHub codespaces, VSCode remote containers, Docker containers, Multipass VMs, and Vagrant boxes */}}
@@ -61,6 +73,7 @@ encryption = "age"
     ephemeral = {{ $ephemeral }}
     headless = {{ $headless }}
     personal = {{ $personal }}
+    powerful = {{ $powerful }}
 
 
 [edit]

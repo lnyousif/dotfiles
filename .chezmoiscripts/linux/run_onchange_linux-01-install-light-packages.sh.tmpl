@@ -29,7 +29,7 @@ fi
 
 if hostnamectl | grep -iq 'starlite'; then
   echo "Installing tablet specific packages"
-  sudo nala install --update -y -o APT::Get::AllowUnauthenticated=true {{ range .packages.linux.common.tablet_only }} {{.}}{{ end }}
+  sudo nala install --update -y -o APT::Get::AllowUnauthenticated=true {{ range .packages.linux.common.tablet }} {{.}}{{ end }}
 fi
 
 {{ else if eq .osid "linux-fedora" }}
@@ -52,7 +52,7 @@ fi
 
 if hostnamectl | grep -iq 'starlite'; then
   echo "Installing tablet specific packages"
-  sudo dnf5 install -y {{ range .packages.linux.common.tablet_only }} {{.}}{{ end }}
+  sudo dnf5 install -y {{ range .packages.linux.common.tablet }} {{.}}{{ end }}
 fi
 
 
@@ -68,7 +68,7 @@ fi
 
 if hostnamectl | grep -iq 'starlite'; then
   echo "Installing tablet specific packages"
-  sudo pacman -Syu --needed {{ range .packages.linux.common.tablet_only }} {{.}}{{ end }}
+  sudo pacman -Syu --needed {{ range .packages.linux.common.tablet }} {{.}}{{ end }}
 fi
 
 if type -P yay >/dev/null 2>&1; then
