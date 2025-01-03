@@ -2,3 +2,9 @@
 {{- range .packages.windows.winget -}}
 winget install -e --disable-interactivity --silent --accept-source-agreements --accept-package-agreements --id {{ . | quote }}
 {{ end -}}
+
+{{ if eq .powerful true -}}
+    {{- range .packages.windows.winget_powerful -}}
+    winget install -e --disable-interactivity --silent --accept-source-agreements --accept-package-agreements --id {{ . | quote }}
+    {{ end -}}
+{{ end -}}
