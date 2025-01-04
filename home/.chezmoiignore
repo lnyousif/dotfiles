@@ -1,14 +1,24 @@
 key.txt.age
-install.sh
-.support
 .chezmoidata/
 
-{{ if ne .chezmoi.os "linux" }}
-.chezmoiscripts/linux/**
-{{ end }}
-{{ if ne .chezmoi.os "windows" }}
+{{ if eq .chezmoi.os "linux" }}
 .chezmoiscripts/windows/**
+.chezmoiscripts/darwin/**
+
 {{ end }}
-{{ if ne .chezmoi.os "darwin" }}
+
+{{ if eq .chezmoi.os "windows" }}
+.chezmoiscripts/linux/**
 .chezmoiscripts/darwin/**
 {{ end }}
+
+{{ if eq .chezmoi.os "darwin" }}
+.chezmoiscripts/linux/**
+.chezmoiscripts/windows/**
+{{ end }}
+
+{{ range $key, $value := .features }}
+    {{ if eq $value false -}}
+        .chezmoiscripts/{{ $.chezmoi.os }}/{{ $key }}/**
+    {{ end -}}
+{{ end -}}
