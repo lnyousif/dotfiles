@@ -1,24 +1,19 @@
 key.txt.age
 .chezmoidata/
-
 {{ if eq .chezmoi.os "linux" }}
 .chezmoiscripts/windows/**
 .chezmoiscripts/darwin/**
-
 {{ end }}
-
 {{ if eq .chezmoi.os "windows" }}
 .chezmoiscripts/linux/**
 .chezmoiscripts/darwin/**
 {{ end }}
-
 {{ if eq .chezmoi.os "darwin" }}
 .chezmoiscripts/linux/**
 .chezmoiscripts/windows/**
 {{ end }}
-
 {{ range $key, $value := .features }}
-    {{ if eq $value false -}}
-        .chezmoiscripts/{{ $.chezmoi.os }}/{{ $key }}/**
-    {{ end -}}
+{{ if eq $value false -}}
+.chezmoiscripts/{{ $.chezmoi.os }}/features/{{ $key }}/**
+{{ end -}}
 {{ end -}}
