@@ -1,17 +1,39 @@
 key.txt.age
 .chezmoidata/
+
 {{ if eq .chezmoi.os "linux" }}
 .chezmoiscripts/windows/**
 .chezmoiscripts/darwin/**
 {{ end }}
+
 {{ if eq .chezmoi.os "windows" }}
 .chezmoiscripts/linux/**
 .chezmoiscripts/darwin/**
+.config/Code/User/settings.json
 {{ end }}
+
 {{ if eq .chezmoi.os "darwin" }}
 .chezmoiscripts/linux/**
 .chezmoiscripts/windows/**
 {{ end }}
+
+
+{{ if ne .chezmoi.os "darwin" }}
+Library/Application Support/Code/User/settings.json
+{{ end }}
+
+{{ if ne .chezmoi.os "linux" }}
+.config/Code/User/settings.json
+{{ end }}
+
+{{ if ne .chezmoi.os "windows" }}
+Library/Application Support/Code/User/settings.json
+{{ end }}
+
+
+
+
+
 {{ range $key, $value := .features }}
 {{ if eq $value false -}}
 .chezmoiscripts/{{ $.chezmoi.os }}/features/{{ $key }}/**
