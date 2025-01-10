@@ -31,9 +31,6 @@ Library/Application Support/Code/User/settings.json
 {{ end }}
 
 
-
-
-
 {{ range $key, $value := .features }}
 {{ if eq $value false -}}
 .chezmoiscripts/{{ $.chezmoi.os }}/features/{{ $key }}/**
