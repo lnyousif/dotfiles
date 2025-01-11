@@ -1,5 +1,3 @@
 {{- if eq .chezmoi.os "darwin" -}}
-{{-   template "darwin/bashrc.tmpl" . -}}
-{{- else if eq .chezmoi.os "linux" -}}
-{{-   template "linux/bashrc.tmpl" . -}}
+{{-   template "common/bashrc.tmpl" . -}}
 {{- end -}}
