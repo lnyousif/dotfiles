@@ -1,6 +1,6 @@
 # Winget Packages
 {{ if eq .features.powerful true -}}
-    {{- range .packages.windows.winget_powerful -}}
+    {{- range .powerful_packages.windows.winget_powerful -}}
     winget install -e --disable-interactivity --silent --accept-source-agreements --accept-package-agreements --id {{ . | quote }}
     {{ end -}}
 {{ end -}}
