@@ -1,0 +1,44 @@
+{
+    "dev.containers.dockerPath": "podman-host.sh",
+    "dev.containers.dockerComposePath": "podman-compose-host.sh",
+    "window.menuBarVisibility": "toggle",
+    "editor.guides.indentation": false,
+    "editor.overviewRulerBorder": false,
+    "workbench.activityBar.location": "bottom",
+    "workbench.editor.showTabs": "none",
+    "editor.wordWrap": "on",
+    "editor.rulers": [],
+    "editor.minimap.enabled": false,
+    "terminal.integrated.tabs.enabled": false,
+    // Disables the layout control icon at the top right
+    "workbench.layoutControl.enabled": false, 
+    // Enables an infinite amount of editors and disables
+    // the useless "Open Editors" panel in the explorer.
+    "explorer.openEditors.visible": 0,
+    "explorer.autoReveal": false,
+    // Sets the sidebar location to the right
+    "workbench.sideBar.location": "left",
+    // Disables the useless minimap to the right of our code
+    "workbench.tree.indent": 12,
+    "workbench.tree.renderIndentGuides": "none",
+    // OPTIONAL: Hides the sidebar completely.
+    // If you choose to enable this, you can still
+    // access it using keyboard shortcuts instead.
+    // Ex: Control Shift E for Explorer
+    // Control Shift G for Version Control
+    // Control Shift X for extensions, etc.
+    // Removes the close tab button. Use Control + W instead.
+    "workbench.editor.tabCloseButton": "off",
+
+
+    "editor.parameterHints.enabled": false,
+    "editor.inlayHints.enabled": "off",
+
+    "editor.lineNumbers": "on",
+
+    "zenMode.fullScreen": false,
+
+    "window.customTitleBarVisibility": "auto",
+    "workbench.colorTheme": "Noir Panda Blue",
+
+}
