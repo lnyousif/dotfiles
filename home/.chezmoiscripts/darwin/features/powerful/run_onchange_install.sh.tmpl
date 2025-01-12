@@ -3,16 +3,14 @@
 
     brew bundle --no-lock --file=/dev/stdin <<EOF
    
-    {{ if eq .features.powerful true -}}
 
-        {{ range .packages.darwin.brews -}}
+        {{ range .powerful_packages.darwin.brews -}}
             brew {{ . | quote }}
         {{ end -}}
 
-        {{ range .packages.darwin.casks -}}
+        {{ range .powerful_packages.darwin.casks -}}
             cask {{ . | quote }}
         {{ end -}}
 
-    {{ end -}}
 
 {{ end -}}

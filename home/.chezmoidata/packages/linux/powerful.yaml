@@ -1,0 +1,17 @@
+powerful_packages:
+  linux:
+    common:
+      apt:
+        - keepassxc
+        - python3
+        - python3-pip
+        - python3-virtualenv
+        - podman
+      apt_url:
+      flatpak:
+        - com.visualstudio.code
+        - io.podman_desktop.PodmanDesktop
+      kde:
+      linux_url:
+      tablet:
+  
