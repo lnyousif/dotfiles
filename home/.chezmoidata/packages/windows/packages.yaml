@@ -1,39 +1,4 @@
 packages:
-  linux:
-    common:
-      apt:
-        - git
-      apt_powerful:
-        - keepassxc
-        - python3
-        - python3-pip
-        - python3-virtualenv
-        - podman
-      apt_url:
-      apt_url_powerful:
-      apt_junk:
-        - firefox
-        - gnome-software
-        - libreoffice-data
-      dra:
-        package:
-        package_powerful:
-        appimage:
-        appimage_powerful:
-        bin:
-        bin_powerful:
-      flatpak:
-        - app/org.chromium.Chromium
-      flatpak_powerful:
-        - com.visualstudio.code
-        - io.podman_desktop.PodmanDesktop
-      kde:
-      kde_powerful:
-      linux_url:
-        - if ! type -P oh-my-posh >/dev/null 2>&1; then curl -s https://ohmyposh.dev/install.sh | bash -s; else oh-my-posh upgrade; fi
-      linux_url_powerful:
-      tablet:
-      tablet_powerful:
   windows:
     winget:
       - 7zip.7zip
