@@ -1,6 +1,16 @@
 {
-    "dev.containers.dockerPath": "podman-host.sh",
-    "dev.containers.dockerComposePath": "podman-compose-host.sh",
+    // Normal Seup 
+    //"dev.containers.dockerPath": "",
+    //"dev.containers.dockerComposePath": "",
+
+    // Fedora Setup when using non flatpack
+    //"dev.containers.dockerPath": "podman-devcon//tainer-wrapper",
+    //"dev.containers.dockerComposePath": "podman-compose",
+    
+    //Fedora setup with Flatpack
+    "dev.containers.dockerPath": "podman-devcontainer-wrapper",
+    "dev.containers.dockerComposePath": "podman-compose",
+    
     "workbench.colorTheme": "Quiet Light",
     "workbench.iconTheme": "material-icon-theme",
 
@@ -16,13 +26,6 @@
     "editor.minimap.enabled": false,
     "workbench.tree.indent": 12,
     "workbench.tree.renderIndentGuides": "none",
-    // OPTIONAL: Hides the sidebar completely.
-    // If you choose to enable this, you can still
-    // access it using keyboard shortcuts instead.
-    // Ex: Control Shift E for Explorer
-    // Control Shift G for Version Control
-    // Control Shift X for extensions, etc.
-    "workbench.activityBar.visible": false,
     // Removes the close tab button. Use Control + W instead.
     "workbench.editor.tabCloseButton": "off",
     // Removes the useless "breadcrumbs" tree below our tabs
@@ -68,7 +71,8 @@
     "editor.fontSize": 16,
     "editor.fontWeight": "350", // OPTIONAL
     "editor.lineHeight": 24,
-    "workbench.activityBar.location": "top",
+    "workbench.activityBar.location": "hidden",
     "window.customTitleBarVisibility": "auto",
+    "workbench.editor.tabActionCloseVisibility": false,
 
 }
