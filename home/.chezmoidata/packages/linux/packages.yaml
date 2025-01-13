@@ -8,11 +8,11 @@ packages:
       apt_junk:
         - firefox
         - libreoffice-data
-        - Boxes
-        - Maps
-        - Terminal
-        - Tour
-        - TextEditor
+        - gnome-boxes
+        - gnome-maps
+        - gnome-terminal
+        - gnome-tour
+        - gnome-text-editor
       dra:
         package:
         appimage:
