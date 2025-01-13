@@ -9,7 +9,6 @@ powerful_packages:
         - podman
       apt_url:
       flatpak:
-        - com.visualstudio.code
         - io.podman_desktop.PodmanDesktop
       kde:
       linux_url:
