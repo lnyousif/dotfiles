@@ -10,8 +10,6 @@
     //Fedora setup with Flatpack
     "dev.containers.dockerPath": "podman-devcontainer-wrapper",
     "dev.containers.dockerComposePath": "podman-compose",
-    
-    "workbench.colorTheme": "Default Dark Modern",
     "workbench.iconTheme": "material-icon-theme",
 
     // Disables the layout control icon at the top right
@@ -70,9 +68,10 @@
     // Customizing your font and spacing (line height)
     "editor.fontSize": 16,
     "editor.fontWeight": "350", // OPTIONAL
-    "editor.lineHeight": 24,
+    "editor.lineHeight": 20,
     "workbench.activityBar.location": "top",
+    "workbench.editor.tabActionCloseVisibility": true,
     "window.customTitleBarVisibility": "auto",
-    "workbench.editor.tabActionCloseVisibility": false,
+    "window.menuBarVisibility": "toggle",
 
 }
