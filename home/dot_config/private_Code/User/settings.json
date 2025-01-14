@@ -70,9 +70,10 @@
     "editor.fontWeight": "350", // OPTIONAL
     "editor.lineHeight": 20,
     "workbench.activityBar.location": "top",
-    "workbench.editor.tabActionCloseVisibility": false,
+    "workbench.editor.tabActionCloseVisibility": true,
     "window.customTitleBarVisibility": "auto",
     "window.menuBarVisibility": "compact",
     "window.titleBarStyle": "custom",
+    "window.closeWhenEmpty": true,
 
 }
