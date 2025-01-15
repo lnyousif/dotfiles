@@ -66,14 +66,15 @@
     "window.autoDetectHighContrast": false,
     "zenMode.fullScreen": false,
     // Customizing your font and spacing (line height)
-    "editor.fontSize": 16,
+    "editor.fontSize": 14,
     "editor.fontWeight": "350", // OPTIONAL
-    "editor.lineHeight": 20,
+    "editor.lineHeight": 18,
     "workbench.activityBar.location": "top",
     "workbench.editor.tabActionCloseVisibility": true,
     "window.customTitleBarVisibility": "auto",
     "window.menuBarVisibility": "compact",
     "window.titleBarStyle": "custom",
     "window.closeWhenEmpty": true,
+    "workbench.colorTheme": "Visual Studio Light",
 
 }
