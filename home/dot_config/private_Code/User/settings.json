@@ -25,7 +25,7 @@
     "workbench.tree.indent": 12,
     "workbench.tree.renderIndentGuides": "none",
     // Removes the close tab button. Use Control + W instead.
-    "workbench.editor.tabCloseButton": "off",
+    "workbench.editor.tabCloseButton": "on",
     // Removes the useless "breadcrumbs" tree below our tabs
     "breadcrumbs.enabled": false,
     "editor.overviewRulerBorder": false,
@@ -70,7 +70,6 @@
     "editor.fontWeight": "350", // OPTIONAL
     "editor.lineHeight": 18,
     "workbench.activityBar.location": "top",
-    "workbench.editor.tabActionCloseVisibility": true,
     "window.customTitleBarVisibility": "auto",
     "window.menuBarVisibility": "compact",
     "window.titleBarStyle": "custom",
