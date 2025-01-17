@@ -17,19 +17,17 @@ key.txt.age
 .chezmoiscripts/windows/**
 {{ end }}
 
-
 {{ if ne .chezmoi.os "darwin" }}
-Library/Application Support/Code/User/settings.json
+Library
 {{ end }}
 
 {{ if ne .chezmoi.os "linux" }}
-.config/Code/User/settings.json
+.config
 {{ end }}
 
 {{ if ne .chezmoi.os "windows" }}
-Library/Application Support/Code/User/settings.json
+Code
 {{ end }}
-
 
 {{ range $key, $value := .features }}
 {{ if eq $value false -}}
