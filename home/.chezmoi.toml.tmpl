@@ -31,26 +31,26 @@
 
     {{- if eq $user "Laith" -}}
 
-    {{- $name := promptString "Git name for the author/committer (Default: Laith Yousif)" }}
+    {{- $name = promptString "Git name for the author/committer (Default: Laith Yousif)" }}
     {{- if not $name }}{{ $name = "Laith Yousif" }}{{ end -}}
     
-    {{- $email := promptString "Git email address for the author/committer (Default: Laith@tmobi.link)" }}
+    {{- $email = promptString "Git email address for the author/committer (Default: Laith@tmobi.link)" }}
     {{- if not $email }}{{ $email = "Laith@tmobi.link" }}{{ end -}}
 
-    {{- $editor := promptStringOnce . "editor" "Editor (code/nano, default code)" -}}
+    {{- $editor = promptStringOnce . "editor" "Editor (code/nano, default code)" -}}
     {{- if not $editor }}{{ $editor = "code" }}{{ end -}}
 
     {{/* personal=true if this machine should have personal secrets */}}
-    {{- $personal := promptStringOnce . "personal" "Personal - Should I setup pass manager locally  (true/false, default true)" -}}  
+    {{- $personal = promptStringOnce . "personal" "Personal - Should I setup pass manager locally  (true/false, default true)" -}}  
     {{- if not $personal }}{{ $personal = true }}{{ end -}}
 
     {{/* powerful=true otherwise light if this machine should have work tools & secrets */}}
-    {{- $powerful := promptStringOnce . "powerful" "Powerful - Should I setup heavy tools locally  (true/false, default true)" -}}  
+    {{- $powerful = promptStringOnce . "powerful" "Powerful - Should I setup heavy tools locally  (true/false, default true)" -}}  
     {{- if not $powerful }}{{ $powerful = true }}{{ end -}}
 
 
     {{- if $personal -}}
-    {{- $keepassxcdb := promptStringOnce . "keepassxcdb" "KeepassXC DB Path (default .keepassxc/chezmoi.kdbx) " -}}
+    {{- $keepassxcdb = promptStringOnce . "keepassxcdb" "KeepassXC DB Path (default .keepassxc/chezmoi.kdbx) " -}}
     {{- if not $keepassxcdb }}{{ $keepassxcdb = ".keepassxc/chezmoi.kdbx" }}{{ end -}}
     {{- end -}}
 
@@ -58,7 +58,7 @@
     {{- end -}}
 
     {{- if eq $user "M" "A" -}}
-        {{ $kids := true }}
+        {{ $kids = true }}
     {{- end -}}
     
 
