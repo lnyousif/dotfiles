@@ -21,10 +21,6 @@ key.txt.age
 Library
 {{ end }}
 
-{{ if ne .chezmoi.os "linux" }}
-.config
-{{ end }}
-
 {{ if ne .chezmoi.os "windows" }}
 Code
 {{ end }}
