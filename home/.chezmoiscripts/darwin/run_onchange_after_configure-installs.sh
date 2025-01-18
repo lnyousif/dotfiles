@@ -4,5 +4,5 @@ set -eufo pipefail
 
 oh-my-posh font install Meslo
 
-podman machine init
-podman machine start
+#podman machine init
+#podman machine start
