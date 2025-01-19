@@ -6,6 +6,7 @@ packages:
       - btop
       - curl
       - git
+      - dockutil
       - jandedobbeleer/oh-my-posh/oh-my-posh
     casks:
       - google-chrome
