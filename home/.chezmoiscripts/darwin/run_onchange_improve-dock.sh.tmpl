@@ -1,9 +1,5 @@
-{{ if eq .chezmoi.os "darwin" -}}
-    #!/bin/bash
+#!/bin/bash
 
-    {{ range .packages.darwin.junk -}}
-        dockutil --no-restart --remove {{ . | quote }} || true
-    {{ end -}}
-
-
+{{ range .packages.darwin.junk -}}
+    dockutil --no-restart --remove {{ . | quote }} || true
 {{ end -}}
