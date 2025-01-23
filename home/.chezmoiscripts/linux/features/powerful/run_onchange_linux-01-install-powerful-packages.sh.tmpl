@@ -19,7 +19,7 @@
 
     if hostnamectl | grep -iq 'starlite'; then
       echo "Installing tablet specific powerful_packages"
-      sudo nala install --update -y -o APT::Get::AllowUnauthenticated=true {{ range .powerful_packages.linux.common.tablet }} {{.}}{{ end }}
+      sudo nala install --update y -o APT::Get::AllowUnauthenticated=true {{ range .powerful_packages.linux.common.tablet }} {{.}}{{ end }}
     fi
 
   {{ else if eq .osid "linux-fedora" }}
