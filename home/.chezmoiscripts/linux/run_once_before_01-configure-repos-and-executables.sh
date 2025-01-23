@@ -3,7 +3,6 @@
 set -e
 LINE="-------------------------------------------"
 
-export PATH="${HOME}/.local/bin:${HOME}/bin:${PATH}"
 
 if command -v apt &>/dev/null; then
   echo "Debian based system found!"
@@ -57,8 +56,8 @@ elif command -v dnf &>/dev/null; then
   tarfile="${filename%.*}"
   filedir="${tarfile%.*}"
   tar -xvzf /tmp/dra/"${filename}" -C /tmp/dra
-  mkdir -p "${HOME}"/bin
-  cp /tmp/dra/"${filedir}"/dra "${HOME}"/bin/
+  mkdir -p "${HOME}"/.local/bin
+  cp /tmp/dra/"${filedir}"/dra "${HOME}"/.local/bin
   rm -fr /tmp/dra
 
 elif command -v pacman &>/dev/null; then
