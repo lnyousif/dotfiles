@@ -8,8 +8,8 @@
     //"dev.containers.dockerComposePath": "podman-compose",
     
     //Fedora setup with Flatpack
-    "dev.containers.dockerPath": "podman-devcontainer-wrapper",
-    "dev.containers.dockerComposePath": "podman-compose",
+    "dev.containers.dockerPath": "",
+    "dev.containers.dockerComposePath": "",
     "workbench.iconTheme": "material-icon-theme",
 
     // Disables the layout control icon at the top right
