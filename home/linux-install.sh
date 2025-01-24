@@ -4,9 +4,6 @@
 # -u: exit on unset variables
 set -eu
 
-# Clone git submodules
-git submodule update --init --recursive
-
 if ! chezmoi="$(command -v chezmoi)"; then
 	bin_dir="${HOME}/.local/bin"
 	chezmoi="${bin_dir}/chezmoi"
