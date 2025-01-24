@@ -1,5 +1,8 @@
 key.txt.age
 .chezmoidata/
+linux-install.sh
+mac-install.sh
+win-install.ps1
 
 {{ if eq .chezmoi.os "linux" }}
 .chezmoiscripts/windows/**
