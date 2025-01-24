@@ -75,5 +75,6 @@
     "window.titleBarStyle": "custom",
     "window.closeWhenEmpty": true,
     "workbench.colorTheme": "Visual Studio Light",
+    "window.restoreWindows": "none",
 
 }
