@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+{{ if eq .osid "linux-fedora" }}
+echo "Diabling SELLinux on Fedora"
+sudo mv .external/selinux_config /etc/selinux/config
+echo "Please Reboot as we just disabled SELinux"
+{{ end }}
