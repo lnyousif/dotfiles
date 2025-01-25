@@ -5,6 +5,7 @@ packages:
         apt:
           - keepassxc
           - podman
+          - podman-compose
         apt_url:
         flatpak:
           - io.podman_desktop.PodmanDesktop
