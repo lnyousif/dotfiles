@@ -46,7 +46,6 @@
         {{- if not $email }}{{ $email = "Laith@tmobi.link" }}{{ end -}}
 
 
-
         {{/* personal=true if this machine should have personal secrets */}}
         {{- $personal = promptBoolOnce . "features.personal" "Personal - Should I setup pass manager locally  (true/false, default true)" -}}  
         {{- if not $personal }}{{ $personal = true }}{{ end -}}

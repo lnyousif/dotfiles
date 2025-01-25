@@ -10,22 +10,26 @@
     //Fedora setup with Flatpack
     "dev.containers.dockerPath": "",
     "dev.containers.dockerComposePath": "",
+    
+    
     "workbench.iconTheme": "material-icon-theme",
-
+    "workbench.colorTheme": "Visual Studio Light",
     // Disables the layout control icon at the top right
-    "workbench.layoutControl.enabled": false, 
-    // Enables an infinite amount of editors and disables
-    // the useless "Open Editors" panel in the explorer.
-    "explorer.openEditors.visible": 0,
-    "explorer.autoReveal": false,
+    "workbench.layoutControl.enabled": false,
     // Sets the sidebar location to the right
     "workbench.sideBar.location": "left",
-    // Disables the useless minimap to the right of our code
-    "editor.minimap.enabled": false,
     "workbench.tree.indent": 12,
     "workbench.tree.renderIndentGuides": "none",
     // Removes the close tab button. Use Control + W instead.
     "workbench.editor.tabCloseButton": "on",
+
+    // Enables an infinite amount of editors and disables
+    // the useless "Open Editors" panel in the explorer.
+    "explorer.openEditors.visible": 0,
+    "explorer.autoReveal": false,
+    // Disables the useless minimap to the right of our code
+    "editor.minimap.enabled": false,
+
     // Removes the useless "breadcrumbs" tree below our tabs
     "breadcrumbs.enabled": false,
     "editor.overviewRulerBorder": false,
@@ -74,7 +78,9 @@
     "window.menuBarVisibility": "compact",
     "window.titleBarStyle": "custom",
     "window.closeWhenEmpty": true,
-    "workbench.colorTheme": "Visual Studio Light",
     "window.restoreWindows": "none",
+ 
+    "dotfiles.repository": "https://github.com/lnyousif/dotfiles.git",
+    "dotfiles.installCommand": "home/linux-install.sh",
 
 }
