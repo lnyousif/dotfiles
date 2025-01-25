@@ -81,6 +81,7 @@
     "window.restoreWindows": "none",
  
     "dotfiles.repository": "https://github.com/lnyousif/dotfiles.git",
-    "dotfiles.installCommand": "home/linux-install.sh",
+    "dotfiles.targetPath": "~/.local/share/chezmoi/home",
+    "dotfiles.installCommand": "linux-install.sh"
 
 }

@@ -18,10 +18,10 @@
     {{ $editor := "nano" }}
 
     {{/* boolean feature tags */}}
-    {{- $personal := false -}}
+    {{- $secrets:= false -}}
     {{- $powerful := false -}}
     {{- $kids := false -}}
-    {{- $codespaces := false -}}
+    {{- $codespace := false -}}
     {{- $ephemeral := false -}}{{/* true if this machine is ephemeral, e.g. a cloud or VM instance */}}
     {{- $headless := false -}}{{/* true if this machine does not have a screen and keyboard */}}
     {{- $keepassxcdb := "" -}}{{/* empty if this machine does not have secrets */}}
@@ -30,14 +30,14 @@
     {{/* detect GitHub codespaces, VSCode remote containers, Docker containers, Multipass VMs, and Vagrant boxes */}}
     {{- if or (env "CODESPACES") (env "REMOTE_CONTAINERS_IPC") (eq .chezmoi.username "root" "ubuntu" "vagrant" "vscode") -}}
     sourceDir = {{ .chezmoi.sourceDir | quote }}
-    {{-   $codespaces = true -}}
+    {{-   $codespace = true -}}
     {{-   $ephemeral = true -}}
     {{-   $headless = true -}}
-    {{-   $personal = false -}}
+    {{-   $secrets = false -}}
     {{-   $powerful = false -}}
     {{- end -}}
 
-    {{- if  not $codespaces -}}
+    {{- if  not $codespace -}}
 
         {{- $name = promptStringOnce . "name" "Git name for the author/committer (Default: Laith Yousif)" }}
         {{- if not $name }}{{ $name = "Laith Yousif" }}{{ end -}}
@@ -47,15 +47,15 @@
 
 
         {{/* personal=true if this machine should have personal secrets */}}
-        {{- $personal = promptBoolOnce . "features.personal" "Personal - Should I setup pass manager locally  (true/false, default true)" -}}  
-        {{- if not $personal }}{{ $personal = true }}{{ end -}}
+        {{- $secrets = promptBoolOnce . "features.secrets" "Personal - Should I setup pass manager locally  (true/false, default true)" -}}  
+        {{- if not $secrets }}{{ $secrets = true }}{{ end -}}
 
         {{/* powerful=true otherwise light if this machine should have work tools & secrets */}}
         {{- $powerful = promptBoolOnce . "features.powerful" "Powerful - Should I setup heavy tools locally  (true/false, default true)" -}}  
         {{- if not $powerful }}{{ $powerful = true }}{{ end -}}
 
 
-        {{- if $personal -}}
+        {{- if $secrets -}}
             {{- $keepassxcdb = promptStringOnce . "keepassxc" "KeepassXC DB Path (default .keepassxc/chezmoi.kdbx) " -}}
             {{- if not $keepassxcdb }}{{ $keepassxcdb = ".keepassxc/chezmoi.kdbx" }}{{ end -}}
         {{- end -}}
@@ -83,12 +83,12 @@ encryption = "age"
     name = "{{ $name }}"
     osid = "{{ $osid }}"
     keepassxc = "{{ $keepassxcdb }}"
-    features.personal = {{ $personal }}
+    features.secrets = {{ $secrets }}
     features.powerful = {{ $powerful }}
     features.headless = {{ $headless }}
     features.ephemeral = {{ $ephemeral }}
     features.kids = {{ $kids }}
-    features.codespaces = {{ $codespaces }}
+    features.codespace = {{ $codespace }}
 
 [edit]
 command = {{ $editor | quote }}

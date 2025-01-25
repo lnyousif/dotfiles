@@ -1,13 +1,14 @@
-powerful_packages:
-  darwin:
-    brews:
-      - git-lfs
-      - gnupg
-      - podman
-      - podman-compose    
-    casks:
-      - tailscale
-      - visual-studio-code
-      - keepassxc
-      - podman-desktop    
+packages:
+  powerful:
+    darwin:
+      brews:
+        - git-lfs
+        - gnupg
+        - podman
+        - podman-compose    
+      casks:
+        - tailscale
+        - visual-studio-code
+        - keepassxc
+        - podman-desktop    
     

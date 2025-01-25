@@ -2,13 +2,12 @@
     #!/bin/bash
 
     brew bundle --no-lock --file=/dev/stdin <<EOF
-   
 
-        {{ range .powerful_packages.darwin.brews -}}
+        {{ range .packages.powerful.darwin.brews -}}
             brew {{ . | quote }}
         {{ end -}}
 
-        {{ range .powerful_packages.darwin.casks -}}
+        {{ range .packages.powerful.darwin.casks -}}
             cask {{ . | quote }}
         {{ end -}}
 
