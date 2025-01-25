@@ -1,8 +1,9 @@
-powerful_packages:
-  windows:
-    winget:
-      - KeePassXCTeam.KeePassXC
-      - Microsoft.VisualStudioCode
-      - Python.Python.3.10
-      - RedHat.Podman
-      - RedHat.Podman-Desktop
+packages:
+  powerful:
+    windows:
+      winget:
+        - KeePassXCTeam.KeePassXC
+        - Microsoft.VisualStudioCode
+        - Python.Python.3.10
+        - RedHat.Podman
+        - RedHat.Podman-Desktop
