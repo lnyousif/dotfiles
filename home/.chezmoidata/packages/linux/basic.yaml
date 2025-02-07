@@ -23,4 +23,4 @@ packages:
         kde:
         linux_url:
           - if ! type -P oh-my-posh >/dev/null 2>&1; then curl -s https://ohmyposh.dev/install.sh | bash -s; else oh-my-posh upgrade && oh-my-posh font install Meslo; fi
-        tablet:  
+        tablet:
