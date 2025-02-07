@@ -4,12 +4,9 @@ packages:
       common:
         apt:
           - keepassxc
-          - podman
-          - podman-compose
+          - moby-rngine
         apt_url:
         flatpak:
-          - io.podman_desktop.PodmanDesktop
         kde:
         linux_url:
         tablet:
-    
