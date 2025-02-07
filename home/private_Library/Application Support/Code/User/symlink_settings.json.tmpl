@@ -1,1 +1,1 @@
-{{- if .chemzoi.os "darwin" }}{{ joinPath .chezmoi.home ".config/Code/User/settings.json" }}{{ end -}}
+{{- if eq .chezmoi.os "darwin" }}{{ joinPath .chezmoi.homeDir ".config/Code/User/settings.json" }}{{ end -}}
