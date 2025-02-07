@@ -1,5 +1,6 @@
 key.txt.age
-.chezmoidata/
+.chezmoidata/**
+.local/bin/**
 linux-install.sh
 mac-install.sh
 win-install.ps1
@@ -21,11 +22,11 @@ win-install.ps1
 {{ end }}
 
 {{ if ne .chezmoi.os "darwin" }}
-Library
+Library/**
 {{ end }}
 
 {{ if ne .chezmoi.os "windows" }}
-Code
+Code/**
 {{ end }}
 
 {{ range $key, $value := .features }}
