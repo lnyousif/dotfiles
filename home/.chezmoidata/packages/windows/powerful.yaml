@@ -5,5 +5,3 @@ packages:
         - KeePassXCTeam.KeePassXC
         - Microsoft.VisualStudioCode
         - Python.Python.3.10
-        - RedHat.Podman
-        - RedHat.Podman-Desktop
