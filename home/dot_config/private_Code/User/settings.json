@@ -1,5 +1,5 @@
 {
-    // Normal Seup 
+    // Normal Setup 
     //"dev.containers.dockerPath": "",
     //"dev.containers.dockerComposePath": "",
 
@@ -13,39 +13,30 @@
     
     
     "workbench.iconTheme": "material-icon-theme",
-    "workbench.colorTheme": "Visual Studio Dark",
+    "workbench.colorTheme": "Visual Studio Light",
     // Disables the layout control icon at the top right
     "workbench.layoutControl.enabled": false,
     // Sets the sidebar location to the right
     "workbench.sideBar.location": "left",
     "workbench.tree.indent": 12,
     "workbench.tree.renderIndentGuides": "none",
-    // Removes the close tab button. Use Control + W instead.
-    "workbench.editor.tabCloseButton": "on",
-
+    
+    
     // Enables an infinite amount of editors and disables
-    // the useless "Open Editors" panel in the explorer.
-    "explorer.openEditors.visible": 0,
+
     "explorer.autoReveal": false,
     // Disables the useless minimap to the right of our code
     "editor.minimap.enabled": false,
-
-    // Removes the useless "breadcrumbs" tree below our tabs
-    "breadcrumbs.enabled": false,
     "editor.overviewRulerBorder": false,
     // Add some padding to the top and bottom of our file
-    "editor.padding.bottom": 14,
-    "editor.padding.top": 14,
-    "editor.scrollbar.horizontal": "hidden",
     "editor.codeLens": false,
     // OPTIONAL: Removes the glyph margin for breakpoints
     // and other symbols that most people don't use.
     // If you use those things, feel free to enable this!
-    "editor.glyphMargin": false,
-
+    
     "editor.foldingHighlight": false,
     // Stops highlighting the current line.
-    "editor.renderLineHighlight": "none",
+    //"editor.renderLineHighlight": "none",
     // Disables unnecessary and useless highlighting
     // of current indentation.
     "editor.guides.indentation": false,
@@ -53,35 +44,33 @@
     // Stops highlighting matching bracket pairs.
     // Colored brackets eliminates the need for this!
     "editor.matchBrackets": "never",
-    "editor.guides.highlightActiveBracketPair": false,
     // OPTIONAL: Disables parameter hints.
     // If you'd prefer to receive hints, leave these
     // settings on!
-    "editor.parameterHints.enabled": false,
-    "editor.inlayHints.enabled": "off",
-    "editor.smoothScrolling": true,
-    // Removes inline suggestions
-    "editor.inlineSuggest.enabled": false,
     // If you find that you don't use line numbers much
     // and want even more space for your code, don't be
     // afraid to turn this off!
     "editor.lineNumbers": "on",
-    "explorer.compactFolders": false,
     "window.autoDetectHighContrast": false,
     "zenMode.fullScreen": false,
-    // Customizing your font and spacing (line height)
-    "editor.fontSize": 14,
-    "editor.fontWeight": "350", // OPTIONAL
-    "editor.lineHeight": 18,
-    "workbench.activityBar.location": "top",
-    "window.customTitleBarVisibility": "auto",
-    "window.menuBarVisibility": "compact",
-    "window.titleBarStyle": "custom",
-    "window.closeWhenEmpty": true,
-    "window.restoreWindows": "none",
  
+    //    // Customizing your font and spacing (line height)
+    //    "editor.fontSize": 14,
+    //    "editor.fontWeight": "350", // OPTIONAL
+    //    "editor.lineHeight": 18,
+    //    "workbench.activityBar.location": "top",
+    //    "window.customTitleBarVisibility": "auto",
+    //    "window.menuBarVisibility": "compact",
+    //    "window.titleBarStyle": "custom",
+    //    "window.closeWhenEmpty": true,
+    //    "window.restoreWindows": "none",
+    
+
     "dotfiles.repository": "https://github.com/lnyousif/dotfiles.git",
     "dotfiles.targetPath": "~/.local/share/chezmoi/home",
-    "dotfiles.installCommand": "linux-install.sh"
+    "dotfiles.installCommand": "linux-install.sh",
+    "github.copilot.chat.codesearch.enabled": true,
+    "github.copilot.chat.newWorkspaceCreation.enabled": true,
+    "debug.javascript.autoAttachFilter": "smart"
 
 }
