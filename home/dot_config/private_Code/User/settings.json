@@ -13,11 +13,11 @@
     
     
     "workbench.iconTheme": "material-icon-theme",
-    "workbench.colorTheme": "Visual Studio Light",
+    "workbench.colorTheme": "Visual Studio Dark",
     // Disables the layout control icon at the top right
     "workbench.layoutControl.enabled": false,
     // Sets the sidebar location to the right
-    "workbench.sideBar.location": "left",
+    "workbench.sideBar.location": "right",
     "workbench.tree.indent": 12,
     "workbench.tree.renderIndentGuides": "none",
     
@@ -71,6 +71,22 @@
     "dotfiles.installCommand": "linux-install.sh",
     "github.copilot.chat.codesearch.enabled": true,
     "github.copilot.chat.newWorkspaceCreation.enabled": true,
-    "debug.javascript.autoAttachFilter": "smart"
+    "debug.javascript.autoAttachFilter": "smart",
+    "github.copilot.chat.languageContext.fix.typescript.enabled": true,
+    "github.copilot.chat.languageContext.inline.typescript.enabled": true,
+    "github.copilot.chat.languageContext.typescript.enabled": true,
+    "github.copilot.chat.agent.thinkingTool": true,
+    "remote.defaultExtensionsIfInstalledLocally": [
+        "GitHub.copilot",
+        "GitHub.copilot-chat",
+        "GitHub.vscode-pull-request-github"
+    ],
+    "github.copilot.nextEditSuggestions.enabled": true,
+    "chat.agent.enabled": true,
+    "breadcrumbs.enabled": false,
+    "editor.stickyScroll.enabled": false,
+    "editor.renderWhitespace": "none",
+    "editor.renderControlCharacters": false,
+    "workbench.activityBar.location": "top"
 
 }
