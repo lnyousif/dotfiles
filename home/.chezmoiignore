@@ -1,6 +1,5 @@
 key.txt.age
 .chezmoidata/**
-.local/bin/**
 linux-install.sh
 mac-install.sh
 win-install.ps1
