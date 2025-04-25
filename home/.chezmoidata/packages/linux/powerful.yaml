@@ -4,7 +4,6 @@ packages:
       common:
         apt:
           - keepassxc
-          - moby-rngine
         apt_url:
         flatpak:
         kde:
