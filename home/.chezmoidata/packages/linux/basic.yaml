@@ -14,6 +14,7 @@ packages:
           - gnome-terminal
           - gnome-tour
           - gnome-text-editor
+          - moby-engine
         dra:
           package:
           appimage:
