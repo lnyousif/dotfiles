@@ -4,3 +4,4 @@ packages:
       winget:
         - KeePassXCTeam.KeePassXC
         - Microsoft.VisualStudioCode
+        - Python.Python.3

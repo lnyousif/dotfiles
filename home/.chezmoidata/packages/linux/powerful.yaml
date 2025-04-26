@@ -4,6 +4,7 @@ packages:
       common:
         apt:
           - keepassxc
+          - python3-pip
         apt_url:
         flatpak:
         kde:
