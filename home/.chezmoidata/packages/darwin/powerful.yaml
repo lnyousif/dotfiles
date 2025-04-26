@@ -8,4 +8,5 @@ packages:
       casks:
         - visual-studio-code
         - keepassxc
-    
+      pips:
+        - commitizen
