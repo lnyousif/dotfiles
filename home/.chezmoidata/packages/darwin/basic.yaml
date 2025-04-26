@@ -8,6 +8,7 @@ packages:
         - curl
         - git
         - dockutil
+        - python-pip
         - jandedobbeleer/oh-my-posh/oh-my-posh
       casks:
         - google-chrome

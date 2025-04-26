@@ -5,6 +5,7 @@ packages:
         apt:
           - git
           - curl
+          - python3-pip
         apt_url:
         apt_junk:
           - firefox
