@@ -9,5 +9,5 @@
 {{ end -}}
 
 {{ range .packages.powerful.darwin.pips -}}
-    pip install {{ . | quote }}
+    pipx install {{ . | quote }}
 {{ end }}
