@@ -4,6 +4,8 @@ packages:
       brews:
         - git-lfs
         - gnupg
+        - commitizen
+        - python-pip
       casks:
         - visual-studio-code
         - keepassxc
