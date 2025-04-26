@@ -7,6 +7,7 @@ packages:
         - Python.Python.3
         - JanDeDobbeleer.OhMyPosh
         - Microsoft.WindowsTerminal
+      pips:
       junk:
         - Clipchamp.Clipchamp
         - Microsoft.549981C3F5F10

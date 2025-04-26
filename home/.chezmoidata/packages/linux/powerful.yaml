@@ -9,3 +9,5 @@ packages:
         kde:
         linux_url:
         tablet:
+        pips:
+          - commitizen
