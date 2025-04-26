@@ -4,3 +4,11 @@
     winget install -e --disable-interactivity --silent --accept-source-agreements --accept-package-agreements --id {{ . | quote }}
     {{ end -}}
 {{ end -}}
+
+# Python packages
+Write-Host "Installing Python packages with pip"
+pip install --upgrade pip setuptools wheel
+
+{{- range .packages.powerful.windows.pips -}}
+pip install {{ . | quote }}
+{{ end -}}

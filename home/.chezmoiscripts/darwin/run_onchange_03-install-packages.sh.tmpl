@@ -1,13 +1,13 @@
-{{ if eq .chezmoi.os "darwin" -}}
-    #!/bin/bash
+#!/bin/bash
 
-    brew bundle --file=/dev/stdin <<EOF
-    {{ range .packages.basic.darwin.brews -}}
-        brew {{ . | quote }}
-    {{ end -}}
-
-    {{ range .packages.basic.darwin.casks -}}
-        cask {{ . | quote }}
-    {{ end -}}
-
+{{ range .packages.basic.darwin.brews -}}
+    brew install {{ . | quote }}
 {{ end -}}
+
+{{ range .packages.basic.darwin.casks -}}
+    brew install --cask {{ . | quote }}
+{{ end -}}
+
+{{ range .packages.powerful.darwin.pips -}}
+    pip install {{ . | quote }}
+{{ end }}

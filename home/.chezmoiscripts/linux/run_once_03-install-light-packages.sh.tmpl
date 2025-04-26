@@ -116,3 +116,11 @@ dra download -o "$HOME"/.local/bin/ -i {{.}}
       paru -Syu --needed {{ range .packages.basic.linux.common.kde }} {{.}}{{ end }}
     fi
 {{ end }}
+
+
+# Python packages
+echo "Installing Python packages with pip"
+
+{{ range .packages.basic.linux.common.pips }}
+pip install {{ . | quote }}
+{{ end }}

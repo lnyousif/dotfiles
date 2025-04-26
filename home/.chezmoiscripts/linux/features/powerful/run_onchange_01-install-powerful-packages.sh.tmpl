@@ -84,3 +84,10 @@
   {{ end }}
 
 {{ end -}}
+
+# Python packages
+echo "Installing Python packages with pip"
+
+{{ range .packages.powerful.linux.common.pips }}
+pip install {{ . | quote }}
+{{ end }}
