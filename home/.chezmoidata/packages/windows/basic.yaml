@@ -4,6 +4,7 @@ packages:
       winget:
         - 7zip.7zip
         - Git.Git
+        - Python.Python.3
         - JanDeDobbeleer.OhMyPosh
         - Microsoft.WindowsTerminal
       junk:
