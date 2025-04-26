@@ -1,30 +1,16 @@
-#!/bin/sh
+#!/bin/bash
 
-# -e: exit on error
-# -u: exit on unset variables
-set -eu
+# Linux Installation Script for Dotfiles
 
-if ! chezmoi="$(command -v chezmoi)"; then
-	bin_dir="${HOME}/.local/bin"
-	chezmoi="${bin_dir}/chezmoi"
-	echo "Installing chezmoi to '${chezmoi}'" >&2
-	if command -v curl >/dev/null; then
-		chezmoi_install_script="$(curl -fsSL get.chezmoi.io)"
-	elif command -v wget >/dev/null; then
-		chezmoi_install_script="$(wget -qO- get.chezmoi.io)"
-	else
-		echo "To install chezmoi, you must have curl or wget installed." >&2
-		exit 1
-	fi
-	sh -c "${chezmoi_install_script}" -- -b "${bin_dir}"
-	unset chezmoi_install_script bin_dir
-fi
+set -e
 
-# POSIX way to get script's dir: https://stackoverflow.com/a/29834779/12156188
-script_dir="$(cd -P -- "$(dirname -- "$(command -v -- "$0")")" && pwd -P)"
+# Update and install dependencies
+sudo apt update && sudo apt install -y curl git chezmoi
 
-set -- init --apply --source="${script_dir}"
+# Initialize chezmoi
+chezmoi init --apply
 
-echo "Running 'chezmoi $*'" >&2
-# exec: replace current process with chezmoi
-exec "$chezmoi" "$@"
+# Post-installation steps
+# Add any additional setup commands here
+
+echo "Dotfiles setup complete!"
