@@ -1,0 +1,36 @@
+# To run this script:
+# 1. Run Windows PowerShell as Administrator
+# 2. Run `Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Scope Process`
+# 3. Run `chezmoi apply ~/.chezmoiscripts/windows/remove-bloat.ps1`
+#
+# FIXME automate running this script as Administrator
+
+
+# https://learn.microsoft.com/en-us/answers/questions/1421927/uninstall-unpin-spotify-whatsapp-etc-using-script
+
+"Removing apps for this user only."
+
+
+$Junk = {{ .packages.basic.windows.junk | join "|" }}
+
+
+$packages = Get-AppxPackage | Where-Object {  $_.Name -match $Junk  } | Where-Object -Property NonRemovable -eq $false 
+foreach ($appx in $packages) {
+    "Removing {0}" -f $appx.name
+    Remove-AppxPackage $appx   
+}
+""
+"Removing apps for all users."
+$packages = Get-AppxPackage -AllUsers | Where-Object {  $_.Name -match $Junk  } | Where-Object -Property NonRemovable -eq $false 
+foreach ($appx in $packages) {
+    "Removing {0}" -f $appx.name
+    Remove-AppxPackage $appx -AllUsers 
+}
+""
+"Removing provisioned apps."
+$packages = Get-AppxProvisionedPackage -Online | Where-Object {  $_.DisplayName -match $Junk  }
+foreach ($appx in $packages) {
+    "Removing {0}" -f $appx.displayname
+    Remove-AppxProvisionedPackage -online -allusers -PackageName $appx.PackageName 
+}
+

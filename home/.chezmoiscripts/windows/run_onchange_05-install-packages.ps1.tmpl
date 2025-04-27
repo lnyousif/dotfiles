@@ -3,6 +3,9 @@
 winget install -e --disable-interactivity --silent --accept-source-agreements --accept-package-agreements --id {{ . | quote }}
 {{ end -}}
 
+py -m pip install --upgrade pip setuptools wheel
+
+
 {{- range .packages.basic.windows.pips -}}
 pip install {{ . | quote }}
 {{ end -}}
