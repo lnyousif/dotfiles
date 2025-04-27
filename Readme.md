@@ -6,19 +6,13 @@ This repository contains my personal dotfiles and configuration files, managed u
 
 ### `home/`
 - **`dot_bashrc.tmpl`**: Template for `.bashrc`.
-- **`dot_gitconfig.tmpl`**: Template for `.gitconfig`.
 - **`dot_zshrc.tmpl`**: Template for `.zshrc`.
 - **`dot_config/`**: Configuration files for various tools.
 - **`dot_external/`**: External configurations, e.g., `selinux_config.tmpl`.
-- **`dot_keepassxc/`**: Encrypted KeePassXC files.
 
 ### `assets/`
 - **`oh-my-posh/theme.omp.json`**: Theme configuration for [Oh My Posh](https://ohmyposh.dev/).
 - **`photos/`**: Personal images for profiles or presentations.
-
-### `private_/`
-- **`private_dot_ssh/`**: Encrypted SSH keys.
-- **`private_Library/`**: Application-specific configurations.
 
 ### Installation Scripts
 - **`linux-install.sh`**: Setup script for Linux.
