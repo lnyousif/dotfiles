@@ -1,0 +1,10 @@
+{{ if and (eq .chezmoi.os "darwin" "linux") (not .features.headless) -}}
+#!/bin/bash
+set -eufo pipefail
+
+{{ range .vscode.basic.extensions }}
+code --force --install-extension {{ . }}
+echo {{ . }}
+{{ end -}}
+
+{{ end -}}
