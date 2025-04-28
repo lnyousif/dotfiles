@@ -3,3 +3,11 @@
 ### Feat
 
 - **commitzen**: adding Commitizen
+
+### Refactor
+
+- **vscode**: adding linux & mac extesion setup
+- **remove-bloats**: Rely on the yaml for removing junk apps on windows
+- **remove-bloats**: Rely on the yaml for removing junk apps on windows
+- **cz.config**: Moved the config to the root
+- **.cz.toml**: Adding cz config
