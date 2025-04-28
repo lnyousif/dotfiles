@@ -1,0 +1,9 @@
+{{ if (not .features.headless) -}}
+#!/bin/bash
+set -eufo pipefail
+
+    {{ range .vscode.basic.extensions }}
+        code --install-extension {{ . }}
+    {{ end -}}
+
+{{ end -}}
