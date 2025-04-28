@@ -6,6 +6,7 @@
 
 ### Refactor
 
+- **vscode**: better cross platform sync for extensions
 - **vscode**: adding linux & mac extesion setup
 - **remove-bloats**: Rely on the yaml for removing junk apps on windows
 - **remove-bloats**: Rely on the yaml for removing junk apps on windows
