@@ -1,8 +1,19 @@
 vscode:
   basic:
     extensions:
-      - ms-vscode-remote.remote-containers
-      - EditorConfig.EditorConfig
-      - ms-vscode-remote.vscode-remote-extensionpack
-      - ms-vscode.cpptools
-      - redhat.vscode-yaml
+      global:
+        - ms-vscode-remote.remote-containers
+        - ms-vscode-remote.vscode-remote-extensionpack
+        - ms-azuretools.vscode-docker
+        - esbenp.prettier-vscode
+        - PKief.material-icon-theme
+        - hbenl.vscode-test-explorer
+        - GitHub.copilot
+        - EditorConfig.EditorConfig
+        - redhat.vscode-yaml
+      windows:
+        - ms-vscode-remote.remote-wsl
+      darwin:
+      linux:
+
+
