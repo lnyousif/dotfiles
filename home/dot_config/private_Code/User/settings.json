@@ -96,6 +96,7 @@
     "editor.stickyScroll.enabled": false,
     "editor.renderWhitespace": "none",
     "editor.renderControlCharacters": false,
-    "workbench.activityBar.location": "top"
-
+    "workbench.activityBar.location": "top",
+    "git.blame.editorDecoration.enabled": true,
+    "git.replaceTagsWhenPull": true
 }

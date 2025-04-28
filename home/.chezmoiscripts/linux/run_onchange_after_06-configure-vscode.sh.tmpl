@@ -2,8 +2,12 @@
 #!/bin/bash
 set -eufo pipefail
 
-    {{ range .vscode.basic.extensions }}
-        code --install-extension {{ . }}
-    {{ end -}}
+{{ range .vscode.basic.extensions.global }}
+    code --install-extension {{ . }}
+{{ end -}}
+
+{{ range .vscode.basic.extensions.linux }}
+    code --install-extension {{ . }}
+{{ end -}}
 
 {{ end -}}
