@@ -1,0 +1,7 @@
+{{ if (not .features.headless) -}}
+
+{{ range .vscode.basic.extensions }}
+    code --install-extension {{ . }}
+{{ end -}}
+
+{{ end -}}
