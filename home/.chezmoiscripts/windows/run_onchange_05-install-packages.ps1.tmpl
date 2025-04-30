@@ -1,11 +1,18 @@
-# Winget Packages
-{{- range .packages.base.windows.winget -}}
-winget install -e --disable-interactivity --silent --accept-source-agreements --accept-package-agreements --id {{ . | quote }}
-{{ end -}}
+{{ range $setup, $value := .setups }}
 
-py -m pip install --upgrade pip setuptools wheel
+  {{ if $value }}
 
+        # Winget Packages
+        {{- range index $.packages $setup "windows" "winget -}}
+            winget install -e --disable-interactivity --silent --accept-source-agreements --accept-package-agreements --id {{ . | quote }}
+        {{ end -}}
 
-{{- range .packages.base.windows.pips -}}
-pip install {{ . | quote }}
-{{ end -}}
+        py -m pip install --upgrade pip setuptools wheel
+
+        {{- range index $.packages $setup "windows" "pips" -}}
+            pip install {{ . | quote }}
+        {{ end -}}
+
+  {{ end }}
+
+{{ end }}
