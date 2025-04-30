@@ -1,18 +1,16 @@
 #!/usr/bin/env bash
 
-{{ $package_group := "${1:-base}" }}
-
 export PATH="$HOME/.local/bin/:$PATH"
+{{ $package_group := . }}
 
 mkdir -p "$HOME/Downloads/AppImages"
 
 # Accept a string argument, default to "base" if empty
-
 echo "installing from data packages"
 
 # Linux self installing packages
 echo "Installing self installing packages"
-{{ $range := index .packages (printf "%s.linux.common.linux_url" $package_group) }}
+{{ $range := index ".packages.powerful.linux.common.linux_url" }}
 {{ range $range }}
 bash -c {{ . | quote }}
 {{ end }}
@@ -22,7 +20,7 @@ echo "Installing executables from GitHub"
 
 ## Appimages
 echo "Installing AppImages"
-{{ $range := index .packages (printf "%s.linux.common.dra.appimage" $package_group) }}
+{{ $range := index .packages $package_group "linux.common.dra.appimage" }}
 {{ range $range }}
 echo "Downloading {{.}}"
 dra download -o "$HOME"/Downloads/AppImages/ -i {{.}}
@@ -30,23 +28,13 @@ dra download -o "$HOME"/Downloads/AppImages/ -i {{.}}
 
 ## Binaries
 echo "Installing binary executables"
-{{ $range := index .packages (printf "%s.linux.common.dra.bin" $package_group) }}
+echo "Installing Flatpak packages"
+flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+
+{{ $range := index .packages $package_group "linux.common.flatpak" }}
 {{ range $range }}
-echo "Downloading {{.}}"
-dra download -o "$HOME"/.local/bin/ -i {{.}}
-{{ end }}
-
-{{- if (or (eq .features.headless false) (eq .features.codespace false)) }}
-
-  # Flatpak
-  echo "Installing Flatpak packages"
-  flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-  flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
-
-  {{ $range := index .packages (printf "%s.linux.common.flatpak" $package_group) }}
-  {{ range $range }}
-  flatpak install -y flathub {{ . }}
-  {{ end }}
+flatpak install -y flathub {{ . | quote }}
 {{ end }}
 
 # Native packages
@@ -55,50 +43,50 @@ dra download -o "$HOME"/.local/bin/ -i {{.}}
     ## Debian
     echo "Installing Debian Packages"
 
-    {{ $range := index .packages (printf "%s.linux.common.apt" $package_group) }}
+    {{ $range := index .packages $package_group "linux.common.apt" }}
     sudo nala install --update -y -o APT::Get::AllowUnauthenticated=true {{ range $range }} {{.}} {{ end }}
-    {{ $range := index .packages (printf "%s.linux.common.apt_url" $package_group) }}
+    {{ $range := index .packages $package_group "linux.common.apt_url" }}
     sudo nala install --update -y -o APT::Get::AllowUnauthenticated=true {{ range $range }}{{. | quote}} {{ end }}
 
-    {{ $range := index .packages (printf "%s.linux.common.apt_junk" $package_group) }}
+    {{ $range := index .packages $package_group "linux.common.apt_junk" }}
     {{ range $range }}
     sudo nala remove -y {{ . | quote }}
     {{ end }}
 
     if [[ $XDG_SESSION_DESKTOP == "KDE" ]]; then
-      {{ $range := index .packages (printf "%s.linux.common.kde" $package_group) }}
+      {{ $range := index .packages $package_group "linux.common.kde" }}
       sudo nala install --update -y -o APT::Get::AllowUnauthenticated=true {{ range $range }} {{.}} {{ end }}
     fi
 
     if hostnamectl | grep -iq 'starlite'; then
       echo "Installing tablet specific packages"
-      {{ $range := index .packages (printf "%s.linux.common.tablet" $package_group) }}
+      {{ $range := index .packages $package_group "linux.common.tablet" }}
       sudo nala install --update -y -o APT::Get::AllowUnauthenticated=true {{ range $range }} {{.}} {{ end }}
     fi
 {{ else if eq .osid "linux-fedora" }}
     ## Fedora
     echo "Installing RPM packages"
 
-    {{ $range := index .packages (printf "%s.linux.common.apt" $package_group) }}
+    {{ $range := index .packages $package_group "linux.common.apt" }}
     sudo dnf5 install -y {{ range $range }} {{.}} {{ end }}
-    {{ $range := index .packages (printf "%s.linux.common.apt_url" $package_group) }}
+    {{ $range := index .packages $package_group "linux.common.apt_url" }}
     {{ range $range }}
     sudo dnf5 install -y {{ . | quote }}
     {{ end }}
 
-    {{ $range := index .packages (printf "%s.linux.common.apt_junk" $package_group) }}
+    {{ $range := index .packages $package_group "linux.common.apt_junk" }}
     {{ range $range }}
     sudo dnf5 remove -y {{ . | quote }}
     {{ end }}
 
     if [[ $XDG_SESSION_DESKTOP == "KDE" ]]; then
-      {{ $range := index .packages (printf "%s.linux.common.kde" $package_group) }}
+      {{ $range := index .packages $package_group "linux.common.kde" }}
       sudo dnf5 install -y {{ range $range }} {{.}} {{ end }}
     fi
 
     if hostnamectl | grep -iq 'starlite'; then
       echo "Installing tablet specific packages"
-      {{ $range := index .packages (printf "%s.linux.common.tablet" $package_group) }}
+      {{ $range := index .packages $package_group "linux.common.tablet" }}
       sudo dnf5 install -y {{ range $range }} {{.}} {{ end }}
     fi
 
@@ -107,25 +95,25 @@ dra download -o "$HOME"/.local/bin/ -i {{.}}
     ## Arch
     echo "Installing Arch packages"
 
-    {{ $range := index .packages (printf "%s.linux.common.apt" $package_group) }}
+    {{ $range := index .packages $package_group "linux.common.apt" }}
     sudo pacman -Syu --needed {{ range $range }} {{.}} {{end}} 
 
     if [[ $XDG_SESSION_DESKTOP == "KDE" ]]; then
-      {{ $range := index .packages (printf "%s.linux.common.kde" $package_group) }}
+      {{ $range := index .packages $package_group "linux.common.kde" }}
       sudo pacman -Syu --needed {{ range $range }} {{.}} {{ end }} {{ range $range }} {{.}} {{ end }}
     fi
 
     if hostnamectl | grep -iq 'starlite'; then
       echo "Installing tablet specific packages"
-      {{ $range := index .packages (printf "%s.linux.common.tablet" $package_group) }}
+      {{ $range := index .packages $package_group "linux.common.tablet" }}
       sudo pacman -Syu --needed {{ range $range }} {{.}} {{ end }}
     fi
 
     if type -P yay >/dev/null 2>&1; then
-      {{ $range := index .packages (printf "%s.linux.common.apt" $package_group) }}
+      {{ $range := index .packages $package_group "linux.common.apt" }}
       yay -Syu --needed {{ range $range }} {{.}} {{ end }}
     elif type -P paru >/dev/null 2>&1; then
-      {{ $range := index .packages (printf "%s.linux.common.kde" $package_group) }}
+      {{ $range := index .packages $package_group "linux.common.kde" }}
       paru -Syu --needed {{ range $range }} {{.}} {{ end }}
     fi
 {{ end }}
@@ -133,7 +121,7 @@ dra download -o "$HOME"/.local/bin/ -i {{.}}
 
 # Python packages
 echo "Installing Python packages with pip"
-{{ $range := index .packages (printf "%s.linux.common.pips" $package_group) }}
+{{ $range := index .packages $package_group "linux.common.pips" }}
 {{ range $range }}
 pip install {{ . | quote }}
 {{ end }}

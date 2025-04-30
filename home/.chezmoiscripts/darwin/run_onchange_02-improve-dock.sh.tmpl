@@ -1,5 +1,5 @@
 #!/bin/bash
 
-{{ range .packages.basic.darwin.junk -}}
+{{ range .packages.base.darwin.junk -}}
     dockutil --no-restart --remove {{ . | quote }} || true
 {{ end -}}
