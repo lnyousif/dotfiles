@@ -4,17 +4,15 @@ packages:
       common:
         apt:
           - keepassxc
+          - chromium
         apt_url:
         linux_url:
         snap:
-          - echo "hello world"
         tablet:
         dra:
           package:
           appimage:
           bin:
-        flatpak:
-          - app/org.chromium.Chromium
         kde:
         pips:
           - commitizen
