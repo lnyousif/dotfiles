@@ -1,5 +1,4 @@
 vscode:
-  basic:
     extensions:
       global:
         - ms-vscode-remote.remote-containers
@@ -15,5 +14,3 @@ vscode:
         - ms-vscode-remote.remote-wsl
       darwin:
       linux:
-
-

@@ -11,7 +11,7 @@
 "Removing apps for this user only."
 
 
-$Junk = {{ .packages.basic.windows.junk | join "|" }}
+$Junk = {{ .packages.base.windows.junk | join "|" }}
 
 
 $packages = Get-AppxPackage | Where-Object {  $_.Name -match $Junk  } | Where-Object -Property NonRemovable -eq $false 

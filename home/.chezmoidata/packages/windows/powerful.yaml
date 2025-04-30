@@ -4,5 +4,4 @@ packages:
       winget:
         - KeePassXCTeam.KeePassXC
         - Microsoft.VisualStudioCode
-      pips:
-        - commitizen
+

@@ -1,0 +1,7 @@
+{{ range .vscode.extensions.global }}
+    code --install-extension {{ . }}
+{{ end -}}
+
+{{ range .vscode.extensions.windows }}
+    code --install-extension {{ . }}
+{{ end -}}

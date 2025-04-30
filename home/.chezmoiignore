@@ -1,3 +1,4 @@
+# Ignore specific files
 key.txt.age
 .chezmoidata/**
 linux-install.sh
@@ -9,10 +10,15 @@ win-install.ps1
 .chezmoiscripts/darwin/**
 {{ end }}
 
+{{ if ne .chezmoi.os "linux" }}
+{{ end }}
+
 {{ if eq .chezmoi.os "windows" }}
 .chezmoiscripts/linux/**
 .chezmoiscripts/darwin/**
-.config/Code/User/settings.json
+{{ end }}
+
+{{ if ne .chezmoi.os "windows" }}
 {{ end }}
 
 {{ if eq .chezmoi.os "darwin" }}
@@ -21,15 +27,10 @@ win-install.ps1
 {{ end }}
 
 {{ if ne .chezmoi.os "darwin" }}
-Library/**
-{{ end }}
-
-{{ if ne .chezmoi.os "windows" }}
-Code/**
 {{ end }}
 
 {{ range $key, $value := .features }}
-{{ if eq $value false -}}
-.chezmoiscripts/{{ $.chezmoi.os }}/features/{{ $key }}/**
-{{ end -}}
+  {{ if eq $value false -}}
+  .chezmoiscripts/{{ $.chezmoi.os }}/features/{{ $key }}/**
+  {{ end -}}
 {{ end -}}

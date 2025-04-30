@@ -5,6 +5,6 @@
     {{ end -}}
 {{ end -}}
 
-{{- range .packages.basic.windows.pips -}}
+{{- range .packages.base.windows.pips -}}
 pip install {{ . | quote }}
 {{ end -}}
