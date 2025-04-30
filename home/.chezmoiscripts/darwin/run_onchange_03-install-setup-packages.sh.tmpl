@@ -1,0 +1,22 @@
+#!/bin/bash
+
+
+{{ range $setup, $value := .setups }}
+
+  {{ if $value }}
+
+    {{ range index $.packages $setup "darwin" "brews" -}}
+        brew install {{ . | quote }}
+    {{ end -}}
+
+    {{ range index $.packages $setup "darwin" "casks" -}}
+        brew install --cask {{ . | quote }}
+    {{ end -}}
+
+    {{ range index $.packages $setup "darwin" "pips" -}}
+        pipx install {{ . | quote }}
+    {{ end }}
+
+  {{ end }}
+
+{{ end }}

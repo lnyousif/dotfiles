@@ -85,11 +85,15 @@ encryption = "age"
     name = "{{ $name }}"                    # User name
     osid = "{{ $osid }}"                    # Operating system ID
     keepassxc = "{{ $keepassxcdb }}"        # KeepassXC database path
+    setups.base = true                      # Always true setups flag to setup the bare minimum
+    setups.powerful = {{ $powerful }}       # Powerful tools setups flag
+    setups.kids = {{ $kids }}               # Kids setups flag
+    
+    features.powerful = {{ $powerful }}     # Powerful features flag
+    features.kids = {{ $kids }}             # Kids features flag
+    features.ephemeral = {{ $ephemeral }}   # Ephemeral features flag
+    features.headless = {{ $headless }}     # Headless setups flag
     features.secrets = {{ $secrets }}       # Secrets feature flag
-    features.powerful = {{ $powerful }}     # Powerful tools feature flag
-    features.headless = {{ $headless }}     # Headless feature flag
-    features.ephemeral = {{ $ephemeral }}   # Ephemeral feature flag
-    features.kids = {{ $kids }}             # Kids feature flag
     features.codespace = {{ $codespace }}   # Codespace feature flag
 
 # Define editor settings
