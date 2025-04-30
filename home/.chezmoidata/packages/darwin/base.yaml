@@ -1,5 +1,5 @@
 packages:
-  basic:
+  base:
     darwin:
       brews:
         - age
@@ -12,6 +12,8 @@ packages:
         - jandedobbeleer/oh-my-posh/oh-my-posh
       casks:
         - google-chrome
+      pips:
+        - commitizen
       junk:
         - Launchpad
         - Safari

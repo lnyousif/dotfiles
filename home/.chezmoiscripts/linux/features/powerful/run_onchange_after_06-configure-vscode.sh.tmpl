@@ -1,0 +1,10 @@
+#!/bin/bash
+set -eufo pipefail
+
+{{ range .vscode.extensions.global }}
+    code --install-extension {{ . }}
+{{ end -}}
+
+{{ range .vscode.extensions.linux }}
+    code --install-extension {{ . }}
+{{ end -}}

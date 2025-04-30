@@ -5,9 +5,16 @@ packages:
         apt:
           - keepassxc
         apt_url:
-        flatpak:
-        kde:
         linux_url:
+        snap:
+          - echo "hello world"
         tablet:
+        dra:
+          package:
+          appimage:
+          bin:
+        flatpak:
+          - app/org.chromium.Chromium
+        kde:
         pips:
           - commitizen

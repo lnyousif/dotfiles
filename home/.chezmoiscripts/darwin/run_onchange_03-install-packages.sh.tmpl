@@ -1,13 +1,13 @@
 #!/bin/bash
 
-{{ range .packages.basic.darwin.brews -}}
+{{ range .packages.base.darwin.brews -}}
     brew install {{ . | quote }}
 {{ end -}}
 
-{{ range .packages.basic.darwin.casks -}}
+{{ range .packages.base.darwin.casks -}}
     brew install --cask {{ . | quote }}
 {{ end -}}
 
-{{ range .packages.powerful.darwin.pips -}}
+{{ range .packages.base.darwin.pips -}}
     pipx install {{ . | quote }}
 {{ end }}

@@ -1,5 +1,5 @@
 packages:
-  basic:
+  base:
     windows:
       winget:
         - 7zip.7zip
@@ -8,6 +8,7 @@ packages:
         - JanDeDobbeleer.OhMyPosh
         - Microsoft.WindowsTerminal
       pips:
+        - commitizen
       junk:
         - Clipchamp.Clipchamp
         - Microsoft.549981C3F5F10
