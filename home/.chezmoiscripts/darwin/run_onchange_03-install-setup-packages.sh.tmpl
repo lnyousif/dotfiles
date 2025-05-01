@@ -5,6 +5,10 @@
 
   {{ if $value }}
 
+    {{ range index $.packages $setup "darwin" "junk" -}}
+        dockutil --no-restart --remove {{ . | quote }} || true
+    {{ end -}}
+
     {{ range index $.packages $setup "darwin" "brews" -}}
         brew install {{ . | quote }}
     {{ end -}}

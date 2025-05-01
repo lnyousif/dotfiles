@@ -15,7 +15,7 @@ mkdir -p "$HOME/Downloads/AppImages"
     # Linux self installing packages
     echo "Installing self installing packages"
 
-    {{ range index $.packages $setup "linux" "common" "linux_url" }}
+    {{ range index $.packages $setup "linux" "common" "linux_cmd" }}
       bash -c {{ . | quote }}
     {{ end }}
 

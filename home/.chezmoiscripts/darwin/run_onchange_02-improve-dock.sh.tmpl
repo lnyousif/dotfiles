@@ -1,5 +1,0 @@
-#!/bin/bash
-
-{{ range .packages.base.darwin.junk -}}
-    dockutil --no-restart --remove {{ . | quote }} || true
-{{ end -}}
