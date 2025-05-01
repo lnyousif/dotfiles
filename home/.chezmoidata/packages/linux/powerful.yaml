@@ -6,7 +6,7 @@ packages:
           - keepassxc
           - chromium
         apt_url:
-        linux_url:
+        linux_cmd:
         snap:
         tablet:
         dra:
