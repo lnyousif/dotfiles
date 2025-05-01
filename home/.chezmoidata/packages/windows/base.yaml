@@ -4,11 +4,10 @@ packages:
       winget:
         - 7zip.7zip
         - Git.Git
-        - Pip
         - JanDeDobbeleer.OhMyPosh
         - Microsoft.WindowsTerminal
       pips:
-        - commitizen
+        - "--user -U commitizen"
       junk:
         - Clipchamp.Clipchamp
         - Microsoft.549981C3F5F10
