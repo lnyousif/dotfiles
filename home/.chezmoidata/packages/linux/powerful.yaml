@@ -15,4 +15,3 @@ packages:
           bin:
         kde:
         pips:
-          - commitizen

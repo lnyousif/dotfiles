@@ -8,6 +8,7 @@ packages:
         - Microsoft.WindowsTerminal
       pips:
         - "--user -U commitizen"
+        - "--user -U pre-commit"
       junk:
         - Clipchamp.Clipchamp
         - Microsoft.549981C3F5F10
