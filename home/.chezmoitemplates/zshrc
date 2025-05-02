@@ -3,9 +3,7 @@
 # The following lines were added by compinstall
 #zstyle :compinstall filename '/home/laith/.zshrc'
 
-
-eval "$(oh-my-posh init zsh --config https://raw.githubusercontent.com/lnyousif/dotfiles/refs/heads/main/assets/oh-my-posh/theme.omp.json)"
-
+eval "$(starship init zsh)"
 
 autoload -Uz compinit
 compinit
