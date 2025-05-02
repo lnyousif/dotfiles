@@ -21,9 +21,9 @@ packages:
           appimage:
           bin:
         kde:
-        linux_cmd:
-          - if ! type -P oh-my-posh >/dev/null 2>&1; then curl -s https://ohmyposh.dev/install.sh | bash -s; else oh-my-posh upgrade && oh-my-posh font install Meslo; fi
         tablet:
         pips:
           - commitizen
           - pre-commit
+        linux_cmd:
+          - curl -sS https://starship.rs/install.sh | sh

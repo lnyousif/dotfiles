@@ -9,7 +9,6 @@ packages:
         - git
         - dockutil
         - pipx
-        - jandedobbeleer/oh-my-posh/oh-my-posh
       casks:
         - google-chrome
       pips:
@@ -34,3 +33,7 @@ packages:
         - Numbers
         - Pages
         - App Store
+      darwin_cmd:
+        - "defaults write com.apple.finder AppleShowAllFiles true"
+        - "defaults write com.apple.finder NewWindowTarget -string 'PfLo'"
+        - curl -sS https://starship.rs/install.sh | sh

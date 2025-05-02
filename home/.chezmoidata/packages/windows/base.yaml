@@ -4,8 +4,8 @@ packages:
       winget:
         - 7zip.7zip
         - Git.Git
-        - JanDeDobbeleer.OhMyPosh
         - Microsoft.WindowsTerminal
+        - Starship.Starship
       pips:
         - "--user -U commitizen"
         - "--user -U pre-commit"

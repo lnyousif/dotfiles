@@ -10,8 +10,6 @@ This repository contains my personal dotfiles and configuration files, managed u
 - **`dot_config/`**: Configuration files for various tools.
 - **`dot_external/`**: External configurations, e.g., `selinux_config.tmpl`.
 
-### `assets/`
-- **`oh-my-posh/theme.omp.json`**: Theme configuration for [Oh My Posh](https://ohmyposh.dev/).
 - **`photos/`**: Personal images for profiles or presentations.
 
 ### Installation Scripts
