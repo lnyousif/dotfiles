@@ -27,15 +27,12 @@ fi
 # Function to install dependencies
 install_dependencies() {
     echo "Installing required dependencies..."
-    
-    # Clone git submodules
-    git submodule update --init --recursive || error_exit "Failed to update git submodules"
-    
+
     # Install Homebrew if not installed
     if ! command -v brew &> /dev/null; then
         echo "Installing Homebrew..."
         /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" || error_exit "Failed to install Homebrew"
-        
+
         # Add Homebrew to PATH for the current session
         if [[ $(uname -m) == "arm64" ]]; then
             eval "$(/opt/homebrew/bin/brew shellenv)"
@@ -45,7 +42,7 @@ install_dependencies() {
     else
         echo "Homebrew is already installed"
     fi
-    
+
     # Check if chezmoi is already installed
     if ! command -v chezmoi &> /dev/null; then
         echo "Installing chezmoi..."
@@ -89,33 +86,33 @@ switch_git_remote() {
 main() {
     echo "🤚  This script will setup .dotfiles for you."
     read -n 1 -r -s -p $'    Press any key to continue or Ctrl+C to abort...\n\n'
-    
+
     install_dependencies
-    
+
     echo "Installing dotfiles with chezmoi..."
-    
+
     # Create backup of existing configuration
     BACKUP_DIR="$HOME/dotfiles_backup_$(date +%Y%m%d_%H%M%S)"
     echo "Creating backup of existing configuration to $BACKUP_DIR"
     mkdir -p "$BACKUP_DIR"
-    
+
     # Backup important existing dotfiles
     for file in .bashrc .zshrc .profile .gitconfig; do
         if [ -f "$HOME/$file" ]; then
             cp -f "$HOME/$file" "$BACKUP_DIR/" || echo "Warning: Failed to backup $file"
         fi
     done
-    
+
     # Initialize and apply chezmoi
     echo "Initializing chezmoi..."
     chezmoi init https://github.com/lnyousif/dotfiles.git --apply || error_exit "Failed to initialize and apply chezmoi"
-    
+
     # Perform macOS specific post-installation tasks
     if [ -f "$HOME/.macos" ]; then
         echo "Setting macOS preferences..."
         bash "$HOME/.macos" || echo "Warning: Failed to set some macOS preferences"
     fi
-    
+
     echo "======================================================"
     echo "✅ Dotfiles setup complete!"
     echo "   Backup of previous configuration saved to: $BACKUP_DIR"
