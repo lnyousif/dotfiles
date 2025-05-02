@@ -21,8 +21,8 @@
         pipx install {{ . | quote }}
     {{ end }}
     
-    {{ range index $.packages $setup "darwin" "linux_cmd" -}}
-        bash {{ . | quote }}
+    {{ range index $.packages $setup "darwin" "darwin_cmd" -}}
+        {{ . | quote }}
     {{ end }}
 
 
