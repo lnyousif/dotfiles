@@ -9,6 +9,7 @@ packages:
         - git
         - dockutil
         - pipx
+        - starship
       casks:
         - google-chrome
       pips:
@@ -36,4 +37,3 @@ packages:
       darwin_cmd:
         - "defaults write com.apple.finder AppleShowAllFiles true"
         - "defaults write com.apple.finder NewWindowTarget -string 'PfLo'"
-        - curl -sS https://starship.rs/install.sh | sh
