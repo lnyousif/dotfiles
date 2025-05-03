@@ -6,6 +6,7 @@ packages:
         - Git.Git
         - Microsoft.WindowsTerminal
         - Starship.Starship
+        - Neovim.Neovim
       pips:
         - "--user -U commitizen"
         - "--user -U pre-commit"
