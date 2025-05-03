@@ -13,8 +13,8 @@
     
     
     "workbench.iconTheme": "material-icon-theme",
-    "workbench.colorTheme": "Visual Studio Light",
-    //"workbench.colorTheme": "Visual Studio Dark",
+    //"workbench.colorTheme": "Visual Studio Light",
+    "workbench.colorTheme": "Visual Studio Dark",
     // Disables the layout control icon at the top right
     "workbench.layoutControl.enabled": false,
     // Sets the sidebar location to the right
