@@ -1,7 +1,13 @@
 ## Unreleased
 
+### Feat
+
+- **setups**: define few way to select setups within the enviornments
+
 ### Refactor
 
+- **starship**: geting starship to work on windows powershell
+- **mac**: setup starship for mac
 - **starship**: replaced oh my posh with starship
 - **install**: improved installation scripts
 - **setup**: improved the code and removed unnecessary files
