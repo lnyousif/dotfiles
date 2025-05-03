@@ -34,3 +34,9 @@ win-install.ps1
   .chezmoiscripts/{{ $.chezmoi.os }}/features/{{ $key }}/**
   {{ end -}}
 {{ end -}}
+
+{{ range $key, $value := .setups }}
+  {{ if eq $value false -}}
+  .chezmoiscripts/{{ $.chezmoi.os }}/setups/{{ $key }}/**
+  {{ end -}}
+{{ end -}}
