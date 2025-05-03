@@ -6,6 +6,7 @@ packages:
           - git
           - curl
           - python3-pip
+          - neovim
         apt_url:
         apt_junk:
           - firefox
