@@ -10,7 +10,8 @@ packages:
         - dockutil
         - pipx
         - starship
-        - neovim
+        - tmux
+        - micro
       casks:
         - google-chrome
       pips:

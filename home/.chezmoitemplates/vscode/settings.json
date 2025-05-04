@@ -1,28 +1,52 @@
 {
-    // Normal Setup 
+    // Normal Setup
     //"dev.containers.dockerPath": "",
     //"dev.containers.dockerComposePath": "",
 
     // Fedora Setup when using non flatpack
     //"dev.containers.dockerPath": "podman-devcon//tainer-wrapper",
     //"dev.containers.dockerComposePath": "podman-compose",
-    
+
     //Fedora setup with Flatpack
     "dev.containers.dockerPath": "",
     "dev.containers.dockerComposePath": "",
-    
-    
+
+    "workbench.editor.showTabs": "multiple",
+    "workbench.startupEditor": "none",
+    "workbench.tips.enabled": false,
+
+    "workbench.sideBar.location": "right",
     "workbench.iconTheme": "material-icon-theme",
+    "material-icon-theme.hidesExplorerArrows": false,
+    "workbench.tree.enableStickyScroll": false,
+    "workbench.tree.renderIndentGuides": "none",
+    "workbench.tree.indent": 8,
+    "explorer.compactFolders": false,
+    "explorer.confirmDragAndDrop": false,
+
+    "editor.colorDecorators": false,
+    "editor.links": false,
+    "files.trimTrailingWhitespace": true,
+    "files.insertFinalNewline": true,
+    "editor.tabSize": 2,
+    "editor.detectIndentation": false,
+    "editor.showFoldingControls": "never",
+
+    "editor.scrollbar.horizontal": "hidden",
+    "editor.scrollbar.vertical": "hidden",
+
+    "editor.hideCursorInOverviewRuler": true,
+    "editor.tabCompletion": "on",
+    "editor.snippetSuggestions": "top",
+    "emmet.triggerExpansionOnTab": true,
+    "extensions.ignoreRecommendations": true,
+
+
     //"workbench.colorTheme": "Visual Studio Light",
     "workbench.colorTheme": "Visual Studio Dark",
-    // Disables the layout control icon at the top right
-    "workbench.layoutControl.enabled": false,
-    // Sets the sidebar location to the right
-    "workbench.sideBar.location": "right",
-    "workbench.tree.indent": 12,
-    "workbench.tree.renderIndentGuides": "none",
-    
-    
+
+
+
     // Enables an infinite amount of editors and disables
 
     "explorer.autoReveal": false,
@@ -34,7 +58,7 @@
     // OPTIONAL: Removes the glyph margin for breakpoints
     // and other symbols that most people don't use.
     // If you use those things, feel free to enable this!
-    
+
     "editor.foldingHighlight": false,
     // Stops highlighting the current line.
     //"editor.renderLineHighlight": "none",
@@ -54,7 +78,7 @@
     "editor.lineNumbers": "on",
     "window.autoDetectHighContrast": false,
     "zenMode.fullScreen": false,
- 
+
     //    // Customizing your font and spacing (line height)
     //    "editor.fontSize": 14,
     //    "editor.fontWeight": "350", // OPTIONAL
@@ -65,7 +89,7 @@
     //    "window.titleBarStyle": "custom",
     //    "window.closeWhenEmpty": true,
     //    "window.restoreWindows": "none",
-    
+
 
     "dotfiles.repository": "https://github.com/lnyousif/dotfiles.git",
     "dotfiles.targetPath": "~/.local/share/chezmoi/home",

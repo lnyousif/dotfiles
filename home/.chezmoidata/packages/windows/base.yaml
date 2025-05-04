@@ -6,7 +6,7 @@ packages:
         - Git.Git
         - Microsoft.WindowsTerminal
         - Starship.Starship
-        - Neovim.Neovim
+        - zyedidia.micro
       pips:
         - "--user -U commitizen"
         - "--user -U pre-commit"
