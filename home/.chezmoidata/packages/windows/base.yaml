@@ -7,6 +7,7 @@ packages:
         - Microsoft.WindowsTerminal
         - Starship.Starship
         - zyedidia.micro
+        - wez.wezterm
       pips:
         - "--user -U commitizen"
         - "--user -U pre-commit"
@@ -57,8 +58,8 @@ packages:
         - solitaire
         - zune
         - mixedreality
-        - tiktok 
+        - tiktok
         - adobe
         - prime
-        - soundrecorder 
+        - soundrecorder
         - bingweather!3dviewer
