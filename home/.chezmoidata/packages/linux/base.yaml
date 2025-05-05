@@ -7,7 +7,7 @@ packages:
           - curl
           - python3-pip
           - micro
-          - tmux
+          - xclip
         apt_url:
         apt_junk:
           - firefox
