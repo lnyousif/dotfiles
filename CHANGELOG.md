@@ -2,10 +2,16 @@
 
 ### Feat
 
+- **neovim**: adding neovim and nvchad setup
 - **setups**: define few way to select setups within the enviornments
 
 ### Refactor
 
+- **terminal**: removed wezterm from windows since win terminal is more than sufficent
+- **tmux**: add tmux to linux and mac and wezterm to windows
+- **tmux-micro**: Adding micro and tux to improve terminal useability
+- **micro**: switching my terminal editor to micro
+- **lua**: adding full neovim configuration
 - **starship**: geting starship to work on windows powershell
 - **mac**: setup starship for mac
 - **starship**: replaced oh my posh with starship
