@@ -1,8 +1,4 @@
 [".config/tmux/plugins/tpm"]
     type = "git-repo"
     url = "https://github.com/tmux-plugins/tpm"
-    refreshPeriod = "16h"
-
-
-
-
+    refreshPeriod = "168h"
