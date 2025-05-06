@@ -31,50 +31,12 @@ fi
 
 # Function to detect package manager and install dependencies
 install_dependencies() {
-    echo "Detecting Linux distribution..."
-    
-    if [ -f /etc/debian_version ] || [ -f /etc/ubuntu_version ]; then
-        echo "Debian/Ubuntu-based distribution detected"
-        sudo apt update || error_exit "Failed to update package lists"
-        sudo apt install -y curl git || error_exit "Failed to install curl and git"
-        
-        # Check if chezmoi is already installed
-        if ! command -v chezmoi &> /dev/null; then
-            echo "Installing chezmoi..."
-            sudo apt install -y chezmoi || error_exit "Failed to install chezmoi"
-        else
-            echo "chezmoi is already installed"
-        fi
-    elif [ -f /etc/fedora-release ]; then
-        echo "Fedora-based distribution detected"
-        sudo dnf check-update || true
-        sudo dnf install -y curl git || error_exit "Failed to install curl and git"
-        
-        if ! command -v chezmoi &> /dev/null; then
-            echo "Installing chezmoi..."
-            sudo dnf install -y chezmoi || error_exit "Failed to install chezmoi"
-        else
-            echo "chezmoi is already installed"
-        fi
-    elif [ -f /etc/arch-release ]; then
-        echo "Arch-based distribution detected"
-        sudo pacman -Sy || error_exit "Failed to update package lists"
-        sudo pacman -S --needed curl git || error_exit "Failed to install curl and git"
-        
-        if ! command -v chezmoi &> /dev/null; then
-            echo "Installing chezmoi..."
-            sudo pacman -S --needed chezmoi || error_exit "Failed to install chezmoi"
-        else
-            echo "chezmoi is already installed"
-        fi
-    else
-        echo "Unsupported distribution. Installing chezmoi using alternative method..."
-        if command -v curl &> /dev/null; then
-            sh -c "$(curl -fsLS get.chezmoi.io)" || error_exit "Failed to install chezmoi"
-        else
-            error_exit "curl is not installed. Please install curl manually and try again."
-        fi
-    fi
+      echo "Installing chezmoi"
+      if command -v curl &> /dev/null; then
+          sh -c "$(curl -fsLS get.chezmoi.io)" || error_exit "Failed to install chezmoi"
+      else
+          error_exit "curl is not installed. Please install curl manually and try again."
+      fi
 }
 
 # Function to switch git remote between HTTPS and SSH
@@ -109,28 +71,16 @@ switch_git_remote() {
 # Main installation process
 main() {
     install_dependencies
-    
+
     echo "Installing dotfiles with chezmoi..."
-    
-    # Create backup of existing configuration
-    BACKUP_DIR="$HOME/dotfiles_backup_$(date +%Y%m%d_%H%M%S)"
-    echo "Creating backup of existing configuration to $BACKUP_DIR"
-    mkdir -p "$BACKUP_DIR"
-    
-    # Backup important existing dotfiles
-    for file in .bashrc .zshrc .profile .gitconfig; do
-        if [ -f "$HOME/$file" ]; then
-            cp -f "$HOME/$file" "$BACKUP_DIR/" || echo "Warning: Failed to backup $file"
-        fi
-    done
-    
+
+
     # Initialize and apply chezmoi
     echo "Initializing chezmoi..."
     chezmoi init https://github.com/lnyousif/dotfiles.git --apply || error_exit "Failed to initialize and apply chezmoi"
-    
+
     echo "======================================================"
     echo "✅ Dotfiles setup complete!"
-    echo "   Backup of previous configuration saved to: $BACKUP_DIR"
     echo "======================================================"
 
     switch_git_remote
