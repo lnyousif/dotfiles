@@ -34,51 +34,38 @@ if (-not (Test-Administrator)) {
 # Function to install dependencies
 function Install-Dependencies {
     Write-Host "Installing required dependencies..."
-    
-    # Install Chocolatey if not installed
-    if (-not (Get-Command choco -ErrorAction SilentlyContinue)) {
-        Write-Host "Installing Chocolatey..."
+
+    # Check if winget is installed
+    if (-not (Get-Command winget -ErrorAction SilentlyContinue)) {
+        Write-Host "winget is not installed. Attempting to install winget..."
         try {
-            Set-ExecutionPolicy Bypass -Scope Process -Force
-            [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072
-            Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
+            # Install winget via App Installer package
+            Invoke-WebRequest -Uri "https://aka.ms/getwinget" -OutFile "$env:TEMP\AppInstaller.msixbundle" -UseBasicParsing
+            Add-AppxPackage -Path "$env:TEMP\AppInstaller.msixbundle"
         }
         catch {
-            Exit-WithError "Failed to install Chocolatey. $($_.Exception.Message)"
+            Exit-WithError "Failed to install winget. $($_.Exception.Message)"
         }
-        # Refresh environment to use choco without restarting PowerShell
-        $env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User")
     }
-    else {
-        Write-Host "Chocolatey is already installed"
-    }
-    
+
     # Install chezmoi or update if already installed
     if (-not (Get-Command chezmoi -ErrorAction SilentlyContinue)) {
-        Write-Host "Installing chezmoi..."
+        Write-Host "Installing chezmoi using winget..."
         try {
-            choco install chezmoi -y
+            winget install -e --id twpayne.chezmoi -h
         }
         catch {
-            Write-Host "Failed to install chezmoi via Chocolatey. Trying alternative method..." -ForegroundColor Yellow
-            try {
-                # Alternative installation using direct download
-                $chezmoiInstaller = "$env:TEMP\install.ps1"
-                Invoke-WebRequest -UseBasicParsing -Uri "https://git.io/chezmoi.ps1" -OutFile $chezmoiInstaller
-                & $chezmoiInstaller
-            }
-            catch {
-                Exit-WithError "Failed to install chezmoi via alternative method. $($_.Exception.Message)"
-            }
+            Exit-WithError "Failed to install chezmoi using winget. $($_.Exception.Message)"
         }
     }
     else {
         Write-Host "chezmoi is already installed"
         try {
-            choco upgrade chezmoi -y
+            Write-Host "Upgrading chezmoi using winget..."
+            winget upgrade -e --id twpayne.chezmoi -h
         }
         catch {
-            Write-Host "Warning: Could not upgrade chezmoi" -ForegroundColor Yellow
+            Write-Host "Warning: Could not upgrade chezmoi using winget" -ForegroundColor Yellow
         }
     }
 }
@@ -100,7 +87,7 @@ function Switch-GitRemote {
         # Set the new SSH URL as the origin remote
         git remote set-url origin "$sshUrl"
         Write-Host "Origin remote switched to SSH: $sshUrl"
-    } 
+    }
     elseif ($currentUrl -like "git@*") {
         # Convert SSH URL to HTTPS URL
         $httpsUrl = $currentUrl -replace "git@", "https://" -replace ":", "/" -replace "\.com:", ".com/"
@@ -108,7 +95,7 @@ function Switch-GitRemote {
         # Set the new HTTPS URL as the origin remote
         git remote set-url origin "$httpsUrl"
         Write-Host "Origin remote switched to HTTPS: $httpsUrl"
-    } 
+    }
     else {
         Write-Host "Origin remote URL format not recognized. No changes made."
     }
@@ -120,23 +107,23 @@ function Install-Dotfiles {
     Write-Host "    Press any key to continue or Ctrl+C to abort..."
     $null = $Host.UI.RawUI.ReadKey("NoEcho,IncludeKeyDown")
     Write-Host ""
-    
+
     Install-Dependencies
-    
+
     Write-Host "Installing dotfiles with chezmoi..."
-    
+
     # Create backup of existing configuration
     $backupDir = Join-Path $env:USERPROFILE "dotfiles_backup_$(Get-Date -Format 'yyyyMMdd_HHmmss')"
     Write-Host "Creating backup of existing configuration to $backupDir"
     New-Item -Path $backupDir -ItemType Directory -Force | Out-Null
-    
+
     # Backup important existing dotfiles (PowerShell profiles and configuration files)
     $filesToBackup = @(
         "$env:USERPROFILE\.gitconfig",
         "$env:USERPROFILE\Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1",
         "$env:USERPROFILE\Documents\PowerShell\Microsoft.PowerShell_profile.ps1"
     )
-    
+
     foreach ($file in $filesToBackup) {
         if (Test-Path $file) {
             try {
@@ -147,7 +134,7 @@ function Install-Dotfiles {
             }
         }
     }
-    
+
     # Initialize and apply chezmoi
     Write-Host "Initializing chezmoi..."
     try {
@@ -156,7 +143,7 @@ function Install-Dotfiles {
     catch {
         Exit-WithError "Failed to initialize and apply chezmoi. $($_.Exception.Message)"
     }
-    
+
     # Perform Windows specific post-installation tasks
     if (Test-Path "$env:USERPROFILE\.windows-settings.ps1") {
         Write-Host "Applying Windows specific settings..."
@@ -167,7 +154,7 @@ function Install-Dotfiles {
             Write-Host "Warning: Failed to apply some Windows settings" -ForegroundColor Yellow
         }
     }
-    
+
     Write-Host "======================================================"
     Write-Host "✅ Dotfiles setup complete!" -ForegroundColor Green
     Write-Host "   Backup of previous configuration saved to: $backupDir"
