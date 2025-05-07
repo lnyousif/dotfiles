@@ -1,3 +1,8 @@
-{{- if or (eq .chezmoi.os "darwin") (eq .chezmoi.os "linux") -}}
-{{-   template "zshrc" . -}}
+{{- if (eq .chezmoi.os "darwin") -}}
+PATH="~/.local/bin:${PATH}"
+export PATH
+eval "$(starship init zsh)"
+eval "$(/opt/homebrew/bin//brew shellenv)"
+{{- else if (eq .chezmoi.os "linux") -}}
+eval "$(starship init zsh)"
 {{- end -}}
