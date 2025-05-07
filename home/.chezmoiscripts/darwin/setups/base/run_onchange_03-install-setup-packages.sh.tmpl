@@ -17,10 +17,11 @@
         brew install --cask {{ . | quote }}
     {{ end -}}
 
+    sudo pipx ensurepath --global
     {{ range index $.packages $setup "darwin" "pips" -}}
-        pipx install {{ . | quote }}
+        sudo pipx install {{ . | quote }} --global
     {{ end }}
-    
+
     {{ range index $.packages $setup "darwin" "darwin_cmd" -}}
         {{ . | quote }}
     {{ end }}
