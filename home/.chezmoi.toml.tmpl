@@ -15,7 +15,7 @@
     {{/* String tags */}}
     {{ $email := "Laith@tmobi.link" }}  # Default email address
     {{ $name := "Laith Yousif" }}       # Default name
-    {{ $editor := "nano" }}             # Default editor
+    {{ $editor := "micro" }}             # Default editor
 
 # Define boolean feature flags for machine-specific configurations
     {{/* boolean feature tags */}}
@@ -28,10 +28,13 @@
     {{- $keepassxcdb := "" -}}          # Path to KeepassXC database (empty if not used)
 
     # Detect specific environments like GitHub Codespaces, VSCode remote containers, etc.
-    
+
     {{/* detect GitHub codespaces, VSCode remote containers, Docker containers, Multipass VMs, and Vagrant boxes */}}
-    
-    {{- if or (env "CODESPACES") (env "REMOTE_CONTAINERS_IPC") (eq .chezmoi.username "root" "ubuntu" "vagrant" "vscode") -}}
+
+    {{- $isCodespace := env "CODESPACES" -}}
+    {{- $isRemoteEnvironment := env "REMOTE_CONTAINERS_IPC" -}}
+    {{- $isSpecialUser := eq .chezmoi.username "vagrant" "vscode" -}}
+    {{- if or $isCodespace $isRemoteEnvironment $isSpecialUser -}}
         sourceDir = {{ .chezmoi.sourceDir | quote }}  # Set source directory
         {{-   $codespace = true -}}                   # Mark as a codespace
         {{-   $ephemeral = true -}}                   # Mark as ephemeral
@@ -43,17 +46,17 @@
         # Prompt for Git name with a default value
         {{- $name = promptStringOnce . "name" "Git name for the author/committer (Default: Laith Yousif)" }}
         {{- if not $name }}{{ $name = "Laith Yousif" }}{{ end -}}
-        
+
         # Prompt for Git email with a default value
         {{- $email = promptStringOnce . "email" "Git email address for the author/committer (Default: Laith@tmobi.link)" }}
         {{- if not $email }}{{ $email = "Laith@tmobi.link" }}{{ end -}}
 
         # Prompt for enabling secrets with a default value of true
-        {{- $secrets = promptBoolOnce . "features.secrets" "Secrets - Should I setup pass manager locally  (true/false, default true)" -}}  
+        {{- $secrets = promptBoolOnce . "features.secrets" "Secrets - Should I setup pass manager locally  (true/false, default true)" -}}
         {{- if not $secrets }}{{ $secrets = true }}{{ end -}}
 
         # Prompt for enabling powerful tools with a default value of true
-        {{- $powerful = promptBoolOnce . "features.powerful" "Powerful - Should I setup heavy tools locally  (true/false, default true)" -}}  
+        {{- $powerful = promptBoolOnce . "features.powerful" "Powerful - Should I setup heavy tools locally  (true/false, default true)" -}}
         {{- if not $powerful }}{{ $powerful = true }}{{ end -}}
 
         # If secrets are enabled, prompt for the KeepassXC database path
@@ -88,7 +91,7 @@ encryption = "age"
     setups.base = true                      # Always true setups flag to setup the bare minimum
     setups.powerful = {{ $powerful }}       # Powerful tools setups flag
     setups.kids = {{ $kids }}               # Kids setups flag
-    
+
     features.ephemeral = {{ $ephemeral }}   # Ephemeral features flag
     features.headless = {{ $headless }}     # Headless setups flag
     features.secrets = {{ $secrets }}       # Secrets feature flag
