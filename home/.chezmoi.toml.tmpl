@@ -41,6 +41,12 @@
         {{-   $headless = true -}}                    # Mark as headless
         {{-   $secrets = false -}}                    # Disable secrets
         {{-   $powerful = false -}}                   # Disable powerful tools
+
+        {{/* for  GitHub codespaces, VSCode remote containers, Docker containers, */}}
+        {{/* Multipass VMs, and Vagrant boxes setup the properties without asking */}}
+        {{ $name = "Laith Yousif" }}
+        {{ $email = "Laith@tmobi.link" }}
+
     {{- else -}}
         # Prompt user for configuration values if not in a codespace
         # Prompt for Git name with a default value
