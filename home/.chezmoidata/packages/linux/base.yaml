@@ -10,7 +10,6 @@ packages:
           - micro
           - tmux
           - xclip
-        apt_url:
         apt_junk:
           - firefox
           - libreoffice-data
@@ -20,12 +19,6 @@ packages:
           - gnome-tour
           - gnome-text-editor
           - moby-engine
-        dra:
-          package:
-          appimage:
-          bin:
-        kde:
-        tablet:
         pips:
           - commitizen
           - pre-commit
