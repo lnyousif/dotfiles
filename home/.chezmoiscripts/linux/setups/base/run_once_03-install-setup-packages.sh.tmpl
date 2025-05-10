@@ -2,8 +2,6 @@
 
 export PATH="$HOME/.local/bin/:$PATH"
 
-mkdir -p "$HOME/Downloads/AppImages"
-
 {{ range $setup, $value := .setups }}
 
   {{ if $value }}
