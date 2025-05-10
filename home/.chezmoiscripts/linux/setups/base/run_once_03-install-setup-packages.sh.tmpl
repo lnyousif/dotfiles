@@ -69,9 +69,14 @@ export PATH="$HOME/.local/bin/:$PATH"
 
 
     # Python packages
-    echo "Installing Python packages with pipx"
+    echo "Installing Python packages with pipx or pip"
+
     {{ range index $.packages $setup "linux" "common" "pips" }}
-    pipx install {{ . | quote }}
+      if command -v pipx &>/dev/null; then
+        pipx install {{ . | quote }}
+      else if command -v pip &>/dev/null; then
+        pip install {{ . | quote }}
+      end
     {{ end }}
 
   {{ end }}
