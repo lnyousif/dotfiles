@@ -1,4 +1,4 @@
-## Unreleased
+## 0.2.0 (2025-05-10)
 
 ### Feat
 
@@ -7,6 +7,18 @@
 
 ### Refactor
 
+- **codespace**: enable codespace to be a full setup option that get applied after base
+- **linux**: update packages before installing new things
+- **bug**: fixing simple error
+- **codespace**: adding support for codespace and dev container setup
+- **cleanup**: making the code better
+- **zsh-bash**: updated for better mac support
+- **tmux**: eleminate all old binding and rely on default
+- **tmux**: better color scheme
+- **tmux**: better configurations and plugins
+- **setup**: improved the scripts that can be run to intitalize the dotfiles application
+- **tmux**: ading better configuration
+- **tmux**: cleanup
 - **terminal**: removed wezterm from windows since win terminal is more than sufficent
 - **tmux**: add tmux to linux and mac and wezterm to windows
 - **tmux-micro**: Adding micro and tux to improve terminal useability
