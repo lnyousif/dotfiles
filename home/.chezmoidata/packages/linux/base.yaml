@@ -6,8 +6,7 @@ packages:
           - git
           - curl
           - wget
-          - py3-pip
-          - python3-pip
+          - pipx
           - micro
           - tmux
           - xclip

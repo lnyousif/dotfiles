@@ -69,7 +69,7 @@ export PATH="$HOME/.local/bin/:$PATH"
     # Python packages
     echo "Installing Python packages with pip"
     {{ range index $.packages $setup "linux" "common" "pips" }}
-    pip install {{ . | quote }}
+    pipx install {{ . | quote }}
     {{ end }}
 
   {{ end }}
