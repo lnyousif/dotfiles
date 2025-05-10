@@ -2,7 +2,6 @@
 
 ### Feat
 
-- **neovim**: adding neovim and nvchad setup
 - **setups**: define few way to select setups within the enviornments
 
 ### Refactor
