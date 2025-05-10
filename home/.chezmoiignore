@@ -12,6 +12,7 @@ codespace-install.sh
 {{ end }}
 
 {{ if ne .chezmoi.os "linux" }}
+,config/Code/**
 {{ end }}
 
 {{ if eq .chezmoi.os "windows" }}
@@ -20,6 +21,7 @@ codespace-install.sh
 {{ end }}
 
 {{ if ne .chezmoi.os "windows" }}
+AppData/**
 {{ end }}
 
 {{ if eq .chezmoi.os "darwin" }}
@@ -28,6 +30,10 @@ codespace-install.sh
 {{ end }}
 
 {{ if ne .chezmoi.os "darwin" }}
+Library/**
+{{ end }}
+
+{{ if eq .chezmoi.os "darwin" }}
 {{ end }}
 
 {{ range $key, $value := .features }}
