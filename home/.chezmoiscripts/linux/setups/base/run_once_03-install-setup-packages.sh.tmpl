@@ -23,7 +23,9 @@ export PATH="$HOME/.local/bin/:$PATH"
         ## Debian
         echo "Installing Debian Packages"
 
-        sudo apt install {{ range index $.packages $setup "linux" "common" "apt" }} {{.}}{{ end }}
+        {{ range index $.packages $setup "linux" "common" "apt" }}
+        sudo apt install -y {{. | quote }}
+        {{ end }}
 
         {{ range index $.packages $setup "linux" "common" "apt_junk" }}
         sudo apt remove -y {{ . | quote }}
@@ -67,7 +69,7 @@ export PATH="$HOME/.local/bin/:$PATH"
 
 
     # Python packages
-    echo "Installing Python packages with pip"
+    echo "Installing Python packages with pipx"
     {{ range index $.packages $setup "linux" "common" "pips" }}
     pipx install {{ . | quote }}
     {{ end }}
