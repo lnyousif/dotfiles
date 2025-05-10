@@ -6,8 +6,6 @@ mac-install.sh
 win-install.ps1
 codespace-install.sh
 
-
-
 {{ if eq .chezmoi.os "linux" }}
 .chezmoiscripts/windows/**
 .chezmoiscripts/darwin/**
