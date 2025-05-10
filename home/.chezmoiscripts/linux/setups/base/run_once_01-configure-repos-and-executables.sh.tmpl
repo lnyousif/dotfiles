@@ -59,6 +59,17 @@ elif command -v pacman &>/dev/null; then
   else
     echo "Chaotic AUR Repo already present."
   fi
+  sudo pacman -Syu --noconfirm
+
+elif command -v apk &>/dev/null; then
+  echo "Alpine based system found!"
+
+  # Update System
+  sudo apk update
+
+  # Add Repositories
+  echo "Setting up repositories"
+  sudo apk add --no-cache alpine-sdk
 else
   echo -e "\e[1;34m${LINE}\e[0m"
   echo -e "\e[1;31mSystem not recognized.\e[0m \e[1;33mPlease ensure code for operating system {{ .osid }} is properly set up.\e[0m"
