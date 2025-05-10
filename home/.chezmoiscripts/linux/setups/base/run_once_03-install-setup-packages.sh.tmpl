@@ -44,7 +44,6 @@ mkdir -p "$HOME/Downloads/AppImages"
         echo "Installing Debian Packages"
 
         sudo nala install --update -y -o APT::Get::AllowUnauthenticated=true {{ range index $.packages $setup "linux" "common" "apt" }} {{.}}{{ end }}
-        sudo nala install --update -y -o APT::Get::AllowUnauthenticated=true {{ range index $.packages $setup "linux" "common" "apt_url" }}{{. | quote}} {{ end }}
 
         {{ range index $.packages $setup "linux" "common" "apt_junk" }}
         sudo nala remove -y {{ . | quote }}
@@ -64,7 +63,7 @@ mkdir -p "$HOME/Downloads/AppImages"
         echo "Installing RPM packages"
 
         sudo dnf5 install -y {{ range index $.packages $setup "linux" "common" "apt" }} {{.}}{{ end }}
-        {{ range index $.packages $setup "linux" "common" "apt_url" }}
+        {{ range index $.packages $setup "linux" "common" "apt" }}
         sudo dnf5 install -y {{ . | quote }}
         {{ end }}
 
@@ -82,12 +81,12 @@ mkdir -p "$HOME/Downloads/AppImages"
           sudo dnf5 install -y {{ range index $.packages $setup "linux" "common" "tablet" }} {{.}}{{ end }}
         fi
 
-        {{ else if eq $.osid "linux-alpine" }}
+    {{ else if eq $.osid "linux-alpine" }}
         ## Alpine
         echo "Installing RPM packages"
 
         sudo apk add --no-cache {{ range index $.packages $setup "linux" "common" "apt" }} {{.}}{{ end }}
-        {{ range index $.packages $setup "linux" "common" "apt_url" }}
+        {{ range index $.packages $setup "linux" "common" "apt" }}
         sudo apk add --no-cache {{ . | quote }}
         {{ end }}
 
