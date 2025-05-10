@@ -82,6 +82,28 @@ mkdir -p "$HOME/Downloads/AppImages"
           sudo dnf5 install -y {{ range index $.packages $setup "linux" "common" "tablet" }} {{.}}{{ end }}
         fi
 
+        {{ else if eq $.osid "linux-alpine" }}
+        ## Alpine
+        echo "Installing RPM packages"
+
+        sudo apk add --no-cache {{ range index $.packages $setup "linux" "common" "apt" }} {{.}}{{ end }}
+        {{ range index $.packages $setup "linux" "common" "apt_url" }}
+        sudo apk add --no-cache {{ . | quote }}
+        {{ end }}
+
+        {{ range index $.packages $setup "linux" "common" "apt_junk" }}
+        sudo apk del --no-cache {{ . | quote }}
+        {{ end }}
+
+
+        if [[ $XDG_SESSION_DESKTOP == "KDE" ]]; then
+          sudo apk add --no-cache {{ range index $.packages $setup "linux" "common" "kde" }} {{.}}{{ end }}
+        fi
+
+        if hostnamectl | grep -iq 'starlite'; then
+          echo "Installing tablet specific packages"
+          sudo apk add --no-cache {{ range index $.packages $setup "linux" "common" "tablet" }} {{.}}{{ end }}
+        fi
 
     {{ else if eq $.osid "linux-arch" }}
         ## Arch

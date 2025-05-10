@@ -92,8 +92,8 @@
 
 
     "dotfiles.repository": "https://github.com/lnyousif/dotfiles.git",
-    "dotfiles.targetPath": "~/.local/share/chezmoi/home",
-    "dotfiles.installCommand": "codespace-install.sh",
+    "dotfiles.targetPath": "~/.dotfiles",
+    "dotfiles.installCommand": "home/codespace-install.sh",
     "github.copilot.chat.codesearch.enabled": true,
     "github.copilot.chat.newWorkspaceCreation.enabled": true,
     "debug.javascript.autoAttachFilter": "smart",
