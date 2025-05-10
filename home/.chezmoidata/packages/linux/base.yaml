@@ -23,4 +23,4 @@ packages:
           - commitizen
           - pre-commit
         linux_cmd:
-          - curl -sS https://starship.rs/install.sh -y | sh
+          - curl -sS https://starship.rs/install.sh | sh -s -- -y

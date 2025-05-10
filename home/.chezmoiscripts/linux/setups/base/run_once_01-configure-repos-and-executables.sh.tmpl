@@ -4,10 +4,17 @@ set -e
 LINE="-------------------------------------------"
 
 
+  echo -e "\e[1;34m${LINE}\e[0m"
+  echo -e "Operating system {{ .osid }}"
+  echo -e "\e[1;34m${LINE}\e[0m"
+
 if command -v apt &>/dev/null; then
   echo "Debian based system found!"
 
+  sudo apt update -y
+
 elif command -v dnf &>/dev/null; then
+  echo "Fedora based system found!"
 
   # Install dnf5 for faster downloads
   sudo dnf install dnf5
@@ -38,6 +45,8 @@ elif command -v dnf &>/dev/null; then
   sudo dnf -y install dnf-plugins-core
 
 elif command -v pacman &>/dev/null; then
+  echo "Arch based system found!"
+
   if ! grep -q '\[chaotic-aur\]' /etc/pacman.conf; then
     sudo pacman-key --recv-key 3056513887B78AEB --keyserver keyserver.ubuntu.com
     sudo pacman-key --lsign-key 3056513887B78AEB
@@ -51,5 +60,7 @@ elif command -v pacman &>/dev/null; then
     echo "Chaotic AUR Repo already present."
   fi
 else
-  echo "Nothing to do on non unknown systems."
+  echo -e "\e[1;34m${LINE}\e[0m"
+  echo -e "\e[1;31mSystem not recognized.\e[0m \e[1;33mPlease ensure code for operating system {{ .osid }} is properly set up.\e[0m"
+  echo -e "\e[1;34m${LINE}\e[0m"
 fi
