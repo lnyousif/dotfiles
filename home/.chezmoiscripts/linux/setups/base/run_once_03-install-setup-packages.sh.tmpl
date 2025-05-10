@@ -76,7 +76,7 @@ export PATH="$HOME/.local/bin/:$PATH"
         pipx install {{ . | quote }}
       else if command -v pip &>/dev/null; then
         pip install {{ . | quote }}
-      end
+      fi
     {{ end }}
 
   {{ end }}
