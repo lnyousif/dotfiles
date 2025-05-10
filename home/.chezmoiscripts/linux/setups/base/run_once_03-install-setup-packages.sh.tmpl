@@ -83,11 +83,11 @@ mkdir -p "$HOME/Downloads/AppImages"
         fi
 
 
-    {{ else if eq .osid "linux-arch" }}
+    {{ else if eq $.osid "linux-arch" }}
         ## Arch
         echo "Installing Arch packages"
 
-        sudo pacman -Syu --needed {{ range index $.packages $setup "linux" "common" "apt" }} {{.}}{{end}} 
+        sudo pacman -Syu --needed {{ range index $.packages $setup "linux" "common" "apt" }} {{.}}{{end}}
 
         if [[ $XDG_SESSION_DESKTOP == "KDE" ]]; then
           sudo pacman -Syu --needed {{ range index $.packages $setup "linux" "common" "kde" }} {{.}}{{ end }}
