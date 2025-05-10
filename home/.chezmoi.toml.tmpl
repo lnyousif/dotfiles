@@ -95,6 +95,7 @@ encryption = "age"
     osid = "{{ $osid }}"                    # Operating system ID
     keepassxc = "{{ $keepassxcdb }}"        # KeepassXC database path
     setups.base = true                      # Always true setups flag to setup the bare minimum
+    setups.codespace = {{  $codespace }}    # True if its running in github codespace or DevContainer or a like
     setups.powerful = {{ $powerful }}       # Powerful tools setups flag
     setups.kids = {{ $kids }}               # Kids setups flag
 

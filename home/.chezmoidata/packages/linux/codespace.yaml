@@ -1,0 +1,16 @@
+packages:
+  codespace:
+    linux:
+      common:
+        apt:
+        apt_junk:
+        pips:
+        linux_cmd:
+          - echo "Setting up DevContainer environment..."
+          - echo "export DEVCONTAINER=true" >> ~/.bashrc
+          - echo 'function welcome() { echo "DevContainer loaded! Project: $(basename $(pwd))"; git status; }' >> ~/.bashrc
+          - echo 'welcome' >> ~/.bashrc
+          - echo 'echo "To reload your shell configuration, run: source ~/.bashrc"' >> ~/.bashrc
+          - mkdir -p ~/.local/bin
+          - echo 'export PATH=$PATH:~/.local/bin' >> ~/.bashrc
+          - if [ -f "./setup-project.sh" ]; then bash ./setup-project.sh; fi
