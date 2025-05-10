@@ -5,13 +5,5 @@ packages:
         apt:
           - keepassxc
           - chromium
-        apt_url:
         linux_cmd:
-        snap:
-        tablet:
-        dra:
-          package:
-          appimage:
-          bin:
-        kde:
         pips:

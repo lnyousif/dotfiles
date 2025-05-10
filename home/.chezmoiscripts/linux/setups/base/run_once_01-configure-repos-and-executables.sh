@@ -6,17 +6,6 @@ LINE="-------------------------------------------"
 
 if command -v apt &>/dev/null; then
   echo "Debian based system found!"
-  # Install Nala
-  if command -v nala &>/dev/null; then
-    echo "Nala is already installed. Skipping"
-  else
-    curl https://gitlab.com/volian/volian-archive/-/raw/main/install-nala.sh | bash
-    sudo apt install -t nala nala
-  fi
-
-  # Setup Nala
-  sudo nala fetch --auto -y --https-only --non-free
-  sudo nala install --update -y curl wget git ca-certificates libfuse2 gnupg2
 
 elif command -v dnf &>/dev/null; then
 
@@ -47,18 +36,6 @@ elif command -v dnf &>/dev/null; then
   # Add Repositories
   echo "Setting up repositories"
   sudo dnf -y install dnf-plugins-core
-
-
-  trap 'rm -fr /tmp/dra' EXIT
-  ## Download dra executable
-  curl -s https://api.github.com/repos/devmatteini/dra/releases/latest | grep browser_download_url | cut -d : -f 2,3 | tr -d \" | grep linux | grep gnu | grep x86 | wget -P /tmp/dra -qi -
-  filename=$(ls /tmp/dra)
-  tarfile="${filename%.*}"
-  filedir="${tarfile%.*}"
-  tar -xvzf /tmp/dra/"${filename}" -C /tmp/dra
-  mkdir -p "${HOME}"/.local/bin
-  cp /tmp/dra/"${filedir}"/dra "${HOME}"/.local/bin
-  rm -fr /tmp/dra
 
 elif command -v pacman &>/dev/null; then
   if ! grep -q '\[chaotic-aur\]' /etc/pacman.conf; then
