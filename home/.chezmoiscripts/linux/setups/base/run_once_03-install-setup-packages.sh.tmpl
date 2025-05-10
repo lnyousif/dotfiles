@@ -74,7 +74,7 @@ export PATH="$HOME/.local/bin/:$PATH"
     {{ range index $.packages $setup "linux" "common" "pips" }}
       if command -v pipx &>/dev/null; then
         pipx install {{ . | quote }}
-      else if command -v pip &>/dev/null; then
+      else
         pip install {{ . | quote }}
       fi
     {{ end }}
