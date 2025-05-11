@@ -20,6 +20,7 @@
 # Define boolean feature flags for machine-specific configurations
     {{/* boolean feature tags */}}
     {{- $secrets:= false -}}            # Whether secrets are enabled
+    {{- $setuptype := "" }}             # Setup Type
     {{- $powerful := false -}}          # Whether powerful tools are enabled
     {{- $kids := false -}}              # Whether this is a kid-friendly setup
     {{- $codespace := false -}}         # Whether this is a GitHub Codespace
@@ -49,26 +50,38 @@
 
     {{- else -}}
         # Prompt user for configuration values if not in a codespace
-        # Prompt for Git name with a default value
-        {{- $name = promptStringOnce . "name" "Git name for the author/committer (Default: Laith Yousif)" }}
-        {{- if not $name }}{{ $name = "Laith Yousif" }}{{ end -}}
 
-        # Prompt for Git email with a default value
-        {{- $email = promptStringOnce . "email" "Git email address for the author/committer (Default: Laith@tmobi.link)" }}
-        {{- if not $email }}{{ $email = "Laith@tmobi.link" }}{{ end -}}
+          {{- $setuptype = promptChoiceOnce . "setuptype" "What type of setup are you choosing " (list "light" "powerful" "kids") -}}
 
-        # Prompt for enabling secrets with a default value of true
-        {{- $secrets = promptBoolOnce . "features.secrets" "Secrets - Should I setup pass manager locally  (true/false, default true)" -}}
-        {{- if not $secrets }}{{ $secrets = true }}{{ end -}}
+          {{- if eq $setuptype "light" -}}
+            {{ $powerful = false }}
+            {{ $kids = false }}
+          {{- else if eq $setuptype "powerful" -}}
+            {{ $powerful = true }}
+            {{ $kids = false }}
+          {{- else if eq $setuptype "kids" -}}
+            {{ $powerful = false }}
+            {{ $kids = true }}
+          {{- end -}}
 
-        # Prompt for enabling powerful tools with a default value of true
-        {{- $powerful = promptBoolOnce . "features.powerful" "Powerful - Should I setup heavy tools locally  (true/false, default true)" -}}
-        {{- if not $powerful }}{{ $powerful = true }}{{ end -}}
+        {{- if eq $kids false -}}
+          # Prompt for Git name with a default value
+          {{- $name = promptStringOnce . "name" "Git name for the author/committer (Default: Laith Yousif)" }}
+          {{- if not $name }}{{ $name = "Laith Yousif" }}{{ end -}}
 
-        # If secrets are enabled, prompt for the KeepassXC database path
-        {{- if $secrets -}}
-            {{- $keepassxcdb = promptStringOnce . "keepassxc" "KeepassXC DB Path (default .keepassxc/chezmoi.kdbx) " -}}
-            {{- if not $keepassxcdb }}{{ $keepassxcdb = ".keepassxc/chezmoi.kdbx" }}{{ end -}}
+          # Prompt for Git email with a default value
+          {{- $email = promptStringOnce . "email" "Git email address for the author/committer (Default: Laith@tmobi.link)" }}
+          {{- if not $email }}{{ $email = "Laith@tmobi.link" }}{{ end -}}
+
+          # Prompt for enabling secrets with a default value of true
+          {{- $secrets = promptBoolOnce . "features.secrets" "Secrets - Should I setup pass manager locally  (true/false, default true)" -}}
+          {{- if not $secrets }}{{ $secrets = true }}{{ else }} {{ end -}}
+
+          # If secrets are enabled, prompt for the KeepassXC database path
+          {{- if $secrets -}}
+              {{- $keepassxcdb = promptStringOnce . "keepassxc" "KeepassXC DB Path (default .keepassxc/chezmoi.kdbx) " -}}
+              {{- if not $keepassxcdb }}{{ $keepassxcdb = ".keepassxc/chezmoi.kdbx" }}{{ end -}}
+          {{- end -}}
         {{- end -}}
 
     {{- end -}}
@@ -93,8 +106,10 @@ encryption = "age"
     email = "{{ $email }}"                  # User email
     name = "{{ $name }}"                    # User name
     osid = "{{ $osid }}"                    # Operating system ID
+    setuptype = "{{ $setuptype }}"           # Setup Type
     keepassxc = "{{ $keepassxcdb }}"        # KeepassXC database path
-    setups.base = true                      # Always true setups flag to setup the bare minimum
+
+    setups.base = {{ true }}                # True basically always, the base is setups flag to setup the bare minimum
     setups.powerful = {{ $powerful }}       # Powerful tools setups flag
     setups.kids = {{ $kids }}               # Kids setups flag
 
