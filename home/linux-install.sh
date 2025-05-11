@@ -33,7 +33,7 @@ fi
 install_dependencies() {
       echo "Installing chezmoi"
       if command -v curl &> /dev/null; then
-          sh -c "$(curl -fsLS get.chezmoi.io)" || error_exit "Failed to install chezmoi"
+          sh -c "$(curl -fsLS get.chezmoi.io/lb)" || error_exit "Failed to install chezmoi"
       else
           error_exit "curl is not installed. Please install curl manually and try again."
       fi
