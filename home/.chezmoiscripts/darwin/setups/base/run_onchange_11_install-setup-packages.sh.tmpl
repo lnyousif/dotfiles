@@ -1,6 +1,7 @@
 #!/bin/bash
 
-
+brew upgrade
+brew update
 {{ range $setup, $value := .setups }}
 
   {{ if $value }}
@@ -22,11 +23,9 @@
         sudo pipx install {{ . | quote }} --global
     {{ end }}
 
-    {{ range index $.packages $setup "darwin" "darwin_cmd" -}}
-        {{ . | quote }}
-    {{ end }}
-
 
   {{ end }}
 
 {{ end }}
+brew cleanup
+brew autoremove
