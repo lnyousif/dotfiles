@@ -8,4 +8,3 @@ packages:
         - visual-studio-code
         - keepassxc
       pips:
-      darwin_cmd:
