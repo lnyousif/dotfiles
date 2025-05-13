@@ -1,8 +1,8 @@
 {{- if (eq .chezmoi.os "darwin") -}}
 PATH="~/.local/bin:${PATH}"
 export PATH
-eval "$(starship init zsh)"
 eval "$(/opt/homebrew/bin//brew shellenv)"
+eval "$(starship init zsh)"
 {{- else if (eq .chezmoi.os "linux") -}}
 eval "$(starship init zsh)"
 {{- end -}}
