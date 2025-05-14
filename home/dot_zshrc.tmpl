@@ -1,28 +1,24 @@
-{{- if (eq .chezmoi.os "darwin") -}}
-PATH="~/.local/bin:${PATH}"
-export PATH
-eval "$(/opt/homebrew/bin//brew shellenv)"
-eval "$(starship init zsh)"
-# Load cross-compatible Bash functions declarations from separate file.
-if [ -f "$HOME"/.bash_functions ]; then
-    \. "$HOME"/.bash_functions
-fi
+{{- if or (eq .chezmoi.os "darwin") (eq .chezmoi.os "linux") -}}
+  {{- if (eq .chezmoi.os "darwin") -}}
+  PATH="~/.local/bin:${PATH}"
+  export PATH
+  eval "$(/opt/homebrew/bin//brew shellenv)"
+  eval "$(starship init zsh)"
+  {{- else if (eq .chezmoi.os "linux") -}}
+    eval "$(starship init zsh)"
+  {{- end -}}
+  # Load cross-compatible Bash functions declarations from separate file.
+  if [ -f "$HOME"/.myscripts/bash_functions ]; then
+      \. "$HOME"/.myscripts/bash_functions
+  fi
 
-# Load cross-compatible Bash alias definitions from separate file.
-if [ -f "$HOME"/.bash_aliases ]; then
-    \. "$HOME"/.bash_aliases
-fi
+  # Load cross-compatible Bash extra functions declarations from separate file.
+  if [ -f "$HOME"/.myscripts/bash_extra ]; then
+      \. "$HOME"/.myscripts/bash_extra
+  fi
 
-{{- else if (eq .chezmoi.os "linux") -}}
-eval "$(starship init zsh)"
-
-# Load cross-compatible Bash functions declarations from separate file.
-if [ -f "$HOME"/.bash_functions ]; then
-    \. "$HOME"/.bash_functions
-fi
-
-# Load cross-compatible Bash alias definitions from separate file.
-if [ -f "$HOME"/.bash_aliases ]; then
-    \. "$HOME"/.bash_aliases
-fi
+  # Load cross-compatible Bash alias definitions from separate file.
+  if [ -f "$HOME"/.myscripts/bash_aliases ]; then
+      \. "$HOME"/.myscripts/bash_aliases
+  fi
 {{- end -}}
