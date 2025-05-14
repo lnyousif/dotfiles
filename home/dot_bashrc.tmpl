@@ -28,5 +28,15 @@ if [ -d ~/.bashrc.d ]; then
     done
 fi
 unset rc
-alias dnf="dnf5"
+
+# Load cross-compatible Bash functions declarations from separate file.
+if [ -f "$HOME"/.bash_functions ]; then
+    \. "$HOME"/.bash_functions
+fi
+
+# Load cross-compatible Bash alias definitions from separate file.
+if [ -f "$HOME"/.bash_aliases ]; then
+    \. "$HOME"/.bash_aliases
+fi
+
 {{- end -}}
