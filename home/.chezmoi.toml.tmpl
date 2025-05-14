@@ -125,6 +125,6 @@ args = ["--wait"]                           # Editor arguments
 
 # Define KeepassXC settings
 [keepassxc]
-database = {{ $keepassxcdb | quote }}       # KeepassXC database path
-args = ["--no-password","-k",".keepassxc/keypass.keyx"]  # KeepassXC arguments
-prompt = false                              # Disable KeepassXC prompts
+database = {{ $keepassxcdb | quote }}                           # KeepassXC database path
+args = ["-k",".keepassxc/keypass.keyx"]                         # KeepassXC arguments
+prompt = true                                                   # Enable/Disable KeepassXC prompts
