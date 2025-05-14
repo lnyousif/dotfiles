@@ -75,8 +75,7 @@
           {{- end -}}
 
           # Prompt for enabling secrets with a default value of true
-          {{- $secrets = promptBoolOnce . "features.secrets" "Secrets - Should I setup pass manager locally  (true/false, default true)" -}}
-          {{- if not $secrets }}{{ $secrets = true }}{{ end -}}
+          {{- $secrets = promptBoolOnce . "features.secrets" "Secrets - Should I setup pass manager locally  (true/false)" -}}
 
           # If secrets are enabled, prompt for the KeepassXC database path
           {{- if $secrets -}}
