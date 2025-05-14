@@ -5,6 +5,7 @@ linux-install.sh
 mac-install.sh
 win-install.ps1
 codespace-install.sh
+.test/**
 
 {{ if eq .chezmoi.os "linux" }}
 .chezmoiscripts/windows/**
@@ -18,6 +19,7 @@ codespace-install.sh
 {{ if eq .chezmoi.os "windows" }}
 .chezmoiscripts/linux/**
 .chezmoiscripts/darwin/**
+.myscripts/**
 {{ end }}
 
 {{ if ne .chezmoi.os "windows" }}
@@ -33,8 +35,6 @@ AppData/**
 Library/**
 {{ end }}
 
-{{ if eq .chezmoi.os "darwin" }}
-{{ end }}
 
 {{ range $key, $value := .features }}
   {{ if eq $value false -}}
