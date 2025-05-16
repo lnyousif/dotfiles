@@ -8,4 +8,6 @@ packages:
         - visual-studio-code
         - keepassxc
       pips:
+        - commitizen
+        - pre-commit
 
