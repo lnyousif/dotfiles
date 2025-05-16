@@ -5,3 +5,5 @@ packages:
         - KeePassXCTeam.KeePassXC
         - Microsoft.VisualStudioCode
       pips:
+        - "--user -U commitizen"
+        - "--user -U pre-commit"
