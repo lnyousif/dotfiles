@@ -15,8 +15,6 @@ packages:
       casks:
         - google-chrome
       pips:
-        - commitizen
-        - pre-commit
       junk:
         - Launchpad
         - Safari

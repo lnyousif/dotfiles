@@ -21,7 +21,5 @@ packages:
           - gnome-text-editor
           - moby-engine
         pips:
-          - commitizen
-          - pre-commit
         linux_cmd:
           - curl -sS https://starship.rs/install.sh | sh -s -- -y

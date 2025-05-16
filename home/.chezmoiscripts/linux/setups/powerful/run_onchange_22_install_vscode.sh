@@ -42,21 +42,6 @@ install_on_rhel() {
     echo "VS Code installation completed!"
 }
 
-# Function to install VS Code on Windows using PowerShell
-install_on_windows() {
-    echo "Detected Windows system."
-    echo "Downloading Visual Studio Code installer..."
-    powershell.exe -Command "& {Invoke-WebRequest -Uri 'https://code.visualstudio.com/sha/download?build=stable&os=win32-x64-user' -OutFile 'VSCodeInstaller.exe'}"
-
-    echo "Running VS Code installer..."
-    powershell.exe -Command "& {Start-Process 'VSCodeInstaller.exe' -ArgumentList '/silent' -Wait}"
-
-    echo "Cleaning up installer..."
-    powershell.exe -Command "& {Remove-Item 'VSCodeInstaller.exe'}"
-
-    echo "VS Code installation completed!"
-}
-
 # Detect the operating system
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
     if [ -f /etc/debian_version ]; then
@@ -67,8 +52,6 @@ if [[ "$OSTYPE" == "linux-gnu"* ]]; then
         echo "Unsupported Linux distribution."
         exit 1
     fi
-elif [[ "$OSTYPE" == "msys" || "$OSTYPE" == "cygwin" || "$OSTYPE" == "win32" ]]; then
-    install_on_windows
 else
     echo "Unsupported operating system: $OSTYPE"
     exit 1
