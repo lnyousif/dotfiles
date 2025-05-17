@@ -19,11 +19,12 @@
 
 # Define boolean feature flags for machine-specific configurations
     {{/* boolean feature tags */}}
-    {{- $encryptdecrypt:= false -}}            # Whether encryptdecrypt are enabled
+    {{- $encryptdecrypt:= false -}}     # Whether encryptdecrypt are enabled
+    {{- $superuser := "" -}}            # Super User
     {{- $setuptype := "" }}             # Setup Type
     {{- $devmachine := false -}}        # Whether devmachine tools are enabled
     {{- $kids := false -}}              # Whether this is a kid-friendly setup
-    {{- $passwordmanager := false -}}  # Whether password manager is enabled
+    {{- $passwordmanager := false -}}   # Whether password manager is enabled
     {{- $codespace := false -}}         # Whether this is a GitHub Codespace
     {{- $ephemeral := false -}}         # Whether this is an ephemeral machine
     {{- $headless := false -}}          # Whether this is a headless machine
@@ -40,8 +41,9 @@
         {{-   $codespace = true -}}                   # Mark as a codespace
         {{-   $ephemeral = true -}}                   # Mark as ephemeral
         {{-   $headless = true -}}                    # Mark as headless
-        {{-   $encryptdecrypt = false -}}                    # Disable encryptdecrypt
-        {{-   $devmachine = false -}}                   # Disable devmachine tools
+        {{-   $encryptdecrypt = false -}}             # Disable encryptdecrypt
+        {{-   $devmachine = false -}}                 # Disable devmachine tools
+
 
         {{/* for  GitHub codespaces, VSCode remote containers, Docker containers, */}}
         {{/* Multipass VMs, and Vagrant boxes setup the properties without asking */}}
@@ -59,6 +61,7 @@
           {{- else if eq $setuptype "devmachine" -}}
             {{ $devmachine = true }}
             {{ $kids = false }}
+            {{ $superuser = "sudo" }}
           {{- else if eq $setuptype "kids" -}}
             {{ $devmachine = false }}
             {{ $kids = true }}
@@ -107,6 +110,7 @@ encryption = "age"
     name = "{{ $name }}"                                  # User name
     osid = "{{ $osid }}"                                  # Operating system ID
     setuptype = "{{ $setuptype }}"                        # Setup Type
+    superuser = "{{ $superuser }}"                  # Superuser
 
     setups.base = {{ true }}                              # True basically always, the base is setups flag to setup the bare minimum
     setups.devmachine = {{ $devmachine }}                 # devmachine tools setups flag

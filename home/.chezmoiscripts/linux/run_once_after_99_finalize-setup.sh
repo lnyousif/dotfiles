@@ -6,6 +6,6 @@ echo "====================================================="
 
 # Remove temporary directory and its contents
 echo "Removing temporary directory..."
-#sudo rm -rf "${HOME}/.temp"
+#{{ .superuser }} rm -rf "${HOME}/.temp"
 
 echo "✅ Cleanup complete!"
