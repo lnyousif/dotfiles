@@ -7,6 +7,7 @@ LINE="-------------------------------------------"
   echo -e "\e[1;34m${LINE}\e[0m"
   echo -e "Operating system {{ .osid }}"
   echo -e "\e[1;34m${LINE}\e[0m"
+{{ if .superuser }}
 
 if command -v apt &>/dev/null; then
   echo "Debian based system found!"
@@ -72,3 +73,4 @@ else
   echo -e "\e[1;31mSystem not recognized.\e[0m \e[1;33mPlease ensure code for operating system {{ .osid }} is properly set up.\e[0m"
   echo -e "\e[1;34m${LINE}\e[0m"
 fi
+{{ end }}
