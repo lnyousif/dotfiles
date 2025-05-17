@@ -11,65 +11,65 @@ LINE="-------------------------------------------"
 if command -v apt &>/dev/null; then
   echo "Debian based system found!"
 
-  sudo apt update -y
+  {{ .superuser }} apt update -y
 
 elif command -v dnf &>/dev/null; then
   echo "Fedora based system found!"
 
   # Install dnf5 for faster downloads
-  sudo dnf install dnf5
+  {{ .superuser }} dnf install dnf5
 
   # modify dnf settings for faster downloads
   CONF_FILE=/etc/dnf/dnf.conf
 
   if ! grep -q "max_parallel_downloads=10" "${CONF_FILE}"; then
-    echo "max_parallel_downloads=10" | sudo tee -a "${CONF_FILE}"
+    echo "max_parallel_downloads=10" | {{ .superuser }} tee -a "${CONF_FILE}"
     echo "dnf downloads are now parallel!"
   fi
 
   if ! grep -q "fastestmirror=True" "${CONF_FILE}"; then
-    echo "fastestmirror=True" | sudo tee -a "${CONF_FILE}"
+    echo "fastestmirror=True" | {{ .superuser }} tee -a "${CONF_FILE}"
     echo "dnf downloads are now faster!"
   fi
 
   if ! grep -q 'alias dnf="dnf5"' "${HOME}/.bashrc"; then
-    echo 'alias dnf="dnf5"' | sudo tee -a ~/.bashrc
+    echo 'alias dnf="dnf5"' | {{ .superuser }} tee -a ~/.bashrc
     echo "dnf is now an alias for dnf5!"
   fi
 
   # Update System
-  sudo dnf update -y
+  {{ .superuser }} dnf update -y
 
   # Add Repositories
   echo "Setting up repositories"
-  sudo dnf -y install dnf-plugins-core
+  {{ .superuser }} dnf -y install dnf-plugins-core
 
 elif command -v pacman &>/dev/null; then
   echo "Arch based system found!"
 
   if ! grep -q '\[chaotic-aur\]' /etc/pacman.conf; then
-    sudo pacman-key --recv-key 3056513887B78AEB --keyserver keyserver.ubuntu.com
-    sudo pacman-key --lsign-key 3056513887B78AEB
-    sudo pacman -U 'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-keyring.pkg.tar.zst'
-    sudo pacman -U 'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-mirrorlist.pkg.tar.zst'
+    {{ .superuser }} pacman-key --recv-key 3056513887B78AEB --keyserver keyserver.ubuntu.com
+    {{ .superuser }} pacman-key --lsign-key 3056513887B78AEB
+    {{ .superuser }} pacman -U 'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-keyring.pkg.tar.zst'
+    {{ .superuser }} pacman -U 'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-mirrorlist.pkg.tar.zst'
 
-    sudo echo '[chaotic-aur]' | sudo tee -a /etc/pacman.conf
-    sudo echo 'Include = /etc/pacman.d/chaotic-mirrorlist' | sudo tee -a /etc/pacman.conf
+    {{ .superuser }} echo '[chaotic-aur]' | {{ .superuser }} tee -a /etc/pacman.conf
+    {{ .superuser }} echo 'Include = /etc/pacman.d/chaotic-mirrorlist' | {{ .superuser }} tee -a /etc/pacman.conf
     echo "Chaotic AUR Repo added!"
   else
     echo "Chaotic AUR Repo already present."
   fi
-  sudo pacman -Syu --noconfirm
+  {{ .superuser }} pacman -Syu --noconfirm
 
 elif command -v apk &>/dev/null; then
   echo "Alpine based system found!"
 
   # Update System
-  sudo apk update
+  {{ .superuser }} apk update
 
   # Add Repositories
   echo "Setting up repositories"
-  sudo apk add --no-cache alpine-sdk
+  {{ .superuser }} apk add --no-cache alpine-sdk
 else
   echo -e "\e[1;34m${LINE}\e[0m"
   echo -e "\e[1;31mSystem not recognized.\e[0m \e[1;33mPlease ensure code for operating system {{ .osid }} is properly set up.\e[0m"

@@ -154,11 +154,11 @@ fi
 
 # Flushes the DNS cache.
 if [[ "$OSTYPE" =~ ^darwin ]]; then
-    alias flushdns='dscacheutil -flushcache; sudo killall -HUP mDNSResponder;echo DNS cache flushed'
+    alias flushdns='dscacheutil -flushcache; {{ .superuser }} killall -HUP mDNSResponder;echo DNS cache flushed'
 elif [[ "$OSTYPE" =~ ^(cygwin|mingw|msys) ]]; then
     alias flushdns='ipconfig //flushdns'
 else
-    alias flushdns='sudo /etc/init.d/dns-clean restart && echo DNS cache flushed'
+    alias flushdns='{{ .superuser }} /etc/init.d/dns-clean restart && echo DNS cache flushed'
 fi
 
 # Gets all IP addresses.
@@ -220,7 +220,7 @@ if [[ "$OSTYPE" =~ ^darwin ]]; then
 elif [[ "$OSTYPE" =~ ^(cygwin|mingw|msys) ]]; then
     alias reboot='shutdown.exe /r'
 else
-    alias reboot='sudo /sbin/reboot'
+    alias reboot='{{ .superuser }} /sbin/reboot'
 fi
 
 # Shuts down the system.
@@ -229,7 +229,7 @@ if [[ "$OSTYPE" =~ ^darwin ]]; then
 elif [[ "$OSTYPE" =~ ^(cygwin|mingw|msys) ]]; then
     alias poweroff='shutdown.exe /s'
 else
-    alias poweroff='sudo /sbin/poweroff'
+    alias poweroff='{{ .superuser }} /sbin/poweroff'
 fi
 
 
@@ -342,8 +342,8 @@ if [[ "$OSTYPE" =~ ^darwin ]]; then
     alias showfiles='defaults write com.apple.finder AppleShowAllFiles -bool true && killall Finder'
 
     # Toggles Spotlight.
-    alias spotoff='sudo mdutil -a -i off'
-    alias spoton='sudo mdutil -a -i on'
+    alias spotoff='{{ .superuser }} mdutil -a -i off'
+    alias spoton='{{ .superuser }} mdutil -a -i on'
 fi
 
 

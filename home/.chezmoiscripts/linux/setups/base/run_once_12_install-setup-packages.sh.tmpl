@@ -24,24 +24,24 @@ export PATH="$HOME/.local/bin/:$PATH"
         echo "Installing Debian Packages"
 
         {{ range index $.packages $setup "linux" "common" "apt" }}
-        sudo apt install -y {{. | quote }}
+        {{ $.superuser }} apt install -y {{. | quote }}
         {{ end }}
 
         {{ range index $.packages $setup "linux" "common" "apt_junk" }}
-        sudo apt remove -y {{ . | quote }}
+        {{ $.superuser }} apt remove -y {{ . | quote }}
         {{ end }}
 
     {{ else if eq $.osid "linux-fedora" }}
         ## Fedora
         echo "Installing RPM packages"
 
-        sudo dnf5 install -y {{ range index $.packages $setup "linux" "common" "apt" }} {{.}}{{ end }}
+        {{ $.superuser }} dnf5 install -y {{ range index $.packages $setup "linux" "common" "apt" }} {{.}}{{ end }}
         {{ range index $.packages $setup "linux" "common" "apt" }}
-        sudo dnf5 install -y {{ . | quote }}
+        {{ $.superuser }} dnf5 install -y {{ . | quote }}
         {{ end }}
 
         {{ range index $.packages $setup "linux" "common" "apt_junk" }}
-        sudo dnf5 remove -y {{ . | quote }}
+        {{ $.superuser }} dnf5 remove -y {{ . | quote }}
         {{ end }}
 
 
@@ -49,13 +49,13 @@ export PATH="$HOME/.local/bin/:$PATH"
         ## Alpine
         echo "Installing RPM packages"
 
-        sudo apk add --no-cache {{ range index $.packages $setup "linux" "common" "apt" }} {{.}}{{ end }}
+        {{ $.superuser }} apk add --no-cache {{ range index $.packages $setup "linux" "common" "apt" }} {{.}}{{ end }}
         {{ range index $.packages $setup "linux" "common" "apt" }}
-        sudo apk add --no-cache {{ . | quote }}
+        {{ $.superuser }} apk add --no-cache {{ . | quote }}
         {{ end }}
 
         {{ range index $.packages $setup "linux" "common" "apt_junk" }}
-        sudo apk del --no-cache {{ . | quote }}
+        {{ $.superuser }} apk del --no-cache {{ . | quote }}
         {{ end }}
 
 
@@ -63,7 +63,7 @@ export PATH="$HOME/.local/bin/:$PATH"
         ## Arch
         echo "Installing Arch packages"
 
-        sudo pacman -Syu --needed {{ range index $.packages $setup "linux" "common" "apt" }} {{.}}{{end}}
+        {{ $.superuser }} pacman -Syu --needed {{ range index $.packages $setup "linux" "common" "apt" }} {{.}}{{end}}
 
     {{ end }}
 
@@ -73,9 +73,9 @@ export PATH="$HOME/.local/bin/:$PATH"
 
     {{ range index $.packages $setup "linux" "common" "pips" }}
       if command -v pipx &>/dev/null; then
-        pipx install {{ . | quote }}
+        {{ $.superuser }} pipx install {{ . | quote }}
       else
-        pip install {{ . | quote }}
+        {{ $.superuser }} pip install {{ . | quote }}
       fi
     {{ end }}
 

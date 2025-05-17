@@ -2,7 +2,7 @@
 
 {{ if eq .osid "linux-fedora" }}
 echo "Disabling SELLinux on Fedora"
-cat <<EOF | sudo tee /etc/selinux/config
+cat <<EOF | {{ .superuser }} tee /etc/selinux/config
 # This file controls the state of SELinux on the system.
 # SELINUX= can take one of these three values:
 #     enforcing - SELinux security policy is enforced.

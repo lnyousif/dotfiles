@@ -18,9 +18,9 @@ brew update
         brew install --cask {{ . | quote }}
     {{ end -}}
 
-    sudo pipx ensurepath --global
+    {{ $.superuser }} pipx ensurepath --global
     {{ range index $.packages $setup "darwin" "pips" -}}
-        sudo pipx install {{ . | quote }} --global
+        {{ $.superuser }} pipx install {{ . | quote }} --global
     {{ end }}
 
 
