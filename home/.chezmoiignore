@@ -8,7 +8,7 @@ codespace-install.sh
 .test/**
 
 {{ if eq .features.encryptdecrypt false }}
-.keypassxc/**
+.keepassxc/**
 .ssh/**
 {{ end }}
 
