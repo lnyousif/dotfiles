@@ -1,5 +1,5 @@
 packages:
-  powerful:
+  devmachine:
     darwin:
       brews:
         - git-lfs
@@ -10,4 +10,3 @@ packages:
       pips:
         - commitizen
         - pre-commit
-
