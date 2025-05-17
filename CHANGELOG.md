@@ -1,3 +1,9 @@
+## Unreleased
+
+### Refactor
+
+- **encryption**: better encryption automation
+
 ## 0.2.1 (2025-05-17)
 
 ### Refactor
@@ -17,6 +23,7 @@
 
 ### Feat
 
+- **neovim**: adding neovim and nvchad setup
 - **setups**: define few way to select setups within the enviornments
 
 ### Refactor
