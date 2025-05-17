@@ -16,9 +16,6 @@ if command -v apt &>/dev/null; then
 elif command -v dnf &>/dev/null; then
   echo "Fedora based system found!"
 
-  # Install dnf5 for faster downloads
-  {{ .superuser }} dnf install dnf5
-
   # modify dnf settings for faster downloads
   CONF_FILE=/etc/dnf/dnf.conf
 
