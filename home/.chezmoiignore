@@ -7,7 +7,7 @@ win-install.ps1
 codespace-install.sh
 .test/**
 
-{{ if (not (stat (joinPath .host.home ".config" "age" "chezmoi.txt"))) }}
+{{ if (not .features.encryptdecrypt) }}
 .keypassxc/**
 .ssh/**
 {{ end }}
