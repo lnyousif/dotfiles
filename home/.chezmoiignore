@@ -7,7 +7,7 @@ win-install.ps1
 codespace-install.sh
 .test/**
 
-{{ if (not .features.encryptdecrypt) }}
+{{ if eq .features.encryptdecrypt false }}
 .keypassxc/**
 .ssh/**
 {{ end }}
