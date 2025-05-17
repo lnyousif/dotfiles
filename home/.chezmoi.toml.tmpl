@@ -92,11 +92,14 @@
       {{-   $osid = printf "%s-%s" .chezmoi.os .chezmoi.osRelease.idLike -}}
     {{- end -}}
 
+
+{{- if $encryptdecrypt -}}
 # Define encryption settings
 encryption = "age"
 [age]
-    identity = "~/.config/chezmoi/key.txt"  # Path to the age identity file
+    identity = "~/.config/chezmoi/key.txt"                                        # Path to the age identity file
     recipient = "age14t6vfqtd0f2z9gth0tsnw3qwh6nxgkvem5exjzs3x9juyp5659wqh47sfw"  # Age recipient key
+{{- end -}}
 
 # Define data section with user and machine-specific values
 [data]

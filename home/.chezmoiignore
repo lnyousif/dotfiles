@@ -7,6 +7,12 @@ win-install.ps1
 codespace-install.sh
 .test/**
 
+{{ if (not (stat (joinPath .host.home ".config" "age" "chezmoi.txt"))) }}
+.keypassxc/**
+.ssh/**
+{{ end }}
+
+
 {{ if eq .chezmoi.os "linux" }}
 .chezmoiscripts/windows/**
 .chezmoiscripts/darwin/**
