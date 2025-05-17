@@ -1,3 +1,18 @@
+## 0.2.1 (2025-05-17)
+
+### Refactor
+
+- **restructure**: better aming and features setup
+- **setups**: making base lighter and powerful more focused on development support
+- **aliases**: added a lot of aliases
+- **docker**: update the vscode extension to use the latest container instead ofdocker tools
+- **packages**: better package management
+- **shell**: improved shell setup
+- **ignore**: improved ignore file
+- **structure**: improve the structure and naming of scripts to ensure better consistant running sequence
+- **codespace**: switching from setup to a feature
+- **codespace**: improved code
+
 ## 0.2.0 (2025-05-10)
 
 ### Feat
