@@ -1,24 +1,6 @@
-{{- if or (eq .chezmoi.os "darwin") (eq .chezmoi.os "linux") -}}
-  {{- if (eq .chezmoi.os "darwin") -}}
-  PATH="~/.local/bin:${PATH}"
-  export PATH
-  eval "$(/opt/homebrew/bin//brew shellenv)"
-  eval "$(starship init zsh)"
-  {{- else if (eq .chezmoi.os "linux") -}}
-    eval "$(starship init zsh)"
-  {{- end -}}
-  # Load cross-compatible Bash functions declarations from separate file.
-  if [ -f "$HOME"/.myscripts/bash_functions ]; then
-      \. "$HOME"/.myscripts/bash_functions
-  fi
-
-  # Load cross-compatible Bash extra functions declarations from separate file.
-  if [ -f "$HOME"/.myscripts/bash_extra ]; then
-      \. "$HOME"/.myscripts/bash_extra
-  fi
-
-  # Load cross-compatible Bash alias definitions from separate file.
-  if [ -f "$HOME"/.myscripts/bash_aliases ]; then
-      \. "$HOME"/.myscripts/bash_aliases
-  fi
+{{- if eq .chezmoi.os "darwin" -}}
+  {{-   template "mac_zshrc" . -}}
+{{- else if eq .chezmoi.os "linux" -}}
+  {{-   template "linux_zshrc" . -}}
 {{- end -}}
+
