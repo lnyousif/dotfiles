@@ -1,0 +1,8 @@
+packages:
+  base:
+    darwin:
+      brews:
+      casks:
+      pips:
+      junk:
+

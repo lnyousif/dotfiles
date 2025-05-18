@@ -1,0 +1,8 @@
+packages:
+  base:
+    linux:
+      common:
+        apt:
+        apt_junk:
+        pips:
+        linux_cmd:

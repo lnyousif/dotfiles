@@ -1,0 +1,6 @@
+packages:
+  base:
+    windows:
+      winget:
+      pips:
+      junk:
