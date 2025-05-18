@@ -13,10 +13,8 @@ export PATH="$HOME/.local/bin/:$PATH"
     # Linux self installing packages
     echo "Installing self installing packages"
 
-    {{ if (index $.packages $setup "linux" "common" "linux_cmd") }}
-      {{ range index $.packages $setup "linux" "common" "linux_cmd" }}
-        bash -c {{ . | quote }}
-      {{ end }}
+    {{ range index $.packages $setup "linux" "common" "linux_cmd" }}
+      bash -c {{ . | quote }}
     {{ end }}
 
     # Native packages
@@ -25,73 +23,60 @@ export PATH="$HOME/.local/bin/:$PATH"
         ## Debian
         echo "Installing Debian Packages"
 
-        {{ if (index $.packages $setup "linux" "common" "apt") }}
-          {{ range index $.packages $setup "linux" "common" "apt" }}
-          {{ $.superuser }} apt install -y {{. | quote }}
-          {{ end }}
+        {{ range index $.packages $setup "linux" "common" "apt" }}
+        {{ $.superuser }} apt install -y {{. | quote }}
         {{ end }}
 
-        {{ if (index $.packages $setup "linux" "common" "apt_junk") }}
-          {{ range index $.packages $setup "linux" "common" "apt_junk" }}
-          {{ $.superuser }} apt remove -y {{ . | quote }}
-          {{ end }}
+        {{ range index $.packages $setup "linux" "common" "apt_junk" }}
+        {{ $.superuser }} apt remove -y {{ . | quote }}
         {{ end }}
 
     {{ else if eq $.osid "linux-fedora" }}
         ## Fedora
         echo "Installing RPM packages"
 
-        {{ if (index $.packages $setup "linux" "common" "apt") }}
-          {{ $.superuser }} dnf5 install -y {{ range index $.packages $setup "linux" "common" "apt" }} {{.}}{{ end }}
-          {{ range index $.packages $setup "linux" "common" "apt" }}
-          {{ $.superuser }} dnf5 install -y {{ . | quote }}
-          {{ end }}
+        {{ $.superuser }} dnf5 install -y {{ range index $.packages $setup "linux" "common" "apt" }} {{.}}{{ end }}
+        {{ range index $.packages $setup "linux" "common" "apt" }}
+        {{ $.superuser }} dnf5 install -y {{ . | quote }}
         {{ end }}
 
-        {{ if (index $.packages $setup "linux" "common" "apt_junk") }}
-          {{ range index $.packages $setup "linux" "common" "apt_junk" }}
-          {{ $.superuser }} dnf5 remove -y {{ . | quote }}
-          {{ end }}
+        {{ range index $.packages $setup "linux" "common" "apt_junk" }}
+        {{ $.superuser }} dnf5 remove -y {{ . | quote }}
         {{ end }}
+
 
     {{ else if eq $.osid "linux-alpine" }}
         ## Alpine
         echo "Installing RPM packages"
 
-        {{ if (index $.packages $setup "linux" "common" "apt") }}
-          {{ $.superuser }} apk add --no-cache {{ range index $.packages $setup "linux" "common" "apt" }} {{.}}{{ end }}
-          {{ range index $.packages $setup "linux" "common" "apt" }}
-          {{ $.superuser }} apk add --no-cache {{ . | quote }}
-          {{ end }}
+        {{ $.superuser }} apk add --no-cache {{ range index $.packages $setup "linux" "common" "apt" }} {{.}}{{ end }}
+        {{ range index $.packages $setup "linux" "common" "apt" }}
+        {{ $.superuser }} apk add --no-cache {{ . | quote }}
         {{ end }}
 
-        {{ if (index $.packages $setup "linux" "common" "apt_junk") }}
-          {{ range index $.packages $setup "linux" "common" "apt_junk" }}
-          {{ $.superuser }} apk del --no-cache {{ . | quote }}
-          {{ end }}
+        {{ range index $.packages $setup "linux" "common" "apt_junk" }}
+        {{ $.superuser }} apk del --no-cache {{ . | quote }}
         {{ end }}
+
 
     {{ else if eq $.osid "linux-arch" }}
         ## Arch
         echo "Installing Arch packages"
 
-        {{ if (index $.packages $setup "linux" "common" "apt") }}
-          {{ $.superuser }} pacman -Syu --needed {{ range index $.packages $setup "linux" "common" "apt" }} {{.}}{{end}}
-        {{ end }}
+        {{ $.superuser }} pacman -Syu --needed {{ range index $.packages $setup "linux" "common" "apt" }} {{.}}{{end}}
 
     {{ end }}
+
 
     # Python packages
     echo "Installing Python packages with pipx or pip"
 
-    {{ if (index $.packages $setup "linux" "common" "pips") }}
-      {{ range index $.packages $setup "linux" "common" "pips" }}
-        if command -v pipx &>/dev/null; then
-          {{ $.superuser }} pipx install {{ . | quote }}
-        else
-          {{ $.superuser }} pip install {{ . | quote }}
-        fi
-      {{ end }}
+    {{ range index $.packages $setup "linux" "common" "pips" }}
+      if command -v pipx &>/dev/null; then
+        {{ $.superuser }} pipx install {{ . | quote }}
+      else
+        {{ $.superuser }} pip install {{ . | quote }}
+      fi
     {{ end }}
 
   {{ end }}
