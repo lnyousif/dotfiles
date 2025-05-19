@@ -12,6 +12,12 @@ win-install.ps1
 {{ end }}
 
 
+{{ if eq .features.work true }}
+.keepassxc/**
+.ssh/**
+{{ end }}
+
+
 {{ if eq .chezmoi.os "linux" }}
 .chezmoiscripts/windows/**
 .chezmoiscripts/darwin/**
