@@ -22,12 +22,13 @@
     {{- $encryptdecrypt:= false -}}     # Whether encryptdecrypt are enabled
     {{- $superuser := "" -}}            # Super User
     {{- $setuptype := "" }}             # Setup Type
-    {{- $devmachine := false -}}        # Whether devmachine tools are enabled
+    {{- $development := false -}}       # Whether development tools are enabled
     {{- $kids := false -}}              # Whether this is a kid-friendly setup
     {{- $passwordmanager := false -}}   # Whether password manager is enabled
     {{- $codespace := false -}}         # Whether this is a GitHub Codespace
     {{- $ephemeral := false -}}         # Whether this is an ephemeral machine
     {{- $headless := false -}}          # Whether this is a headless machine
+    {{- $work := false -}}              # Whether this is a work machine
 
     # Detect specific environments like GitHub Codespaces, VSCode remote containers, etc.
 
@@ -42,8 +43,8 @@
         {{-   $ephemeral = true -}}                   # Mark as ephemeral
         {{-   $headless = true -}}                    # Mark as headless
         {{-   $encryptdecrypt = false -}}             # Disable encryptdecrypt
-        {{-   $devmachine = false -}}                 # Disable devmachine tools
-        {{-   $superuser = "sudo" -}}                     # Setup superuser to install tools
+        {{-   $development = false -}}                # Disable development tools
+        {{-   $superuser = "sudo" -}}                 # Setup superuser to install tools
 
         {{/* for  GitHub codespaces, VSCode remote containers, Docker containers, */}}
         {{/* Multipass VMs, and Vagrant boxes setup the properties without asking */}}
@@ -53,36 +54,43 @@
     {{- else -}}
         # Prompt user for configuration values if not in a codespace
 
-          {{- $setuptype = promptChoiceOnce . "setuptype" "What type of setup are you choosing " (list "light" "devmachine" "kids") -}}
+          {{- $setuptype = promptChoiceOnce . "setuptype" "What type of setup are you choosing " (list "basic" "personal" "kids" "development" "work") -}}
 
-          {{- if eq $setuptype "light" -}}
-            {{ $devmachine = false }}
+          {{- if eq $setuptype "basic" -}}
+            {{ $development = false }}
             {{ $kids = false }}
-          {{- else if eq $setuptype "devmachine" -}}
-            {{ $devmachine = true }}
+            {{ $work = false }}
+          {{- else if eq $setuptype "dev-machine" -}}
+            {{ $development = true }}
             {{ $kids = false }}
+            {{ $work = false }}
             {{ $superuser = "sudo" }}
+          {{- else if eq $setuptype "work" -}}
+            {{ $development = true }}
+            {{ $kids = false }}
+            {{ $work = true }}
           {{- else if eq $setuptype "kids" -}}
-            {{ $devmachine = false }}
+            {{ $development = false }}
             {{ $kids = true }}
+            {{ $work = false }}
           {{- end -}}
 
-          {{- if eq $kids false -}}
-            # Prompt for Git name with a default value
-            {{- $name = promptStringOnce . "name" "Git name for the author/committer (Default: Laith Yousif)" }}
-            {{- if not $name }}{{ $name = "Laith Yousif" }}{{ end -}}
+          {{- if eq $work true -}}
+              # Prompt for Git name with a default value
+              {{- $name = promptStringOnce . "name" "Git name for the author/committer (Default: Laith Yousif)" }}
+              {{- if not $name }}{{ $name = "Laith Yousif" }}{{ end -}}
 
-            # Prompt for Git email with a default value
-            {{- $email = promptStringOnce . "email" "Git email address for the author/committer (Default: Laith@tmobi.link)" }}
-            {{- if not $email }}{{ $email = "Laith@tmobi.link" }}{{ end -}}
-          {{- end -}}
+              # Prompt for Git email with a default value
+              {{- $email = promptStringOnce . "email" "Git email address for the author/committer (Default: Laith@tmobi.link)" }}
+              {{- if not $email }}{{ $email = "Laith@tmobi.link" }}{{ end -}}
+          {{- else if and (eq $development true) (eq $kids false) -}}
+              # Prompt for enabling encryptdecrypt with a default value of true
+              {{- $encryptdecrypt = promptBoolOnce . "features.encryptdecrypt" "Should I setup Encryption Decryption  (true/false)" -}}
 
-          # Prompt for enabling encryptdecrypt with a default value of true
-          {{- $encryptdecrypt = promptBoolOnce . "features.encryptdecrypt" "Should I setup Encryption Decryption  (true/false)" -}}
-
-          # If encryptdecrypt are enabled, prompt for the seting up password manager database path
-          {{- if $encryptdecrypt -}}
-            {{- $passwordmanager = promptBoolOnce . "features.passwordmanager" "Should I setup a Password Manager  (true/false)" -}}
+              # If encryptdecrypt are enabled, prompt for the seting up password manager database path
+              {{- if $encryptdecrypt -}}
+                {{- $passwordmanager = promptBoolOnce . "features.passwordmanager" "Should I setup a Password Manager  (true/false)" -}}
+              {{- end -}}
           {{- end -}}
     {{- end -}}
 
@@ -110,19 +118,18 @@ encryption = "age"
     name = "{{ $name }}"                                  # User name
     osid = "{{ $osid }}"                                  # Operating system ID
     setuptype = "{{ $setuptype }}"                        # Setup Type
-    superuser = "{{ $superuser }}"                  # Superuser
+    superuser = "{{ $superuser }}"                        # Superuser
 
     setups.base = {{ true }}                              # True basically always, the base is setups flag to setup the bare minimum
-    setups.devmachine = {{ $devmachine }}                 # devmachine tools setups flag
+    setups.development = {{ $development }}               # development tools setups flag
     setups.kids = {{ $kids }}                             # Kids setups flag
 
-    features.ephemeral = {{ $ephemeral }}                 # Ephemeral features flag
-    features.headless = {{ $headless }}                   # Headless setups flag
+    features.ephemeral = {{ $ephemeral }}                 # Ephemeral feature flag
+    features.headless = {{ $headless }}                   # Headless feature flag
     features.encryptdecrypt = {{ $encryptdecrypt }}       # encryptdecrypt feature flag
     features.codespace = {{ $codespace }}                 # Codespace feature flag
     features.passwordmanager = {{ $passwordmanager }}     # Password manager feature flag
-
-
+    features.work = {{ $work }}                           # Work feature flag
 
 # Define editor settings
 [edit]

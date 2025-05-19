@@ -1,5 +1,5 @@
 packages:
-  devmachine:
+  development:
     windows:
       winget:
         - KeePassXCTeam.KeePassXC

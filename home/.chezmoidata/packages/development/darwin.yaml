@@ -1,5 +1,5 @@
 packages:
-  devmachine:
+  development:
     darwin:
       brews:
         - git-lfs
