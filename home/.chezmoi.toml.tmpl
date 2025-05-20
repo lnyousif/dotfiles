@@ -96,10 +96,13 @@
               {{- if $encryptdecrypt -}}
                 {{- $passwordmanager = promptBoolOnce . "features.passwordmanager" "Should I setup a Password Manager  (true/false)" -}}
               {{- end -}}
+
+              {{- if and $encryptdecrypt $passwordmanager -}}
+                {{- $hub = promptBoolOnce . "features.hub" "Should I setup this as networking access hub from which I can access other machines  (true/false)" -}}
+                {{- $node = promptBoolOnce . "features.node" "Should I setup this as a node machine that can be accessed from other machines using ssh  (true/false)" -}}
+              {{- end -}}
           {{- end -}}
 
-          {{- $hub = promptBoolOnce . "features.hub" "Should I setup this as networking hub from which I can access other machines  (true/false)" -}}
-          {{- $node = promptBoolOnce . "features.node" "Should I setup this as a Node machine that can be accessed from other machines using ssh  (true/false)" -}}
 
 
     {{- end -}}
