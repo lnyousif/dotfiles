@@ -12,118 +12,118 @@
 # {{- /* This file supports Go's text/template language. */}}
 
 # Define string variables for user-specific configurations
-    {{/* String tags */}}
-    {{ $email := "Laith@tmobi.link" }}  # Default email address
-    {{ $name := "Laith Yousif" }}       # Default name
-    {{ $editor := "micro" }}             # Default editor
+{{/* String tags */}}
+{{ $email := "Laith@tmobi.link" }}  # Default email address
+{{ $name := "Laith Yousif" }}       # Default name
+{{ $editor := "micro" }}             # Default editor
 
 # Define boolean feature flags for machine-specific configurations
-    {{/* boolean feature tags */}}
-    {{- $encryptdecrypt:= false -}}     # Whether encryptdecrypt are enabled
-    {{- $superuser := "" -}}            # Super User
-    {{- $setuptype := "" }}             # Setup Type
-    {{- $development := false -}}       # Whether development tools are enabled
-    {{- $kids := false -}}              # Whether this is a kid-friendly setup
-    {{- $passwordmanager := false -}}   # Whether password manager is enabled
-    {{- $codespace := false -}}         # Whether this is a GitHub Codespace
-    {{- $ephemeral := false -}}         # Whether this is an ephemeral machine
-    {{- $headless := false -}}          # Whether this is a headless machine
-    {{- $work := false -}}              # Whether this is a work machine
-    {{- $hub := false -}}               # Whether this is a Hub machine
-    {{- $node := false -}}              # Whether this is a Node machine
+{{/* boolean feature tags */}}
+{{- $encryption := false -}}    # Whether encryption are enabled
+{{- $superuser := "" -}}            # Super User
+{{- $setuptype := "" }}             # Setup Type
+{{- $development := false -}}       # Whether development tools are enabled
+{{- $kids := false -}}              # Whether this is a kid-friendly setup
+{{- $passman := false -}}   # Whether password manager is enabled
+{{- $codespace := false -}}         # Whether this is a GitHub Codespace
+{{- $ephemeral := false -}}         # Whether this is an ephemeral machine
+{{- $headless := false -}}          # Whether this is a headless machine
+{{- $work := false -}}              # Whether this is a work machine
+{{- $hub := false -}}               # Whether this is a Hub machine
+{{- $node := false -}}              # Whether this is a Node machine
 
 
-    # Detect specific environments like GitHub Codespaces, VSCode remote containers, etc.
+# Detect specific environments like GitHub Codespaces, VSCode remote containers, etc.
 
-    {{/* detect GitHub codespaces, VSCode remote containers, Docker containers, Multipass VMs, and Vagrant boxes */}}
+{{/* detect GitHub codespaces, VSCode remote containers, Docker containers, Multipass VMs, and Vagrant boxes */}}
 
-    {{- $isCodespace := env "CODESPACES" -}}
-    {{- $isRemoteEnvironment := env "REMOTE_CONTAINERS_IPC" -}}
-    {{- $isSpecialUser := eq .chezmoi.username "vagrant" "vscode" -}}
-    {{- if or $isCodespace $isRemoteEnvironment $isSpecialUser -}}
-        sourceDir = {{ .chezmoi.sourceDir | quote }}  # Set source directory
-        {{-   $codespace = true -}}                   # Mark as a codespace
-        {{-   $ephemeral = true -}}                   # Mark as ephemeral
-        {{-   $headless = true -}}                    # Mark as headless
-        {{-   $encryptdecrypt = false -}}             # Disable encryptdecrypt
-        {{-   $development = false -}}                # Disable development tools
-        {{-   $superuser = "sudo" -}}                 # Setup superuser to install tools
+{{- $isCodespace := env "CODESPACES" -}}
+{{- $isRemoteEnvironment := env "REMOTE_CONTAINERS_IPC" -}}
+{{- $isSpecialUser := eq .chezmoi.username "vagrant" "vscode" -}}
+{{- if or $isCodespace $isRemoteEnvironment $isSpecialUser -}}
+    sourceDir = {{ .chezmoi.sourceDir | quote }}  # Set source directory
+    {{-   $codespace = true -}}                   # Mark as a codespace
+    {{-   $ephemeral = true -}}                   # Mark as ephemeral
+    {{-   $headless = true -}}                    # Mark as headless
+    {{-   $encryption = false -}}             # Disable encryption
+    {{-   $development = false -}}                # Disable development tools
+    {{-   $superuser = "sudo" -}}                 # Setup superuser to install tools
 
-        {{/* for  GitHub codespaces, VSCode remote containers, Docker containers, */}}
-        {{/* Multipass VMs, and Vagrant boxes setup the properties without asking */}}
-        {{ $name = "Laith Yousif" }}
-        {{ $email = "Laith@tmobi.link" }}
+    {{/* for  GitHub codespaces, VSCode remote containers, Docker containers, */}}
+    {{/* Multipass VMs, and Vagrant boxes setup the properties without asking */}}
+    {{ $name = "Laith Yousif" }}
+    {{ $email = "Laith@tmobi.link" }}
 
-    {{- else -}}
-        # Prompt user for configuration values if not in a codespace
+{{- else -}}
+    # Prompt user for configuration values if not in a codespace
 
-          {{- $setuptype = promptChoiceOnce . "setuptype" "What type of setup are you choosing " (list "basic" "kids" "development" "work") -}}
+      {{- $setuptype = promptChoiceOnce . "setuptype" "What type of setup are you choosing " (list "basic" "kids" "development" "work") -}}
 
-          {{- if eq $setuptype "basic" -}}
-            {{ $development = false }}
-            {{ $kids = false }}
-            {{ $work = false }}
-          {{- else if eq $setuptype "development" -}}
-            {{ $development = true }}
-            {{ $kids = false }}
-            {{ $work = false }}
-            {{ $superuser = "sudo" }}
-          {{- else if eq $setuptype "work" -}}
-            {{ $development = true }}
-            {{ $kids = false }}
-            {{ $work = true }}
-          {{- else if eq $setuptype "kids" -}}
-            {{ $development = false }}
-            {{ $kids = true }}
-            {{ $work = false }}
+      {{- if eq $setuptype "basic" -}}
+        {{ $development = false }}
+        {{ $kids = false }}
+        {{ $work = false }}
+      {{- else if eq $setuptype "development" -}}
+        {{ $development = true }}
+        {{ $kids = false }}
+        {{ $work = false }}
+        {{ $superuser = "sudo" }}
+      {{- else if eq $setuptype "work" -}}
+        {{ $development = true }}
+        {{ $kids = false }}
+        {{ $work = true }}
+      {{- else if eq $setuptype "kids" -}}
+        {{ $development = false }}
+        {{ $kids = true }}
+        {{ $work = false }}
+      {{- end -}}
+
+      {{- if eq $work true -}}
+          # Prompt for Git name with a default value
+          {{- $name = promptStringOnce . "name" "Git name for the author/committer (Default: Laith Yousif)" }}
+          {{- if not $name }}{{ $name = "Laith Yousif" }}{{ end -}}
+
+          # Prompt for Git email with a default value
+          {{- $email = promptStringOnce . "email" "Git email address for the author/committer (Default: Laith@tmobi.link)" }}
+          {{- if not $email }}{{ $email = "Laith@tmobi.link" }}{{ end -}}
+      {{- end -}}
+
+      {{- if eq $kids false -}}
+          # Prompt for enabling encryption with a default value of true
+          {{- $encryption = promptBoolOnce . "features.encryption" "Should I setup Encryption Decryption  (true/false)" -}}
+
+          # If encryption are enabled, prompt for the seting up password manager database path
+          {{- if $encryption -}}
+            {{- $passman = promptBoolOnce . "features.passman" "Should I setup a Password Manager  (true/false)" -}}
           {{- end -}}
 
-          {{- if eq $work true -}}
-              # Prompt for Git name with a default value
-              {{- $name = promptStringOnce . "name" "Git name for the author/committer (Default: Laith Yousif)" }}
-              {{- if not $name }}{{ $name = "Laith Yousif" }}{{ end -}}
-
-              # Prompt for Git email with a default value
-              {{- $email = promptStringOnce . "email" "Git email address for the author/committer (Default: Laith@tmobi.link)" }}
-              {{- if not $email }}{{ $email = "Laith@tmobi.link" }}{{ end -}}
+          {{- if and $encryption $passman -}}
+            {{- $hub = promptBoolOnce . "features.hub" "Should I setup this as networking access hub from which I can access other machines  (true/false)" -}}
+            {{- $node = promptBoolOnce . "features.node" "Should I setup this as a node machine that can be accessed from other machines using ssh  (true/false)" -}}
           {{- end -}}
-
-          {{- if eq $kids false -}}
-              # Prompt for enabling encryptdecrypt with a default value of true
-              {{- $encryptdecrypt = promptBoolOnce . "features.encryptdecrypt" "Should I setup Encryption Decryption  (true/false)" -}}
-
-              # If encryptdecrypt are enabled, prompt for the seting up password manager database path
-              {{- if $encryptdecrypt -}}
-                {{- $passwordmanager = promptBoolOnce . "features.passwordmanager" "Should I setup a Password Manager  (true/false)" -}}
-              {{- end -}}
-
-              {{- if and $encryptdecrypt $passwordmanager -}}
-                {{- $hub = promptBoolOnce . "features.hub" "Should I setup this as networking access hub from which I can access other machines  (true/false)" -}}
-                {{- $node = promptBoolOnce . "features.node" "Should I setup this as a node machine that can be accessed from other machines using ssh  (true/false)" -}}
-              {{- end -}}
-          {{- end -}}
+      {{- end -}}
 
 
 
-    {{- end -}}
+{{- end -}}
 
-    # Determine the operating system ID
-    {{- $osid := .chezmoi.os -}}
-    {{- if hasKey .chezmoi.osRelease "id" -}}
-      {{-   $osid = printf "%s-%s" .chezmoi.os .chezmoi.osRelease.id -}}
-    {{- end -}}
-    {{- if hasKey .chezmoi.osRelease "idLike" -}}
-      {{-   $osid = printf "%s-%s" .chezmoi.os .chezmoi.osRelease.idLike -}}
-    {{- end -}}
+# Determine the operating system ID
+{{- $osid := .chezmoi.os -}}
+{{- if hasKey .chezmoi.osRelease "id" -}}
+  {{-   $osid = printf "%s-%s" .chezmoi.os .chezmoi.osRelease.id -}}
+{{- end -}}
+{{- if hasKey .chezmoi.osRelease "idLike" -}}
+  {{-   $osid = printf "%s-%s" .chezmoi.os .chezmoi.osRelease.idLike -}}
+{{- end -}}
 
+ ## Encryption setup
 
-{{- if $encryptdecrypt -}}
-# Define encryption settings
 encryption = "age"
 [age]
     identity = "~/.config/chezmoi/key.txt"                                        # Path to the age identity file
     recipient = "age14t6vfqtd0f2z9gth0tsnw3qwh6nxgkvem5exjzs3x9juyp5659wqh47sfw"  # Age recipient key
-{{- end -}}
+
+
 
 # Define data section with user and machine-specific values
 [data]
@@ -139,9 +139,9 @@ encryption = "age"
 
     features.ephemeral = {{ $ephemeral }}                 # Ephemeral feature flag
     features.headless = {{ $headless }}                   # Headless feature flag
-    features.encryptdecrypt = {{ $encryptdecrypt }}       # encryptdecrypt feature flag
+    features.encryption = {{ $encryption }}       # encryption feature flag
     features.codespace = {{ $codespace }}                 # Codespace feature flag
-    features.passwordmanager = {{ $passwordmanager }}     # Password manager feature flag
+    features.passman = {{ $passman }}     # Password manager feature flag
     features.work = {{ $work }}                           # Work feature flag
     features.hub = {{ $hub }}                             # Hub feature flag
     features.node = {{ $node }}                           # Node feature flag
@@ -151,9 +151,10 @@ encryption = "age"
 [edit]
     command = {{ $editor | quote }}                           # Editor command
     args = ["--wait"]                                         # Editor arguments
- adding better handling of work and base profiles
+# adding better handling of work and base profiles
+
 # Define KeepassXC settings
 [keepassxc]
-    database = {{ ".keepassxc/chezmoi.kdbx" | quote }}         # KeepassXC database path
-    args = ["-k",".keepassxc/keypass.keyx"]                    # KeepassXC arguments
-    prompt = true                                              # Enable/Disable KeepassXC prompts
+    database = "{{ .chezmoi.destDir }}/.keepassxc/chezmoi.kdbx"        # KeepassXC database path
+    args = ["-k", "{{ .chezmoi.destDir }}/.keepassxc/keypass.keyx"]    # KeepassXC arguments
+    prompt = true                                                       # Enable/Disable KeepassXC prompts

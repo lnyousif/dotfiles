@@ -4,9 +4,9 @@ key.txt.age
 linux-install.sh
 mac-install.sh
 win-install.ps1
-.test/**
 
-{{ if eq .features.encryptdecrypt false }}
+
+{{ if eq .features.encryption false }}
 .keepassxc/**
 .ssh/**
 {{ end }}
