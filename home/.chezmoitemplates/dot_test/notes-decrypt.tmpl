@@ -1,0 +1,3 @@
+{{- if eq .features.passman true}}
+    {{ joinPath .chezmoi.sourceDir ".ignored-encrypted-file.age" | include | decrypt }}
+{{ end -}}
