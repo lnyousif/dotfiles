@@ -1,0 +1,3 @@
+{{- if .features.node }}
+    {{ keepassxcAttachment " Keys/chezmoi-homelab-node" "encrypted_id_ed25519_homelab.pub" | decrypt }}
+{{ end -}}
