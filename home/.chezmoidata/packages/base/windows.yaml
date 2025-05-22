@@ -7,6 +7,7 @@ packages:
         - Microsoft.WindowsTerminal
         - Starship.Starship
         - zyedidia.micro
+        - KeePassXCTeam.KeePassXC
       pips:
       junk:
         - Clipchamp.Clipchamp

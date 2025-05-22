@@ -2,7 +2,6 @@ packages:
   development:
     windows:
       winget:
-        - KeePassXCTeam.KeePassXC
         - Microsoft.VisualStudioCode
       pips:
         - "--user -U commitizen"
