@@ -11,6 +11,7 @@ packages:
           - micro
           - tmux
           - xclip
+          - keepassxc
         apt_junk:
           - firefox
           - libreoffice-data

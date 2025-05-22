@@ -3,7 +3,6 @@ packages:
     linux:
       common:
         apt:
-          - keepassxc
           - chromium
         linux_cmd:
         pips:
