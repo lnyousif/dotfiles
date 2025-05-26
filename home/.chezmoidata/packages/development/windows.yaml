@@ -3,6 +3,7 @@ packages:
     windows:
       winget:
         - Microsoft.VisualStudioCode
+        - JesseDuffield.Lazydocker
       pips:
         - "--user -U commitizen"
         - "--user -U pre-commit"

@@ -4,6 +4,7 @@ packages:
       common:
         apt:
           - chromium
+          - lazydocker
         linux_cmd:
         pips:
           - commitizen
