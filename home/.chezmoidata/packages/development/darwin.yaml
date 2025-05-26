@@ -4,6 +4,7 @@ packages:
       brews:
         - git-lfs
         - gnupg
+        - lazydocker
       casks:
         - visual-studio-code
       pips:
