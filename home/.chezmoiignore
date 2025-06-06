@@ -24,7 +24,7 @@ win-install.ps1
 {{ end }}
 
 {{ if ne .chezmoi.os "linux" }}
-,config/Code/**
+.config/Code/**
 {{ end }}
 
 {{ if eq .chezmoi.os "windows" }}

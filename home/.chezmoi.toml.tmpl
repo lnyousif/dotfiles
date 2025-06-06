@@ -1,37 +1,33 @@
 # -*-mode:conf-toml-*- vim:ft=toml
 
-# ~/.local/share/chezmoi/.chezmoi.toml.tmpl
-# =============================================================================
-# Used to customize configuration when doing a `chezmoi init`.
-#
-# This template file will trigger prompts to fill-in machine-specific
-# templateable values. The resulting file is then created at
-# `~/.config/chezmoi/chezmoi.toml`
-# See https://www.chezmoi.io/docs/how-to/
-#
-# {{- /* This file supports Go's text/template language. */}}
-
 # Define string variables for user-specific configurations
-{{/* String tags */}}
-{{ $email := "Laith@tmobi.link" }}  # Default email address
-{{ $name := "Laith Yousif" }}       # Default name
-{{ $editor := "micro" }}             # Default editor
+{{ $editor := "micro" }}            # Default editor
 
 # Define boolean feature flags for machine-specific configurations
 {{/* boolean feature tags */}}
-{{- $encryption := false -}}    # Whether encryption are enabled
+{{- $encryption := false -}}        # Whether encryption are enabled
 {{- $superuser := "" -}}            # Super User
 {{- $setuptype := "" }}             # Setup Type
 {{- $development := false -}}       # Whether development tools are enabled
 {{- $kids := false -}}              # Whether this is a kid-friendly setup
-{{- $passman := false -}}   # Whether password manager is enabled
+{{- $passman := false -}}           # Whether password manager is enabled
 {{- $codespace := false -}}         # Whether this is a GitHub Codespace
 {{- $ephemeral := false -}}         # Whether this is an ephemeral machine
 {{- $headless := false -}}          # Whether this is a headless machine
 {{- $work := false -}}              # Whether this is a work machine
 {{- $hub := false -}}               # Whether this is a Hub machine
 {{- $node := false -}}              # Whether this is a Node machine
+{{- $KeePass := "" -}}
+{{ $name := "Laith Yousif" }}
+{{ $email := "Laith@tmobi.link" }}
 
+{{- if env "CHEZMOI_NAME" -}}
+  {{- $name = env "CHEZMOI_NAME" -}}
+{{- end -}}
+
+{{- if env "CHEZMOI_EMAIL" -}}
+  {{- $email = env "CHEZMOI_EMAIL" -}}
+{{- end -}}
 
 # Detect specific environments like GitHub Codespaces, VSCode remote containers, etc.
 
@@ -45,19 +41,21 @@
     {{-   $codespace = true -}}                   # Mark as a codespace
     {{-   $ephemeral = true -}}                   # Mark as ephemeral
     {{-   $headless = true -}}                    # Mark as headless
-    {{-   $encryption = false -}}             # Disable encryption
+    {{-   $encryption = false -}}                 # Disable encryption
     {{-   $development = false -}}                # Disable development tools
     {{-   $superuser = "sudo" -}}                 # Setup superuser to install tools
 
     {{/* for  GitHub codespaces, VSCode remote containers, Docker containers, */}}
     {{/* Multipass VMs, and Vagrant boxes setup the properties without asking */}}
-    {{ $name = "Laith Yousif" }}
-    {{ $email = "Laith@tmobi.link" }}
 
 {{- else -}}
     # Prompt user for configuration values if not in a codespace
 
-      {{- $setuptype = promptChoiceOnce . "setuptype" "What type of setup are you choosing " (list "basic" "kids" "development" "work") -}}
+      {{- if env "CHEZMOI_SETUP_TYPE" -}}
+        {{- $setuptype = env "CHEZMOI_SETUP_TYPE" -}}
+      {{- else -}}
+        {{- $setuptype = promptChoiceOnce . "setuptype" "What type of setup are you choosing " (list "basic" "kids" "development" "work") -}}
+      {{- end -}}
 
       {{- if eq $setuptype "basic" -}}
         {{ $development = false }}
@@ -78,34 +76,44 @@
         {{ $work = false }}
       {{- end -}}
 
-      {{- if eq $work true -}}
-          # Prompt for Git name with a default value
-          {{- $name = promptStringOnce . "name" "Git name for the author/committer (Default: Laith Yousif)" }}
-          {{- if not $name }}{{ $name = "Laith Yousif" }}{{ end -}}
-
-          # Prompt for Git email with a default value
-          {{- $email = promptStringOnce . "email" "Git email address for the author/committer (Default: Laith@tmobi.link)" }}
-          {{- if not $email }}{{ $email = "Laith@tmobi.link" }}{{ end -}}
-      {{- end -}}
-
       {{- if eq $kids false -}}
           # Prompt for enabling encryption with a default value of true
-          {{- $encryption = promptBoolOnce . "features.encryption" "Should I setup Encryption Decryption  (true/false)" -}}
+
+          {{- if env "CHEZMOI_ENCRYPTION" -}}
+            {{- $encryption = env "CHEZMOI_ENCRYPTION" -}}
+          {{- else -}}
+            {{- $encryption = promptBoolOnce . "features.encryption" "Should I setup Encryption Decryption  (true/false)" -}}
+          {{- end -}}
+
 
           # If encryption are enabled, prompt for the seting up password manager database path
           {{- if $encryption -}}
-            {{- $passman = promptBoolOnce . "features.passman" "Should I setup a Password Manager  (true/false)" -}}
+            {{- if env "CHEZMOI_PASS_MANAGER" -}}
+              {{- $passman = env "CHEZMOI_PASS_MANAGER" -}}
+            {{- else -}}
+              {{- $passman = promptBoolOnce . "features.passman" "Should I setup a Password Manager  (true/false)" -}}
+            {{- end -}}
+
           {{- end -}}
 
           {{- if and $encryption $passman -}}
-            {{- $hub = promptBoolOnce . "features.hub" "Should I setup this as networking access hub from which I can access other machines  (true/false)" -}}
-            {{- $node = promptBoolOnce . "features.node" "Should I setup this as a node machine that can be accessed from other machines using ssh  (true/false)" -}}
+
+            {{- if env "CHEZMOI_NETWORK_HUB" -}}
+              {{- $hub = env "CHEZMOI_NETWORK_HUB" -}}
+            {{- else -}}
+              {{- $hub = promptBoolOnce . "features.hub" "Should I setup this as networking access hub from which I can access other machines  (true/false)" -}}
+            {{- end -}}
+
+            {{- if env "CHEZMOI_NETWORK_NODE" -}}
+              {{- $node = env "CHEZMOI_NETWORK_NODE" -}}
+            {{- else -}}
+              {{- $node = promptBoolOnce . "features.node" "Should I setup this as a node machine that can be accessed from other machines using ssh  (true/false)" -}}
+            {{- end -}}
+
           {{- end -}}
       {{- end -}}
-
-
-
 {{- end -}}
+
 
 # Determine the operating system ID
 {{- $osid := .chezmoi.os -}}
@@ -141,9 +149,9 @@ encryption = "age"
 
     features.ephemeral = {{ $ephemeral }}                 # Ephemeral feature flag
     features.headless = {{ $headless }}                   # Headless feature flag
-    features.encryption = {{ $encryption }}       # encryption feature flag
+    features.encryption = {{ $encryption }}               # encryption feature flag
     features.codespace = {{ $codespace }}                 # Codespace feature flag
-    features.passman = {{ $passman }}     # Password manager feature flag
+    features.passman = {{ $passman }}                     # Password manager feature flag
     features.work = {{ $work }}                           # Work feature flag
     features.hub = {{ $hub }}                             # Hub feature flag
     features.node = {{ $node }}                           # Node feature flag
@@ -151,12 +159,11 @@ encryption = "age"
 
 # Define editor settings
 [edit]
-    command = {{ $editor | quote }}                           # Editor command
-    args = ["--wait"]                                         # Editor arguments
+    command = {{ $editor | quote }}                                     # Editor command
+    args = ["--wait"]                                                   # Editor arguments
 # adding better handling of work and base profiles
 
 # Define KeepassXC settings
 [keepassxc]
-    database = "{{ .chezmoi.destDir }}/.keepassxc/chezmoi.kdbx"        # KeepassXC database path
-    args = ["-k", "{{ .chezmoi.destDir }}/.keepassxc/keypass.keyx"]    # KeepassXC arguments
-    prompt = true                                                       # Enable/Disable KeepassXC prompts
+    database = "{{ .chezmoi.destDir }}/.keepassxc/chezmoi.kdbx"         # KeepassXC database path
+    args = ["-k", "{{ .chezmoi.destDir }}/.keepassxc/keypass.keyx"]     # KeepassXC arguments
