@@ -2,6 +2,8 @@ PATH="~/.local/bin:${PATH}"
 export PATH
 eval "$(/opt/homebrew/bin//brew shellenv)"
 eval "$(starship init zsh)"
+export EDITOR=micro
+
 # Load cross-compatible Bash functions declarations from separate file.
 if [ -f "$HOME"/.myscripts/bash_functions ]; then
     \. "$HOME"/.myscripts/bash_functions

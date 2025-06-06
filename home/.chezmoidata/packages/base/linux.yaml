@@ -12,6 +12,7 @@ packages:
           - tmux
           - xclip
           - keepassxc
+          - nnn
         apt_junk:
           - firefox
           - libreoffice-data
