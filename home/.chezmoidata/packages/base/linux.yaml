@@ -4,6 +4,7 @@ packages:
       common:
         apt:
           - git
+          - age
           - curl
           - wget
           - python3-pip
