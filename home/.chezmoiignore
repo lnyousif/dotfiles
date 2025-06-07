@@ -49,12 +49,12 @@ Library/**
 
 {{ range $key, $value := .features }}
   {{ if eq $value false -}}
-  .chezmoiscripts/{{ $.chezmoi.os }}/1_features/{{ $key }}/**
+  .chezmoiscripts/{{ $.chezmoi.os }}/2_features/{{ $key }}/**
   {{ end -}}
 {{ end -}}
 
 {{ range $key, $value := .setups }}
   {{ if eq $value false -}}
-  .chezmoiscripts/{{ $.chezmoi.os }}/0_setups/{{ $key }}/**
+  .chezmoiscripts/{{ $.chezmoi.os }}/1_setups/{{ $key }}/**
   {{ end -}}
 {{ end -}}

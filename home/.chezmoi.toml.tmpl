@@ -54,19 +54,26 @@
       {{- if env "CHEZMOI_SETUP_TYPE" -}}
         {{- $setuptype = env "CHEZMOI_SETUP_TYPE" -}}
       {{- else -}}
-        {{- $setuptype = promptChoiceOnce . "setuptype" "What type of setup are you choosing " (list "basic" "kids" "development" "work") -}}
+        {{- $setuptype = promptChoiceOnce . "setuptype" "What type of setup are you choosing " (list "basic" "kids" "development" "work") "basic" -}}
+      {{- end -}}
+
+      {{- if env "CHEZMOI_USER_TYPE" -}}
+        {{- $superuser = env "CHEZMOI_USER_TYPE" -}}
+      {{- else -}}
+        {{- $superuser = promptChoiceOnce . "superuser" "What type of user are you" (list "normal" "sudo") "sudo" -}}
+        {{- if ne $superuser "sudo" -}}
+          {{- $superuser = "" -}}
+        {{- end -}}
       {{- end -}}
 
       {{- if eq $setuptype "basic" -}}
         {{ $development = false }}
         {{ $kids = false }}
         {{ $work = false }}
-        {{ $superuser = "sudo" }}
       {{- else if eq $setuptype "development" -}}
         {{ $development = true }}
         {{ $kids = false }}
         {{ $work = false }}
-        {{ $superuser = "sudo" }}
       {{- else if eq $setuptype "work" -}}
         {{ $development = true }}
         {{ $kids = false }}
@@ -75,7 +82,6 @@
         {{ $development = false }}
         {{ $kids = true }}
         {{ $work = false }}
-        {{ $superuser = "sudo" }}
       {{- end -}}
 
       {{- if eq $kids false -}}
@@ -84,7 +90,7 @@
           {{- if env "CHEZMOI_ENCRYPTION" -}}
             {{- $encryption = env "CHEZMOI_ENCRYPTION" -}}
           {{- else -}}
-            {{- $encryption = promptBoolOnce . "features.encryption" "Should I setup Encryption Decryption  (true/false)" -}}
+            {{- $encryption = promptBoolOnce . "features.encryption" "Should I setup Encryption Decryption  (true/false)" true -}}
           {{- end -}}
 
 
@@ -93,7 +99,7 @@
             {{- if env "CHEZMOI_PASS_MANAGER" -}}
               {{- $passman = env "CHEZMOI_PASS_MANAGER" -}}
             {{- else -}}
-              {{- $passman = promptBoolOnce . "features.passman" "Should I setup a Password Manager  (true/false)" -}}
+              {{- $passman = promptBoolOnce . "features.passman" "Should I setup a Password Manager  (true/false)" true -}}
             {{- end -}}
 
           {{- end -}}
@@ -103,13 +109,13 @@
             {{- if env "CHEZMOI_NETWORK_HUB" -}}
               {{- $hub = env "CHEZMOI_NETWORK_HUB" -}}
             {{- else -}}
-              {{- $hub = promptBoolOnce . "features.hub" "Should I setup this as networking access hub from which I can access other machines  (true/false)" -}}
+              {{- $hub = promptBoolOnce . "features.hub" "Should I setup this as a network hub to access other machines  (true/false)" false -}}
             {{- end -}}
 
             {{- if env "CHEZMOI_NETWORK_NODE" -}}
               {{- $node = env "CHEZMOI_NETWORK_NODE" -}}
             {{- else -}}
-              {{- $node = promptBoolOnce . "features.node" "Should I setup this as a node machine that can be accessed from other machines using ssh  (true/false)" -}}
+              {{- $node = promptBoolOnce . "features.node" "Should I setup this as a node  that can be accessed using ssh  (true/false)" true -}}
             {{- end -}}
 
           {{- end -}}
@@ -133,7 +139,6 @@ encryption = "age"
 [age]
     identity = "~/.config/chezmoi/key.txt"                                        # Path to the age identity file
     recipient = "age14t6vfqtd0f2z9gth0tsnw3qwh6nxgkvem5exjzs3x9juyp5659wqh47sfw"  # Age recipient key
-
 {{- end -}}
 
 
