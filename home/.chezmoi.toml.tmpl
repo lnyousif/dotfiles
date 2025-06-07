@@ -61,6 +61,7 @@
         {{ $development = false }}
         {{ $kids = false }}
         {{ $work = false }}
+        {{ $superuser = "sudo" }}
       {{- else if eq $setuptype "development" -}}
         {{ $development = true }}
         {{ $kids = false }}
@@ -74,6 +75,7 @@
         {{ $development = false }}
         {{ $kids = true }}
         {{ $work = false }}
+        {{ $superuser = "sudo" }}
       {{- end -}}
 
       {{- if eq $kids false -}}
