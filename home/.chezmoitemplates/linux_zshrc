@@ -1,6 +1,12 @@
 eval "$(starship init zsh)"
 export EDITOR=micro
 
+# Add custom commands directory to PATH
+if [ -d "$HOME/.myscripts/bin" ] && ! [[ "$PATH" =~ "$HOME/.myscripts/bin" ]]; then
+    PATH="$HOME/.myscripts/bin:$PATH"
+fi
+export PATH
+
 # Load cross-compatible Bash functions declarations from separate file.
 if [ -f "$HOME"/.myscripts/bash_functions ]; then
     \. "$HOME"/.myscripts/bash_functions

@@ -10,6 +10,10 @@ fi
 if ! [[ "$PATH" =~ "$HOME/.local/bin:$HOME/bin:" ]]; then
     PATH="$HOME/.local/bin:$HOME/bin:$PATH"
 fi
+# Add custom commands directory to PATH
+if [ -d "$HOME/.myscripts/bin" ] && ! [[ "$PATH" =~ "$HOME/.myscripts/bin" ]]; then
+    PATH="$HOME/.myscripts/bin:$PATH"
+fi
 export PATH
 export EDITOR=micro
 eval "$(starship init bash)"
