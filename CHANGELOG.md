@@ -2,6 +2,18 @@
 
 ### Refactor
 
+- **initial-apply**: non interactive init and apply for remote VMs and no gui machines
+- **lazydocker**: adding lazydocker and improved readme
+- **encryption**: better system
+- **encryption**: way better system to setup the encryption
+- **encryption**: better encryption and key management
+- **keepass**: upated test data
+- **vscode**: disable terminal suggestions
+- **encryption**: added better system for encryption
+- **setups**: adding better handling of work and base profiles
+- **codespace**: improved codespace init
+- **mac**: finalizing cleanup
+- **linux**: better update for linux
 - **encryption**: better encryption automation
 
 ## 0.2.1 (2025-05-17)
@@ -25,6 +37,7 @@
 
 - **neovim**: adding neovim and nvchad setup
 - **setups**: define few way to select setups within the enviornments
+- **commitzen**: adding Commitizen
 
 ### Refactor
 
@@ -55,15 +68,6 @@
 - **features**: wip: executing templates instead of rewriting code
 - **vscode**: updating theme to a one installed everywhere
 - **vscode**: update the theme to light
-
-## 0.1.0 (2025-04-28)
-
-### Feat
-
-- **commitzen**: adding Commitizen
-
-### Refactor
-
 - **vscode**: move vscode windows setup location
 - **vscode**: update vscode configuration management
 - **vscode**: better cross platform sync for extensions
