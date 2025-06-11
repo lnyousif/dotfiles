@@ -1,5 +1,12 @@
 PATH="~/.local/bin:${PATH}"
 export PATH
+
+# Add custom commands directory to PATH
+if [ -d "$HOME/.myscripts/bin" ] && ! [[ "$PATH" =~ "$HOME/.myscripts/bin" ]]; then
+    PATH="$HOME/.myscripts/bin:$PATH"
+fi
+export PATH
+
 eval "$(/opt/homebrew/bin//brew shellenv)"
 eval "$(starship init zsh)"
 export EDITOR=micro

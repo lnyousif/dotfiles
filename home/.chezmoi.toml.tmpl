@@ -172,5 +172,7 @@ encryption = "age"
 
 # Define KeepassXC settings
 [keepassxc]
-    database = "{{ .chezmoi.destDir }}/.keepassxc/chezmoi.kdbx"         # KeepassXC database path
-    args = ["-k", "{{ .chezmoi.destDir }}/.keepassxc/keypass.keyx"]     # KeepassXC arguments
+    command = "my_chezmoi_keepassxc.sh"
+    database = "{{ .chezmoi.destDir }}/.keepassxc/chezmoi.kdbx"                                 # KeepassXC database path
+    args = ["-k", "{{ .chezmoi.destDir }}/.keepassxc/keypass.keyx"]      # KeepassXC arguments
+    prompt = false

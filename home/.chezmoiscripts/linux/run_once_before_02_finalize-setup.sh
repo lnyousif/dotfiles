@@ -8,4 +8,7 @@ echo "====================================================="
 echo "Removing temporary directory..."
 #{{ .superuser }} rm -rf "${HOME}/.temp"
 
+source ~/.bashrc  # For bash
+source ~/.zshrc   # For zsh
+
 echo "✅ Cleanup complete!"
