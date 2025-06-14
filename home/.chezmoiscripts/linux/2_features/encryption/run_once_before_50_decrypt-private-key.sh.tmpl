@@ -1,7 +1,11 @@
 #!/bin/sh
 
 if [ ! -f "${HOME}/.config/chezmoi/key.txt" ]; then
-    mkdir -p "${HOME}/.config/chezmoi"
-    chezmoi age decrypt --output "${HOME}/.config/chezmoi/key.txt" --passphrase "{{ .chezmoi.sourceDir }}/key.txt.age"
-    chmod 600 "${HOME}/.config/chezmoi/key.txt"
+mkdir -p "${HOME}/.config/chezmoi"
+expect -c "
+spawn chezmoi age decrypt --output "${HOME}/.config/chezmoi/key.txt" --passphrase "{{ .chezmoi.sourceDir }}/key.txt.age"
+expect \"Enter passphrase:\"
+send \"$AGE_PASSPHRASE\r\"
+expect eof"
+chmod 600 "${HOME}/.config/chezmoi/key.txt"
 fi
