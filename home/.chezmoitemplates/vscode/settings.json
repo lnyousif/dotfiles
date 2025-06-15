@@ -1,125 +1,68 @@
 {
-    // Normal Setup
-    //"dev.containers.dockerPath": "",
-    //"dev.containers.dockerComposePath": "",
-
-    // Fedora Setup when using non flatpack
-    //"dev.containers.dockerPath": "podman-devcon//tainer-wrapper",
-    //"dev.containers.dockerComposePath": "podman-compose",
-
-    //Fedora setup with Flatpack
-    //"dev.containers.dockerPath": "",
-    //"dev.containers.dockerComposePath": "",
-
+    // Workbench: General UI, Layout, Theme, Startup
     "workbench.editor.showTabs": "multiple",
     "workbench.startupEditor": "none",
     "workbench.tips.enabled": false,
-
     "workbench.sideBar.location": "right",
+    "workbench.activityBar.location": "top",
     "workbench.iconTheme": "material-icon-theme",
-    "material-icon-theme.hidesExplorerArrows": false,
-    "workbench.tree.enableStickyScroll": false,
-    "workbench.tree.renderIndentGuides": "none",
-    "workbench.tree.indent": 8,
-    "explorer.compactFolders": false,
-    "explorer.confirmDragAndDrop": false,
+    "workbench.colorTheme": "Visual Studio Light",
 
-    // Editor enhancements
-    "editor.colorDecorators": false,
-    "editor.links": false,
-    "files.trimTrailingWhitespace": true,
-    "files.insertFinalNewline": true,
+    // Editor: Appearance & Behavior
+    "editor.wordWrap": "on", // Change to "off" if you prefer non wrapped text
     "editor.tabSize": 2,
     "editor.detectIndentation": false,
     "editor.showFoldingControls": "never",
+    "editor.foldingHighlight": false,
+    "editor.minimap.enabled": false,
+    "editor.overviewRulerBorder": false,
+    "editor.hideCursorInOverviewRuler": true,
+    "editor.colorDecorators": false,
+    "editor.links": false,
+    "editor.cursorSmoothCaretAnimation": "on",
+    "editor.definitionLinkOpensInPeek": true,
+    "editor.codeLens": false,
+    "editor.lineNumbers": "on",
+    "editor.renderWhitespace": "none",
+    "editor.renderControlCharacters": false,
+
+    // Editor: Bracket & Guides
+    "editor.bracketPairColorization.enabled": true,
+    "editor.guides.bracketPairs": true,
+    "editor.guides.indentation": false,
+    "editor.guides.highlightActiveIndentation": false,
+    "editor.matchBrackets": "never",
+
+    // Editor: Formatting & Actions
     "editor.formatOnSave": true,
     "editor.formatOnPaste": true,
     "editor.codeActionsOnSave": {
         "source.organizeImports": "explicit",
         "source.fixAll": "explicit"
     },
-    "editor.bracketPairColorization.enabled": true,
-    "editor.guides.bracketPairs": true,
-    "editor.cursorSmoothCaretAnimation": "on",
-    "editor.wordWrap": "on", // Change to "off" if you prefer non wrapped text
-    "editor.definitionLinkOpensInPeek": true,
-    "editor.hideCursorInOverviewRuler": true,
+
+    // Editor: Suggestions & Completion
     "editor.tabCompletion": "on",
     "editor.snippetSuggestions": "top",
     "emmet.triggerExpansionOnTab": true,
-    "extensions.ignoreRecommendations": true,
 
-
-    "workbench.colorTheme": "Visual Studio Light",
-
-    // Enables an infinite amount of editors and disables
-
-    "explorer.autoReveal": false,
-    // Disables the useless minimap to the right of our code
-    "editor.minimap.enabled": false,
-    "editor.overviewRulerBorder": false,
-    // Add some padding to the top and bottom of our file
-    "editor.codeLens": false,
-    // OPTIONAL: Removes the glyph margin for breakpoints
-    // and other symbols that most people don't use.
-    // If you use those things, feel free to enable this!
-
-    "editor.foldingHighlight": false,
-    // Stops highlighting the current line.
-    //"editor.renderLineHighlight": "none",
-    // Disables unnecessary and useless highlighting
-    // of current indentation.
-    "editor.guides.indentation": false,
-    "editor.guides.highlightActiveIndentation": false,
-    // Stops highlighting matching bracket pairs.
-    // Colored brackets eliminates the need for this!
-    "editor.matchBrackets": "never",
-    // OPTIONAL: Disables parameter hints.
-    // If you'd prefer to receive hints, leave these
-    // settings on!
-    // If you find that you don't use line numbers much
-    // and want even more space for your code, don't be
-    // afraid to turn this off!
-    "editor.lineNumbers": "on",
-    "window.autoDetectHighContrast": false,
-    "zenMode.fullScreen": false,
-
-    //    // Customizing your font and spacing (line height)
-    //    "editor.fontSize": 14,
-    //    "editor.fontWeight": "350", // OPTIONAL
-    //    "editor.lineHeight": 18,
-    //    "workbench.activityBar.location": "top",
-    //    "window.customTitleBarVisibility": "auto",
-    //    "window.menuBarVisibility": "compact",
-    //    "window.titleBarStyle": "custom",
-    //    "window.closeWhenEmpty": true,
-    //    "window.restoreWindows": "none",
-
-
-    "dotfiles.repository": "https://github.com/lnyousif/dotfiles.git",
-    "dotfiles.targetPath": "~/.dotfiles",
-    "dotfiles.installCommand": "bootstrap.sh",
-    "github.copilot.chat.codesearch.enabled": true,
-    "github.copilot.chat.newWorkspaceCreation.enabled": true,
-    "debug.javascript.autoAttachFilter": "smart",
-    "github.copilot.chat.languageContext.fix.typescript.enabled": true,
-    "github.copilot.chat.languageContext.inline.typescript.enabled": true,
-    "github.copilot.chat.languageContext.typescript.enabled": true,
-    "github.copilot.chat.agent.thinkingTool": true,
-    "github.copilot.nextEditSuggestions.enabled": true,
-    "chat.agent.enabled": true,
+    // Editor: Navigation
     "breadcrumbs.enabled": false,
     "editor.stickyScroll.enabled": false,
-    "editor.renderWhitespace": "none",
-    "editor.renderControlCharacters": false,
-    "workbench.activityBar.location": "top",
-    "git.blame.editorDecoration.enabled": true,
-    "git.replaceTagsWhenPull": true,
-    "terminal.integrated.suggest.enabled": false,
 
-    // Files and Performance
+    // Explorer & Tree
+    "explorer.compactFolders": false,
+    "explorer.confirmDragAndDrop": false,
+    "explorer.autoReveal": false,
+    "material-icon-theme.hidesExplorerArrows": false,
+    "workbench.tree.enableStickyScroll": false,
+    "workbench.tree.renderIndentGuides": "none",
+    "workbench.tree.indent": 8,
+
+    // Files
+    "files.trimTrailingWhitespace": true,
+    "files.insertFinalNewline": true,
     "files.autoSave": "false",
-    //"files.autoSaveDelay": 1000,
     "files.exclude": {
         "**/.git": true,
         "**/.DS_Store": true,
@@ -132,14 +75,15 @@
         "**/dist/**": true
     },
 
-    // Terminal enhancements
+    // Terminal
     "terminal.integrated.fontFamily": "monospace",
     "terminal.integrated.cursorBlinking": true,
     "terminal.integrated.copyOnSelection": true,
     "terminal.integrated.enableMultiLinePasteWarning": false,
     "terminal.integrated.persistentSessionScrollback": 5000,
+    "terminal.integrated.suggest.enabled": false,
 
-    // Search improvements
+    // Search
     "search.exclude": {
         "**/node_modules": true,
         "**/bower_components": true,
@@ -148,8 +92,35 @@
     },
     "search.smartCase": true,
 
-    // Git improvements
+    // Git
     "git.autofetch": false,
     "git.confirmSync": false,
-    "git.enableSmartCommit": true
+    "git.enableSmartCommit": true,
+    "git.blame.editorDecoration.enabled": true,
+    "git.replaceTagsWhenPull": true,
+
+    // Debugging
+    "debug.javascript.autoAttachFilter": "smart",
+
+    // Extensions
+    "extensions.ignoreRecommendations": true,
+    // Extensions: Dotfiles
+    "dotfiles.repository": "https://github.com/lnyousif/dotfiles.git",
+    "dotfiles.targetPath": "~/.dotfiles",
+    "dotfiles.installCommand": "bootstrap.sh",
+    // Extensions: GitHub Copilot
+    "github.copilot.chat.codesearch.enabled": true,
+    "github.copilot.chat.newWorkspaceCreation.enabled": true,
+    "github.copilot.chat.languageContext.fix.typescript.enabled": true,
+    "github.copilot.chat.languageContext.inline.typescript.enabled": true,
+    "github.copilot.chat.languageContext.typescript.enabled": true,
+    "github.copilot.chat.agent.thinkingTool": true,
+    "github.copilot.nextEditSuggestions.enabled": true,
+    "chat.agent.enabled": true,
+
+    // Window
+    "window.autoDetectHighContrast": false,
+
+    // Zen Mode
+    "zenMode.fullScreen": false
 }
