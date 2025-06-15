@@ -8,8 +8,8 @@
     //"dev.containers.dockerComposePath": "podman-compose",
 
     //Fedora setup with Flatpack
-    "dev.containers.dockerPath": "",
-    "dev.containers.dockerComposePath": "",
+    //"dev.containers.dockerPath": "",
+    //"dev.containers.dockerComposePath": "",
 
     "workbench.editor.showTabs": "multiple",
     "workbench.startupEditor": "none",
@@ -41,12 +41,8 @@
     "editor.bracketPairColorization.enabled": true,
     "editor.guides.bracketPairs": true,
     "editor.cursorSmoothCaretAnimation": "on",
-    "editor.wordWrap": "off", // Change to "on" if you prefer wrapped text
+    "editor.wordWrap": "on", // Change to "off" if you prefer non wrapped text
     "editor.definitionLinkOpensInPeek": true,
-
-    "editor.scrollbar.horizontal": "hidden",
-    "editor.scrollbar.vertical": "hidden",
-
     "editor.hideCursorInOverviewRuler": true,
     "editor.tabCompletion": "on",
     "editor.snippetSuggestions": "top",
@@ -54,10 +50,7 @@
     "extensions.ignoreRecommendations": true,
 
 
-    //"workbench.colorTheme": "Visual Studio Light",
-    "workbench.colorTheme": "Visual Studio Dark",
-
-
+    "workbench.colorTheme": "Visual Studio Light",
 
     // Enables an infinite amount of editors and disables
 
