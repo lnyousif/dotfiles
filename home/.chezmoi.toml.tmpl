@@ -17,7 +17,7 @@
 {{- $work := false -}}              # Whether this is a work machine
 {{- $hub := false -}}               # Whether this is a Hub machine
 {{- $node := false -}}              # Whether this is a Node machine
-{{- $KeePass := "" -}}
+{{- $cloudflare := false -}}
 {{ $name := "Laith Yousif" }}
 {{ $email := "Laith@tmobi.link" }}
 
@@ -118,6 +118,12 @@
               {{- $node = promptBoolOnce . "features.node" "Should I setup this as a node  that can be accessed using ssh  (true/false)" true -}}
             {{- end -}}
 
+            {{- if env "CHEZMOI_NETWORK_CLOUDFLARE" -}}
+              {{- $cloudflare = env "CHEZMOI_NETWORK_CLOUDFLARE" -}}
+            {{- else -}}
+              {{- $cloudflare = promptBoolOnce . "features.cloudflare" "Should I setup this as a cloudflare dns updater (true/false)" false -}}
+            {{- end -}}
+
           {{- end -}}
       {{- end -}}
 {{- end -}}
@@ -162,6 +168,7 @@ encryption = "age"
     features.work = {{ $work }}                           # Work feature flag
     features.hub = {{ $hub }}                             # Hub feature flag
     features.node = {{ $node }}                           # Node feature flag
+    features.cloudflare = {{ $cloudflare }}               # Cloudflare feature flag
 
 
 # Define editor settings
