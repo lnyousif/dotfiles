@@ -5,7 +5,7 @@ packages:
         apt:
           - git
           - age
-          - age-cli
+          - expect
           - curl
           - wget
           - python3-pip
