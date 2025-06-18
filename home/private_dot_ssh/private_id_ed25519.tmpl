@@ -1,1 +1,7 @@
+{{- $targetFile := joinPath .chezmoi.homeDir ".ssh" "id_ed25519" -}}
+{{- $fileInfo := stat $targetFile -}}
+{{- if and $fileInfo (gt $fileInfo.size 0) -}}
+{{-   include $targetFile -}}
+{{- else -}}
 {{-   template "github/id_ed25519" . -}}
+{{- end -}}
