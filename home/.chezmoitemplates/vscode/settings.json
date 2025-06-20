@@ -6,7 +6,7 @@
     "workbench.sideBar.location": "right",
     "workbench.activityBar.location": "top",
     "workbench.iconTheme": "material-icon-theme",
-    "workbench.colorTheme": "Visual Studio Light",
+    "workbench.colorTheme": "Abyss",
 
     // Editor: Appearance & Behavior
     "editor.wordWrap": "on", // Change to "off" if you prefer non wrapped text
