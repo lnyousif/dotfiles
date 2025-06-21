@@ -53,7 +53,7 @@
     // Explorer & Tree
     "explorer.compactFolders": false,
     "explorer.confirmDragAndDrop": false,
-    "explorer.autoReveal": false,
+    "explorer.autoReveal": true,
     "material-icon-theme.hidesExplorerArrows": false,
     "workbench.tree.enableStickyScroll": false,
     "workbench.tree.renderIndentGuides": "none",
