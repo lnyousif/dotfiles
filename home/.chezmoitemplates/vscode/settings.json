@@ -6,7 +6,7 @@
     "workbench.sideBar.location": "right",
     "workbench.activityBar.location": "top",
     "workbench.iconTheme": "material-icon-theme",
-    "workbench.colorTheme": "Abyss",
+    "workbench.colorTheme": "Quiet Light",
 
     // Editor: Appearance & Behavior
     "editor.wordWrap": "on", // Change to "off" if you prefer non wrapped text
@@ -62,7 +62,7 @@
     // Files
     "files.trimTrailingWhitespace": true,
     "files.insertFinalNewline": true,
-    "files.autoSave": "false",
+    "files.autoSave": "off",
     "files.exclude": {
         "**/.git": true,
         "**/.DS_Store": true,
@@ -79,7 +79,7 @@
     "terminal.integrated.fontFamily": "monospace",
     "terminal.integrated.cursorBlinking": true,
     "terminal.integrated.copyOnSelection": true,
-    "terminal.integrated.enableMultiLinePasteWarning": false,
+    "terminal.integrated.enableMultiLinePasteWarning": "never",
     "terminal.integrated.persistentSessionScrollback": 5000,
     "terminal.integrated.suggest.enabled": false,
 
@@ -122,5 +122,8 @@
     "window.autoDetectHighContrast": false,
 
     // Zen Mode
-    "zenMode.fullScreen": false
+    "zenMode.fullScreen": false,
+
+    // MISC
+    "geminicodeassist.project": "inspired-graph-xf3h4"
 }
