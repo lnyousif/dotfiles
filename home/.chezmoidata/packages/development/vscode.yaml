@@ -7,6 +7,7 @@ vscode:
         - github.vscode-github-actions
         - GitHub.copilot
         - GitHub.copilot-chat
+        - GitHub.codespaces
         - Gruntfuggly.todo-tree
         - google.geminicodeassist
         - esbenp.prettier-vscode
