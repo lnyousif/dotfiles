@@ -6,7 +6,7 @@
     "workbench.sideBar.location": "right",
     "workbench.activityBar.location": "top",
     "workbench.iconTheme": "material-icon-theme",
-    "workbench.colorTheme": "Quiet Light",
+    "workbench.colorTheme": "Dark Modern",
 
     // Editor: Appearance & Behavior
     "editor.wordWrap": "on", // Change to "off" if you prefer non wrapped text
