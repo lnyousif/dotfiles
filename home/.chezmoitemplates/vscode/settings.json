@@ -1,15 +1,15 @@
 {
     // Workbench: General UI, Layout, Theme, Startup
     "workbench.editor.showTabs": "multiple",
-    "workbench.startupEditor": "none",
+    "workbench.startupEditor": "welcomePage",
     "workbench.tips.enabled": false,
-    "workbench.sideBar.location": "right",
+    "workbench.sideBar.location": "left",
     "workbench.activityBar.location": "top",
     "workbench.iconTheme": "material-icon-theme",
-    "workbench.colorTheme": "Dark Modern",
+    "workbench.colorTheme": "Default Dark Modern",
 
     // Editor: Appearance & Behavior
-    "editor.wordWrap": "on", // Change to "off" if you prefer non wrapped text
+    "editor.wordWrap": "off",
     "editor.tabSize": 2,
     "editor.detectIndentation": false,
     "editor.showFoldingControls": "never",
