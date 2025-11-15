@@ -4,7 +4,8 @@ packages:
       common:
         apt:
           - chromium
-          - lazydocker
+          - podman
+          - podman-compose
         linux_cmd:
         pips:
           - commitizen
