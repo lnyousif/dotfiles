@@ -24,6 +24,8 @@ packages:
           - gnome-tour
           - gnome-text-editor
           - moby-engine
+          - calendar
+          - calculator
         pips:
         linux_cmd:
           - curl -sS https://starship.rs/install.sh | sh -s -- -y
