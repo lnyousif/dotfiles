@@ -3,7 +3,11 @@ packages:
     windows:
       winget:
         - Microsoft.VisualStudioCode
-        - JesseDuffield.Lazydocker
+        - RedHat.Podman
+        - RedHat.Podman-Desktop
+        - CoreyButler.NVMforWindows
+        - OpenJS.NodeJS.LTS
+        - pnpm.pnpm
       pips:
         - "--user -U commitizen"
         - "--user -U pre-commit"

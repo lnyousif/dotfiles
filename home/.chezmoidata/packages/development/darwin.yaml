@@ -4,6 +4,9 @@ packages:
       brews:
         - git-lfs
         - gnupg
+        - nvm
+        - node
+        - pnpm
         - podman
         - podman-compose
         - podman-desktop
