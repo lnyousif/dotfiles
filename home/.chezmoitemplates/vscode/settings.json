@@ -125,5 +125,11 @@
     "zenMode.fullScreen": false,
 
     // MISC
-    "geminicodeassist.project": "inspired-graph-xf3h4"
+    "geminicodeassist.project": "inspired-graph-xf3h4",
+    "containers.containerClient": "com.microsoft.visualstudio.containers.podman",
+    "containers.orchestratorClient": "com.microsoft.visualstudio.orchestrators.podmancompose",
+    "dev.containers.dockerPath": "podman",
+    "dev.containers.dockerComposePath": "podman-compose",
+    "dev.containers.dockerSocketPath": "/run/user/$(id -u)/podman/podman.socket",
+    "workbench.editor.enablePreview": false
 }
