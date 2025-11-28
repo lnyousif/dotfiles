@@ -14,7 +14,6 @@ packages:
           - tmux
           - xclip
           - keepassxc
-          - nn
         apt_junk:
           - firefox
           - libreoffice-data
@@ -26,6 +25,7 @@ packages:
           - moby-engine
           - calendar
           - calculator
+          - nn
         pips:
         linux_cmd:
           - curl -sS https://starship.rs/install.sh | sh -s -- -y
