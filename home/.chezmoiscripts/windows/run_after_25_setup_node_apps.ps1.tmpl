@@ -1,0 +1,13 @@
+#!/bin/bash
+
+{{ range $setup, $value := .setups }}
+
+  {{ if $value }}
+
+    {{ range index $.packages $setup "windows" "common" "pnpm" }}
+      pnpm install -g {{. | quote }}
+    {{ end }}
+
+  {{ end }}
+
+{{ end }}

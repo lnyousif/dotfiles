@@ -11,3 +11,7 @@ packages:
         pips:
           - commitizen
           - pre-commit
+        pnpm:
+          - "@google/gemini-cli"
+          - "@github/copilot"
+
