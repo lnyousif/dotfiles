@@ -12,7 +12,6 @@ packages:
         - starship
         - tmux
         - micro
-        - nnn
       casks:
         - google-chrome
         - keepassxc
