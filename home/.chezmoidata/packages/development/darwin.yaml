@@ -10,6 +10,7 @@ packages:
         - podman
         - podman-compose
         - podman-desktop
+        - act
       casks:
         - visual-studio-code
       darwin_cmd:

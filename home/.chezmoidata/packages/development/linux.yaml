@@ -8,6 +8,7 @@ packages:
           - podman-compose
           - podman-desktop
         linux_cmd:
+          -     curl https://raw.githubusercontent.com/nektos/act/master/install.sh | sudo bash
         pips:
           - commitizen
           - pre-commit
