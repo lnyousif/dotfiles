@@ -8,6 +8,7 @@ packages:
         - CoreyButler.NVMforWindows
         - OpenJS.NodeJS.LTS
         - pnpm.pnpm
+        - nektos.act
       pips:
         - "--user -U commitizen"
         - "--user -U pre-commit"
