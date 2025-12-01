@@ -4,7 +4,7 @@
     "workbench.startupEditor": "welcomePage",
     "workbench.tips.enabled": false,
     "workbench.sideBar.location": "left",
-    "workbench.activityBar.location": "top",
+    "workbench.activityBar.location": "default",
     "workbench.iconTheme": "material-icon-theme",
     "workbench.colorTheme": "Default Dark Modern",
 
