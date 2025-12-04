@@ -136,6 +136,8 @@ See [Environment Reference](docs/ENVIRONMENT_REFERENCE.md) for all options.
 - 🐳 [DevContainer Setup](docs/DEVCONTAINER_SETUP.md) - VS Code DevContainers & Codespaces
 - 🔧 [Environment Reference](docs/ENVIRONMENT_REFERENCE.md) - Configuration variables and options
 - 🔍 [Troubleshooting Guide](docs/TROUBLESHOOTING.md) - Common issues and solutions
+- ⭐ [Features Overview](docs/FEATURES.md) - Complete list of all features
+- 🌍 [Cross-Platform Guide](docs/CROSS_PLATFORM.md) - Platform-specific details
 
 ## Common Tasks
 
@@ -227,9 +229,12 @@ Intelligent prompt showing:
 
 While this is a personal dotfiles repository, suggestions and improvements are welcome!
 
-1. Open an issue for discussion
-2. Fork and make changes
-3. Submit a PR with clear description
+See [CONTRIBUTING.md](CONTRIBUTING.md) for detailed guidelines on:
+- Reporting issues
+- Suggesting enhancements
+- Submitting pull requests
+- Code style and testing
+- Platform considerations
 
 ## Resources
 
