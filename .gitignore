@@ -1,0 +1,64 @@
+# Editor and IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Temporary files
+*.tmp
+*.bak
+*.backup
+.*.tmp
+
+# Logs
+*.log
+logs/
+
+# OS-specific
+Thumbs.db
+Desktop.ini
+
+# Build artifacts (if any are added in future)
+dist/
+build/
+*.o
+*.so
+*.dylib
+
+# Documentation build artifacts
+docs/_build/
+docs/.doctrees/
+
+# Testing artifacts
+.pytest_cache/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Personal customization that shouldn't be committed
+# (use for local testing only)
+/tmp/
+/local/
+*.local
+
+# Secrets and sensitive data
+*.key
+*.pem
+*.cert
+*.p12
+*.pfx
+.env
+.env.local
+secrets/
+
+# Chezmoi specific (these are managed)
+# Don't ignore the source files, but ignore runtime data
+.chezmoitempdir/
+
+# Backup files
+*.bak
+*~
+*.orig
