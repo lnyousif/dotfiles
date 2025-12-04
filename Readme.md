@@ -132,6 +132,9 @@ See [Environment Reference](docs/ENVIRONMENT_REFERENCE.md) for all options.
 
 ## Documentation
 
+📚 **[Complete Documentation Index](docs/INDEX.md)** - Find the right guide for your needs
+
+**Quick Links:**
 - 📖 [Quick Start Guide](docs/QUICK_START.md) - Detailed installation and setup
 - 🐳 [DevContainer Setup](docs/DEVCONTAINER_SETUP.md) - VS Code DevContainers & Codespaces
 - 🔧 [Environment Reference](docs/ENVIRONMENT_REFERENCE.md) - Configuration variables and options
