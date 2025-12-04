@@ -224,17 +224,6 @@ Intelligent prompt showing:
 - Command duration
 - Error indicators
 
-## Contributing
-
-While this is a personal dotfiles repository, suggestions and improvements are welcome!
-
-See [CONTRIBUTING.md](CONTRIBUTING.md) for detailed guidelines on:
-- Reporting issues
-- Suggesting enhancements
-- Submitting pull requests
-- Code style and testing
-- Platform considerations
-
 ## Resources
 
 - [Chezmoi Documentation](https://www.chezmoi.io/)
