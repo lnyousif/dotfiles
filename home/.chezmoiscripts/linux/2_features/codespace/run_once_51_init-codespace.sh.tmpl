@@ -82,15 +82,22 @@ fi
 status_msg "Setting up container-specific configurations..."
 
 # Create useful aliases for the container environment
-if [ -f "$HOME/.bash_aliases" ]; then
-  cat << EOF >> "$HOME/.bash_aliases"
+ALIASES_FILE="$HOME/.bash_aliases"
+if [ ! -f "$ALIASES_FILE" ]; then
+  touch "$ALIASES_FILE"
+fi
+
+cat << 'EOF' >> "$ALIASES_FILE"
 
 # CodeSpace specific aliases
-alias proj="cd \$CODESPACE_VSCODE_FOLDER"
+alias proj="cd $CODESPACE_VSCODE_FOLDER"
 alias refresh="source ~/.bashrc"
+alias gs="git status"
+alias gp="git pull"
+alias gcm="git commit -m"
+alias update-dotfiles="chezmoi update"
 EOF
-  success_msg "Added CodeSpace-specific aliases"
-fi
+success_msg "Added CodeSpace-specific aliases"
 
 # Setup project-specific environment if detected
 if [ -n "$CODESPACE_VSCODE_FOLDER" ] && [ -d "$CODESPACE_VSCODE_FOLDER" ]; then
