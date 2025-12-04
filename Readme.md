@@ -92,7 +92,7 @@ Add to your project's `.devcontainer/devcontainer.json`:
 }
 ```
 
-See [example templates](examples/devcontainer/) for complete configurations.
+
 
 ## Features
 
@@ -120,27 +120,25 @@ During setup, choose from:
 - **Features**: encryption, password manager, network node
 - **Platform Detection**: Automatic for Codespaces/DevContainers
 
-Pre-configure with environment variables to skip prompts:
+See the Environment Variables section below for pre-configuration options.
+
+
+
+## Environment Variables
+
+You can pre-configure the installation by setting environment variables:
 
 ```bash
 export CHEZMOI_NAME="Your Name"
 export CHEZMOI_EMAIL="your@email.com"
-export CHEZMOI_SETUP_TYPE="development"
+export CHEZMOI_SETUP_TYPE="development"  # basic, kids, development, work
+export CHEZMOI_USER_TYPE="sudo"          # sudo, normal
+export CHEZMOI_ENCRYPTION=false
+export CHEZMOI_PASS_MANAGER=false
+export CHEZMOI_NETWORK_HUB=false
+export CHEZMOI_NETWORK_NODE=false
+export CHEZMOI_NETWORK_CLOUDFLARE=false
 ```
-
-See [Environment Reference](docs/ENVIRONMENT_REFERENCE.md) for all options.
-
-## Documentation
-
-📚 **[Complete Documentation Index](docs/INDEX.md)** - Find the right guide for your needs
-
-**Quick Links:**
-- 📖 [Quick Start Guide](docs/QUICK_START.md) - Detailed installation and setup
-- 🐳 [DevContainer Setup](docs/DEVCONTAINER_SETUP.md) - VS Code DevContainers & Codespaces
-- 🔧 [Environment Reference](docs/ENVIRONMENT_REFERENCE.md) - Configuration variables and options
-- 🔍 [Troubleshooting Guide](docs/TROUBLESHOOTING.md) - Common issues and solutions
-- ⭐ [Features Overview](docs/FEATURES.md) - Complete list of all features
-- 🌍 [Cross-Platform Guide](docs/CROSS_PLATFORM.md) - Platform-specific details
 
 ## Common Tasks
 
@@ -187,8 +185,6 @@ chezmoi add ~/.config/newfile
 │   ├── dot_zshrc.tmpl             # Zsh configuration
 │   ├── dot_config/                # Application configs
 │   └── dot_myscripts/             # Custom scripts
-├── docs/                           # Documentation
-├── examples/                       # Example configurations
 └── bootstrap.sh                    # Bootstrap script
 ```
 
