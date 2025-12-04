@@ -8,7 +8,7 @@ set -e
 
 echo "======================================================"
 echo "      Dotfiles Installation Script for Linux"
-echo "======================================================"y
+echo "======================================================"
 
 # Function for error handling
 error_exit() {
