@@ -128,7 +128,7 @@
             {{- if env "CHEZMOI_NETWORK_CFLOC" -}}
               {{- $cfloc = env "CHEZMOI_NETWORK_CFLOC" -}}
             {{- else -}}
-              {{- $cfloc = promptChoiceOnce . "features.cfloc" "What cfloc you are choosing " (list "sd" "ag" "rm" "bk") "bk" -}}
+              {{- $cfloc = promptChoiceOnce . "cfloc" "What cfloc you are choosing " (list "sd" "ag" "rm" "bk") "bk" -}}
             {{- end -}}
 
           {{- end -}}
@@ -162,6 +162,7 @@ encryption = "age"
     osid = "{{ $osid }}"                                              # Operating system ID
     setuptype = "{{ $setuptype }}"                                    # Setup Type
     superuser = "{{ $superuser }}"                                    # Superuser
+    cfloc = "{{ $cfloc }}                                             # cfloc
 
     setups.base = {{ true }}                                          # True basically always, the base is setups flag to setup the bare minimum
     setups.development = {{ $development }}                           # Development tools setups flag
