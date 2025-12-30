@@ -7,19 +7,19 @@
 # @auth_key             - Your API Token or Global API Key
 # @zone_identifier      - Can be found in the "Overview" tab of your domain
 # -------------------------------------------------- #
-auth_email=""
-auth_method="token"
-auth_key=""
-zone_identifier=""
+auth_email="{{ (keepassxc "Cloudflare/auth_email").Password }}"                       # The email used to login 'https://dash.cloudflare.com'
+auth_method="{{ (keepassxc "Cloudflare/auth_method").Password }}"                     # Set to "global" for Global API Key or "token" for Scoped API Token
+auth_key="{{ (keepassxc "Cloudflare/auth_key").Password }}"                           # Your API Token or Global API Key
+zone_identifier="{{ (keepassxc "Cloudflare/zone_identifier").Password }}"             # Can be found in the "Overview" tab of your domain
 
 #############  DNS RECORD CONFIGURATION  #############
 # @record_name          - Which record you want to be synced
 # @ttl                  - DNS TTL (seconds), can be set between (30 if enterprise) 60 and 86400 seconds, or 1 for Automatic
 # @proxy                - Set the proxy to true or false
 # -------------------------------------------------- #
-record_name=""
-ttl="3600"
-proxy="false"
+record_name="{{ (keepassxc .cfloc.record).Password }}"                     # Which record you want to be synced
+ttl="{{ (keepassxc "Cloudflare/ttl").Password }}"                                     # DNS TTL (seconds)
+proxy="{{ (keepassxc "Cloudflare/proxy").Password }}"                                 # Set the proxy to true or false
 
 ###############  SCRIPT CONFIGURATION  ###############
 # @static_IPv6_mode     - Useful if you are using EUI-64 IPv6 address with SLAAC IPv6 suffix token. (Privacy Extensions)
@@ -40,10 +40,10 @@ log_header_name="DDNS Updater_v6"
 # @slackuri             - URI for Slack WebHook "https://hooks.slack.com/services/xxxxx"
 # @discorduri           - URI for Discord WebHook "https://discordapp.com/api/webhooks/xxxxx"
 # -------------------------------------------------- #
-sitename=""
-slackchannel=""
-slackuri=""
-discorduri=""
+sitename="{{ (keepassxc .cfloc.site).Password }}"                           # Title of site "Example Site"
+slackchannel="{{ (keepassxc "Cloudflare/slackchannel").Password }}"                   # Slack Channel #example
+slackuri="{{ (keepassxc "Cloudflare/slackuri").Password }}"                           # URI for Slack WebHook "https://hooks.slack.com/services/xxxxx"
+discorduri="{{ (keepassxc "Cloudflare/discorduri").Password }}"                       # URI for Discord WebHook "https://discordapp.com/api/webhooks/xxxxx"
 
 
 

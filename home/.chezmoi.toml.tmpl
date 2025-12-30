@@ -17,9 +17,10 @@
 {{- $work := false -}}              # Whether this is a work machine
 {{- $hub := false -}}               # Whether this is a Hub machine
 {{- $node := false -}}              # Whether this is a Node machine
-{{- $cloudflare := false -}}
-{{ $name := "Laith Yousif" }}
-{{ $email := "Laith@tmobi.link" }}
+{{- $cloudflare := false -}}        # Whether this is a Cloudflare DNS updater
+{{- $cfloc := "" -}}                # Cloudflare DNS location updater
+{{ $name := "Laith Yousif" }}       # User name
+{{ $email := "Laith@tmobi.link" }}  # User email
 
 {{- if env "CHEZMOI_NAME" -}}
   {{- $name = env "CHEZMOI_NAME" -}}
@@ -124,6 +125,12 @@
               {{- $cloudflare = promptBoolOnce . "features.cloudflare" "Should I setup this as a cloudflare dns updater (true/false)" false -}}
             {{- end -}}
 
+            {{- if env "CHEZMOI_NETWORK_CFLOC" -}}
+              {{- $cfloc = env "CHEZMOI_NETWORK_CFLOC" -}}
+            {{- else -}}
+              {{- $cfloc = promptChoiceOnce . "features.cfloc" "What cfloc you are choosing " (list "sd" "ag" "rm" "bk") "bk" -}}
+            {{- end -}}
+
           {{- end -}}
       {{- end -}}
 {{- end -}}
@@ -150,26 +157,29 @@ encryption = "age"
 
 # Define data section with user and machine-specific values
 [data]
-    email = "{{ $email }}"                                # User email
-    name = "{{ $name }}"                                  # User name
-    osid = "{{ $osid }}"                                  # Operating system ID
-    setuptype = "{{ $setuptype }}"                        # Setup Type
-    superuser = "{{ $superuser }}"                        # Superuser
+    email = "{{ $email }}"                                            # User email
+    name = "{{ $name }}"                                              # User name
+    osid = "{{ $osid }}"                                              # Operating system ID
+    setuptype = "{{ $setuptype }}"                                    # Setup Type
+    superuser = "{{ $superuser }}"                                    # Superuser
 
-    setups.base = {{ true }}                              # True basically always, the base is setups flag to setup the bare minimum
-    setups.development = {{ $development }}               # development tools setups flag
-    setups.kids = {{ $kids }}                             # Kids setups flag
+    setups.base = {{ true }}                                          # True basically always, the base is setups flag to setup the bare minimum
+    setups.development = {{ $development }}                           # Development tools setups flag
+    setups.kids = {{ $kids }}                                         # Kids setups flag
 
-    features.ephemeral = {{ $ephemeral }}                 # Ephemeral feature flag
-    features.headless = {{ $headless }}                   # Headless feature flag
-    features.encryption = {{ $encryption }}               # encryption feature flag
-    features.codespace = {{ $codespace }}                 # Codespace feature flag
-    features.passman = {{ $passman }}                     # Password manager feature flag
-    features.work = {{ $work }}                           # Work feature flag
-    features.hub = {{ $hub }}                             # Hub feature flag
-    features.node = {{ $node }}                           # Node feature flag
-    features.cloudflare = {{ $cloudflare }}               # Cloudflare feature flag
+    features.ephemeral = {{ $ephemeral }}                             # Ephemeral feature flag
+    features.headless = {{ $headless }}                               # Headless feature flag
+    features.encryption = {{ $encryption }}                           # encryption feature flag
+    features.codespace = {{ $codespace }}                             # Codespace feature flag
+    features.passman = {{ $passman }}                                 # Password manager feature flag
+    features.work = {{ $work }}                                       # Work feature flag
+    features.hub = {{ $hub }}                                         # Hub feature flag
+    features.node = {{ $node }}                                       # Node feature flag
+    features.cloudflare = {{ $cloudflare }}                           # Cloudflare feature flag
 
+
+    cfloc.record = {{ print "Cloudflare/record_name_" $cfloc | quote }}   # Cloudflare record name
+    cfloc.site = {{ print "Cloudflare/sitename_" $cfloc | quote }}        # Cloudflare site name
 
 # Define editor settings
 [edit]
