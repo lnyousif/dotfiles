@@ -1,17 +1,19 @@
 #!/bin/bash
 ## change to "bin/sh" when necessary
 
-auth_email=""                                       # The email used to login 'https://dash.cloudflare.com'
-auth_method="token"                                 # Set to "global" for Global API Key or "token" for Scoped API Token
-auth_key=""                                         # Your API Token or Global API Key
-zone_identifier=""                                  # Can be found in the "Overview" tab of your domain
-record_name=""                                      # Which record you want to be synced
-ttl="3600"                                          # Set the DNS TTL (seconds)
-proxy="false"                                       # Set the proxy to true or false
-sitename=""                                         # Title of site "Example Site"
-slackchannel=""                                     # Slack Channel #example
-slackuri=""                                         # URI for Slack WebHook "https://hooks.slack.com/services/xxxxx"
-discorduri=""                                       # URI for Discord WebHook "https://discordapp.com/api/webhooks/xxxxx"
+
+
+auth_email="{{ (keepassxc "Cloudflare/auth_email").Password }}"                       # The email used to login 'https://dash.cloudflare.com'
+auth_method="{{ (keepassxc "Cloudflare/auth_method").Password }}"                     # Set to "global" for Global API Key or "token" for Scoped API Token
+auth_key="{{ (keepassxc "Cloudflare/auth_key").Password }}"                           # Your API Token or Global API Key
+zone_identifier="{{ (keepassxc "Cloudflare/zone_identifier").Password }}"             # Can be found in the "Overview" tab of your domain
+sitename="{{ (keepassxc .cfloc.site).Password }}"                                 # Title of site "Example Site"
+record_name="{{ (keepassxc .cfloc.record).Password }}"                                # Which record `you want to be synced
+ttl="{{ (keepassxc "Cloudflare/ttl").Password }}"                                     # Set the DNS TTL (seconds)
+proxy="{{ (keepassxc "Cloudflare/proxy").Password }}"                                 # Set the proxy to true or false
+slackchannel="{{ (keepassxc "Cloudflare/slackchannel").Password }}"                   # Slack Channel #example
+slackuri="{{ (keepassxc "Cloudflare/slackuri").Password }}"                           # URI for Slack WebHook "https://hooks.slack.com/services/xxxxx"
+discorduri="{{ (keepassxc "Cloudflare/discorduri").Password }}"                       # URI for Discord WebHook "https://discordapp.com/api/webhooks/xxxxx"
 
 
 ###########################################
@@ -98,7 +100,7 @@ update=$(curl -s -X PATCH "https://api.cloudflare.com/client/v4/zones/$zone_iden
 ###########################################
 case "$update" in
 *"\"success\":false"*)
-  echo -e "DDNS Updater: $CURRENT_IP $record_name DDNS failed for $record_identifier ($CURRENT_IP). DUMPING RESULTS:\n$update" | logger -s 
+  echo -e "DDNS Updater: $CURRENT_IP $record_name DDNS failed for $record_identifier ($CURRENT_IP). DUMPING RESULTS:\n$update" | logger -s
   if [[ $slackuri != "" ]]; then
     curl -L -X POST $slackuri \
     --data-raw '{
