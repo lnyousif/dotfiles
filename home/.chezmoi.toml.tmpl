@@ -125,10 +125,12 @@
               {{- $cloudflare = promptBoolOnce . "features.cloudflare" "Should I setup this as a cloudflare dns updater (true/false)" false -}}
             {{- end -}}
 
-            {{- if env "CHEZMOI_NETWORK_CFLOC" -}}
-              {{- $cfloc = env "CHEZMOI_NETWORK_CFLOC" -}}
-            {{- else -}}
-              {{- $cfloc = promptChoiceOnce . "cf_loc" "What cfloc you are choosing " (list "sd" "ag" "rm" "bk") "ag" -}}
+            {{- if $cloudflare -}}
+              {{- if env "CHEZMOI_NETWORK_CFLOC" -}}
+                {{- $cfloc = env "CHEZMOI_NETWORK_CFLOC" -}}
+              {{- else -}}
+                {{- $cfloc = promptChoiceOnce . "cf_loc" "What cfloc you are choosing " (list "sd" "ag" "rm" "bk") "ag" -}}
+              {{- end -}}
             {{- end -}}
 
           {{- end -}}
