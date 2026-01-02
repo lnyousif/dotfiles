@@ -164,7 +164,7 @@ encryption = "age"
     osid = "{{ $osid }}"                                              # Operating system ID
     setuptype = "{{ $setuptype }}"                                    # Setup Type
     superuser = "{{ $superuser }}"                                    # Superuser
-    cf_loc = "{{ $cfloc }}"                                            # cfloc
+    cf_loc = "{{ $cfloc }}"                                           # cfloc
 
     setups.base = {{ true }}                                          # True basically always, the base is setups flag to setup the bare minimum
     setups.development = {{ $development }}                           # Development tools setups flag
@@ -193,6 +193,6 @@ encryption = "age"
 # Define KeepassXC settings
 [keepassxc]
     command = "my_chezmoi_keepassxc.sh"
-    database = "{{ .chezmoi.destDir }}/.keepassxc/chezmoi.kdbx"                                 # KeepassXC database path
+    database = "{{ .chezmoi.destDir }}/.keepassxc/chezmoi.kdbx"          # KeepassXC database path
     args = ["-k", "{{ .chezmoi.destDir }}/.keepassxc/keypass.keyx"]      # KeepassXC arguments
     prompt = false

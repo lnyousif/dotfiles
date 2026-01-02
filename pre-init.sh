@@ -10,5 +10,6 @@ export CHEZMOI_PASS_MANAGER=false            # Set to true to enable password ma
 export CHEZMOI_NETWORK_HUB=false             # Set to true if this is a network hub
 export CHEZMOI_NETWORK_NODE=false            # Set to true if this is a node machine
 export CHEZMOI_NETWORK_CLOUDFLARE=false      # Set to true if this is a node machine
+export CHEZMOI_NETWORK_CFLOC=""      # Set to true if this is a node machine
 
 echo "Environment variables for chezmoi have been set."
