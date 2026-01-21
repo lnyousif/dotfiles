@@ -1,18 +1,21 @@
 packages:
   development:
     linux:
-      common:
-        apt:
-          - chromium
-          - podman
-          - podman-compose
-          - podman-desktop
-        linux_cmd:
-          -     curl https://raw.githubusercontent.com/nektos/act/master/install.sh | sudo bash
-        pips:
-          - commitizen
-          - pre-commit
-        pnpm:
-          - "@google/gemini-cli"
-          - "@github/copilot"
-
+      brews:
+        - podman
+        - podman-compose
+        - podman-desktop
+        - act
+      apt:
+        - chromium
+        - podman
+        - podman-compose
+        - podman-desktop
+      linux_cmd:
+        - curl https://raw.githubusercontent.com/nektos/act/master/install.sh | sudo bash
+      pips:
+        - commitizen
+        - pre-commit
+      pnpm:
+        - "@google/gemini-cli"
+        - "@github/copilot"

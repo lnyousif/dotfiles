@@ -1,8 +1,7 @@
 packages:
   kids:
     linux:
-      common:
-        apt:
-        apt_junk:
-        pips:
-        linux_cmd:
+      apt:
+      apt_junk:
+      pips:
+      linux_cmd:

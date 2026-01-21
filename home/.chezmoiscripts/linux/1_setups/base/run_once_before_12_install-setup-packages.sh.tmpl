@@ -14,9 +14,13 @@ export PATH="$HOME/.local/bin/:$PATH"
     # Linux self installing packages
     echo "Installing self installing packages"
 
-    {{ range index $.packages $setup "linux" "common" "linux_cmd" }}
+    {{ range index $.packages $setup "linux" "linux_cmd" }}
       bash -c {{ . | quote }}
     {{ end }}
+
+    {{ range index $.packages $setup "linux" "brews" -}}
+        brew install {{ . | quote }}
+    {{ end -}}
 
     # Native packages
 
@@ -24,11 +28,11 @@ export PATH="$HOME/.local/bin/:$PATH"
         ## Debian
         echo "Installing Debian Packages"
 
-        {{ range index $.packages $setup "linux" "common" "apt" }}
+        {{ range index $.packages $setup "linux" "apt" }}
         {{ $.superuser }} apt install -y {{. | quote }}
         {{ end }}
 
-        {{ range index $.packages $setup "linux" "common" "apt_junk" }}
+        {{ range index $.packages $setup "linux" "apt_junk" }}
         {{ $.superuser }} apt remove -y {{ . | quote }}
         {{ end }}
 
@@ -36,26 +40,26 @@ export PATH="$HOME/.local/bin/:$PATH"
         ## Fedora
         echo "Installing RPM packages"
 
-        {{ $.superuser }} dnf5 install -y {{ range index $.packages $setup "linux" "common" "apt" }} {{.}}{{ end }}
-        {{ range index $.packages $setup "linux" "common" "apt" }}
-        {{ $.superuser }} dnf5 install -y {{ . | quote }}
+        {{ $.superuser }} dnf install -y {{ range index $.packages $setup "linux" "apt" }} {{.}}{{ end }}
+        {{ range index $.packages $setup "linux" "apt" }}
+        {{ $.superuser }} dnf install -y {{ . | quote }}
         {{ end }}
 
-        {{ range index $.packages $setup "linux" "common" "apt_junk" }}
-        {{ $.superuser }} dnf5 remove -y {{ . | quote }}
+        {{ range index $.packages $setup "linux" "apt_junk" }}
+        {{ $.superuser }} dnf remove -y {{ . | quote }}
         {{ end }}
 
 
     {{ else if eq $.osid "linux-alpine" }}
         ## Alpine
-        echo "Installing RPM packages"
+        echo "Installing APK packages"
 
-        {{ $.superuser }} apk add --no-cache {{ range index $.packages $setup "linux" "common" "apt" }} {{.}}{{ end }}
-        {{ range index $.packages $setup "linux" "common" "apt" }}
+        {{ $.superuser }} apk add --no-cache {{ range index $.packages $setup "linux" "apt" }} {{.}}{{ end }}
+        {{ range index $.packages $setup "linux" "apt" }}
         {{ $.superuser }} apk add --no-cache {{ . | quote }}
         {{ end }}
 
-        {{ range index $.packages $setup "linux" "common" "apt_junk" }}
+        {{ range index $.packages $setup "linux" "apt_junk" }}
         {{ $.superuser }} apk del --no-cache {{ . | quote }}
         {{ end }}
 
@@ -64,7 +68,7 @@ export PATH="$HOME/.local/bin/:$PATH"
         ## Arch
         echo "Installing Arch packages"
 
-        {{ $.superuser }} pacman -Syu --needed {{ range index $.packages $setup "linux" "common" "apt" }} {{.}}{{end}}
+        {{ $.superuser }} pacman -Syu --needed {{ range index $.packages $setup "linux" "apt" }} {{.}}{{end}}
 
     {{ end }}
 
@@ -72,7 +76,7 @@ export PATH="$HOME/.local/bin/:$PATH"
     # Python packages
     echo "Installing Python packages with pipx or pip"
 
-    {{ range index $.packages $setup "linux" "common" "pips" }}
+    {{ range index $.packages $setup "linux" "pips" }}
       if command -v pipx &>/dev/null; then
         {{ $.superuser }} pipx install {{ . | quote }}
       else

@@ -1,31 +1,32 @@
 packages:
   base:
     linux:
-      common:
-        apt:
-          - git
-          - age
-          - expect
-          - curl
-          - wget
-          - python3-pip
-          - pipx
-          - micro
-          - tmux
-          - xclip
-          - keepassxc
-        apt_junk:
-          - firefox
-          - libreoffice-data
-          - gnome-boxes
-          - gnome-maps
-          - gnome-terminal
-          - gnome-tour
-          - gnome-text-editor
-          - moby-engine
-          - calendar
-          - calculator
-          - nn
-        pips:
-        linux_cmd:
-          - curl -sS https://starship.rs/install.sh | sh -s -- -y
+      brews:
+        - starship
+      apt:
+        - git
+        - age
+        - expect
+        - curl
+        - wget
+        - python3-pip
+        - pipx
+        - micro
+        - tmux
+        - xclip
+        - keepassxc
+      apt_junk:
+        - firefox
+        - libreoffice-data
+        - gnome-boxes
+        - gnome-maps
+        - gnome-terminal
+        - gnome-tour
+        - gnome-text-editor
+        - moby-engine
+        - calendar
+        - calculator
+        - nn
+      pips:
+      linux_cmd:
+        - curl -sS https://starship.rs/install.sh | sh -s -- -y
