@@ -4,7 +4,7 @@
 
   {{ if $value }}
 
-    {{ range index $.packages $setup "linux" "common" "pnpm" }}
+    {{ range index $.packages $setup "linux" "pnpm" }}
       pnpm install -g {{. | quote }}
     {{ end }}
 

@@ -4,7 +4,7 @@
 
   {{ if $value }}
 
-    {{ range index $.packages $setup "windows" "common" "pnpm" }}
+    {{ range index $.packages $setup "windows" "pnpm" }}
       pnpm install -g {{. | quote }}
     {{ end }}
 
