@@ -11,6 +11,7 @@ packages:
         - podman-compose
         - podman-desktop
         - act
+        - kind
       casks:
         - visual-studio-code
       darwin_cmd:
@@ -21,4 +22,3 @@ packages:
       pnpm:
         - "@google/gemini-cli"
         - "@github/copilot"
-

@@ -4,15 +4,15 @@ packages:
       brews:
         - podman
         - podman-compose
-        - podman-desktop
         - act
+        - kind
+      casks:
+        - visual-studio-code
+        - podman-desktop
       apt:
         - chromium
-        - podman
-        - podman-compose
-        - podman-desktop
       linux_cmd:
-        - curl https://raw.githubusercontent.com/nektos/act/master/install.sh | sudo bash
+        #- curl https://raw.githubusercontent.com/nektos/act/master/install.sh | sudo bash
       pips:
         - commitizen
         - pre-commit
