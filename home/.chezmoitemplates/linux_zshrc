@@ -21,3 +21,5 @@ fi
 if [ -f "$HOME"/.myscripts/bash_aliases ]; then
     \. "$HOME"/.myscripts/bash_aliases
 fi
+
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv bash)"
