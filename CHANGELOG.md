@@ -18,6 +18,7 @@
 
 ### Refactor
 
+- **structure**: restructured the executions steps
 - **ssh**: enhance private key templates with file existence checks
 - **ssh**: update key setup script and rename templates
 - **cloudflare**: adding cloudflare support
