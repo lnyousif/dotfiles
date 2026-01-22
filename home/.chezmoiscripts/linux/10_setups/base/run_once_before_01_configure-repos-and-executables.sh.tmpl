@@ -8,9 +8,6 @@ LINE="-------------------------------------------"
   echo -e "Operating system {{ .osid }}"
   echo -e "\e[1;34m${LINE}\e[0m"
 
-  curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh |  bash
-  curl -fsSL https://get.pnpm.io/install.sh | sh -
-
 {{ if .superuser }}
 
 if command -v apt &>/dev/null; then
