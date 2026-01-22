@@ -1,7 +1,30 @@
 ## Unreleased
 
+### Feat
+
+- enable Podman socket for user in final cleanup script
+- enable Podman socket for user in final setup script
+- remove unnecessary files
+- adding pnpm setup
+- adding podman and node to the default setup
+- adding podman and darwin cmd feature
+- **neovim**: adding neovim and nvchad setup
+- **setups**: define few way to select setups within the enviornments
+- **commitzen**: adding Commitizen
+
+### Fix
+
+- **settings**: change workbench color theme to Abyss
+
 ### Refactor
 
+- **ssh**: enhance private key templates with file existence checks
+- **ssh**: update key setup script and rename templates
+- **cloudflare**: adding cloudflare support
+- **git**: update default settings for git to speed up devcontainer build
+- **encryption**: better approach when the configuration not passed
+- **vscode**: improved structure for the setting.json file for vscode
+- **encryption**: updating linux setup to allow better non intractive instalation
 - **initial-apply**: non interactive init and apply for remote VMs and no gui machines
 - **lazydocker**: adding lazydocker and improved readme
 - **encryption**: better system
@@ -15,11 +38,6 @@
 - **mac**: finalizing cleanup
 - **linux**: better update for linux
 - **encryption**: better encryption automation
-
-## 0.2.1 (2025-05-17)
-
-### Refactor
-
 - **restructure**: better aming and features setup
 - **setups**: making base lighter and powerful more focused on development support
 - **aliases**: added a lot of aliases
@@ -30,17 +48,6 @@
 - **structure**: improve the structure and naming of scripts to ensure better consistant running sequence
 - **codespace**: switching from setup to a feature
 - **codespace**: improved code
-
-## 0.2.0 (2025-05-10)
-
-### Feat
-
-- **neovim**: adding neovim and nvchad setup
-- **setups**: define few way to select setups within the enviornments
-- **commitzen**: adding Commitizen
-
-### Refactor
-
 - **codespace**: enable codespace to be a full setup option that get applied after base
 - **linux**: update packages before installing new things
 - **bug**: fixing simple error
