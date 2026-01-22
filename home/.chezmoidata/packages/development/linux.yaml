@@ -11,11 +11,11 @@ packages:
         - podman-desktop
       apt:
         - chromium
-      linux_cmd:
-        #- curl https://raw.githubusercontent.com/nektos/act/master/install.sh | sudo bash
       pips:
         - commitizen
         - pre-commit
       pnpm:
         - "@google/gemini-cli"
         - "@github/copilot"
+      linux_cmd:
+        #- curl https://raw.githubusercontent.com/nektos/act/master/install.sh | sudo bash
