@@ -14,11 +14,11 @@ packages:
         - kind
       casks:
         - visual-studio-code
-      darwin_cmd:
-        - curl -fsSL https://bun.sh/install | bash -y
       pips:
         - commitizen
         - pre-commit
       pnpm:
         - "@google/gemini-cli"
         - "@github/copilot"
+      darwin_cmd:
+        - curl -fsSL https://bun.sh/install | bash -y
