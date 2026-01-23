@@ -1,136 +1,151 @@
 {
-    // Workbench: General UI, Layout, Theme, Startup
-    "workbench.editor.showTabs": "multiple",
-    "workbench.startupEditor": "welcomePage",
-    "window.restoreWindows": "none",
-    "workbench.tips.enabled": false,
-    "workbench.sideBar.location": "left",
-    "workbench.activityBar.location": "default",
-    "workbench.iconTheme": "material-icon-theme",
-    "workbench.colorTheme": "Tomorrow Night Blue",
+  // Workbench: General UI, Layout, Theme, Startup
+  "workbench.editor.showTabs": "multiple",
+  "workbench.startupEditor": "welcomePage",
+  "window.restoreWindows": "none",
+  "workbench.tips.enabled": false,
+  "workbench.sideBar.location": "left",
+  "workbench.activityBar.location": "default",
+  "workbench.iconTheme": "material-icon-theme",
+  "workbench.colorTheme": "Tomorrow Night Blue",
+  "workbench.statusBar.visible": true,
+  "editor.tokenColorCustomizations": {
+    "comments": "#6A9955",
+    "keywords": "#569CD6",
+    "functions": "#DCDCAA",
+    "variables": "#9CDCFE",
+    "strings": "#CE9178",
+    "numbers": "#B5CEA8"
+  },
+  "workbench.colorCustomizations": {
+    "[*]": {
+      "sideBar.background": "#404040",
+      "terminal.background": "#330000"
+    }
+  },
 
-    // Editor: Appearance & Behavior
-    "editor.wordWrap": "off",
-    "editor.tabSize": 2,
-    "editor.detectIndentation": false,
-    "editor.showFoldingControls": "never",
-    "editor.foldingHighlight": false,
-    "editor.minimap.enabled": false,
-    "editor.overviewRulerBorder": false,
-    "editor.hideCursorInOverviewRuler": true,
-    "editor.colorDecorators": false,
-    "editor.links": false,
-    "editor.cursorSmoothCaretAnimation": "on",
-    "editor.definitionLinkOpensInPeek": true,
-    "editor.codeLens": false,
-    "editor.lineNumbers": "on",
-    "editor.renderWhitespace": "none",
-    "editor.renderControlCharacters": false,
+  // Editor: Appearance & Behavior
+  "editor.wordWrap": "off",
+  "editor.tabSize": 2,
+  "editor.detectIndentation": false,
+  "editor.showFoldingControls": "never",
+  "editor.foldingHighlight": false,
+  "editor.minimap.enabled": false,
+  "editor.overviewRulerBorder": false,
+  "editor.hideCursorInOverviewRuler": true,
+  "editor.colorDecorators": false,
+  "editor.links": false,
+  "editor.cursorSmoothCaretAnimation": "on",
+  "editor.definitionLinkOpensInPeek": true,
+  "editor.codeLens": false,
+  "editor.lineNumbers": "on",
+  "editor.renderWhitespace": "none",
+  "editor.renderControlCharacters": false,
 
-    // Editor: Bracket & Guides
-    "editor.bracketPairColorization.enabled": true,
-    "editor.guides.bracketPairs": true,
-    "editor.guides.indentation": false,
-    "editor.guides.highlightActiveIndentation": false,
-    "editor.matchBrackets": "never",
+  // Editor: Bracket & Guides
+  "editor.bracketPairColorization.enabled": true,
+  "editor.guides.bracketPairs": true,
+  "editor.guides.indentation": false,
+  "editor.guides.highlightActiveIndentation": false,
+  "editor.matchBrackets": "never",
 
-    // Editor: Formatting & Actions
-    "editor.formatOnSave": true,
-    "editor.formatOnPaste": true,
-    "editor.codeActionsOnSave": {
-        "source.organizeImports": "explicit",
-        "source.fixAll": "explicit"
-    },
+  // Editor: Formatting & Actions
+  "editor.formatOnSave": true,
+  "editor.formatOnPaste": true,
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": "explicit",
+    "source.fixAll": "explicit"
+  },
 
-    // Editor: Suggestions & Completion
-    "editor.tabCompletion": "on",
-    "editor.snippetSuggestions": "top",
-    "emmet.triggerExpansionOnTab": true,
+  // Editor: Suggestions & Completion
+  "editor.tabCompletion": "on",
+  "editor.snippetSuggestions": "top",
+  "emmet.triggerExpansionOnTab": true,
 
-    // Editor: Navigation
-    "breadcrumbs.enabled": false,
-    "editor.stickyScroll.enabled": false,
+  // Editor: Navigation
+  "breadcrumbs.enabled": false,
+  "editor.stickyScroll.enabled": false,
 
-    // Explorer & Tree
-    "explorer.compactFolders": false,
-    "explorer.confirmDragAndDrop": false,
-    "explorer.autoReveal": true,
-    "material-icon-theme.hidesExplorerArrows": false,
-    "workbench.tree.enableStickyScroll": false,
-    "workbench.tree.renderIndentGuides": "none",
-    "workbench.tree.indent": 8,
+  // Explorer & Tree
+  "explorer.compactFolders": false,
+  "explorer.confirmDragAndDrop": false,
+  "explorer.autoReveal": true,
+  "material-icon-theme.hidesExplorerArrows": false,
+  "workbench.tree.enableStickyScroll": false,
+  "workbench.tree.renderIndentGuides": "none",
+  "workbench.tree.indent": 8,
 
-    // Files
-    "files.trimTrailingWhitespace": true,
-    "files.insertFinalNewline": true,
-    "files.autoSave": "off",
-    "files.exclude": {
-        "**/.git": true,
-        "**/.DS_Store": true,
-        "**/node_modules": true,
-        "**/dist": false
-    },
-    "files.watcherExclude": {
-        "**/.git/objects/**": true,
-        "**/node_modules/**": true,
-        "**/dist/**": false
-    },
+  // Files
+  "files.trimTrailingWhitespace": true,
+  "files.insertFinalNewline": true,
+  "files.autoSave": "off",
+  "files.exclude": {
+    "**/.git": true,
+    "**/.DS_Store": true,
+    "**/node_modules": true,
+    "**/dist": false
+  },
+  "files.watcherExclude": {
+    "**/.git/objects/**": true,
+    "**/node_modules/**": true,
+    "**/dist/**": false
+  },
 
-    // Terminal
-    "terminal.integrated.fontFamily": "monospace",
-    "terminal.integrated.cursorBlinking": true,
-    "terminal.integrated.copyOnSelection": true,
-    "terminal.integrated.enableMultiLinePasteWarning": "never",
-    "terminal.integrated.persistentSessionScrollback": 5000,
-    "terminal.integrated.suggest.enabled": false,
+  // Terminal
+  "terminal.integrated.fontFamily": "monospace",
+  "terminal.integrated.cursorBlinking": true,
+  "terminal.integrated.copyOnSelection": true,
+  "terminal.integrated.enableMultiLinePasteWarning": "never",
+  "terminal.integrated.persistentSessionScrollback": 5000,
+  "terminal.integrated.suggest.enabled": false,
 
-    // Search
-    "search.exclude": {
-        "**/node_modules": true,
-        "**/bower_components": true,
-        "**/dist": false,
-        "**/coverage": true
-    },
-    "search.smartCase": true,
+  // Search
+  "search.exclude": {
+    "**/node_modules": true,
+    "**/bower_components": true,
+    "**/dist": false,
+    "**/coverage": true
+  },
+  "search.smartCase": true,
 
-    // Git
-    "git.autofetch": false,
-    "git.confirmSync": false,
-    "git.enableSmartCommit": true,
-    "git.blame.editorDecoration.enabled": true,
-    "git.replaceTagsWhenPull": true,
+  // Git
+  "git.autofetch": false,
+  "git.confirmSync": false,
+  "git.enableSmartCommit": true,
+  "git.blame.editorDecoration.enabled": true,
+  "git.replaceTagsWhenPull": true,
 
-    // Debugging
-    "debug.javascript.autoAttachFilter": "smart",
+  // Debugging
+  "debug.javascript.autoAttachFilter": "smart",
 
-    // Extensions
-    "extensions.ignoreRecommendations": true,
-    // Extensions: Dotfiles
-    "dotfiles.repository": "https://github.com/lnyousif/dotfiles.git",
-    "dotfiles.targetPath": "~/.dotfiles",
-    "dotfiles.installCommand": "bootstrap.sh",
-    // Extensions: GitHub Copilot
-    "github.copilot.chat.codesearch.enabled": true,
-    "github.copilot.chat.newWorkspaceCreation.enabled": true,
-    "github.copilot.chat.languageContext.fix.typescript.enabled": true,
-    "github.copilot.chat.languageContext.inline.typescript.enabled": true,
-    "github.copilot.chat.languageContext.typescript.enabled": true,
-    "github.copilot.chat.agent.thinkingTool": true,
-    "github.copilot.nextEditSuggestions.enabled": true,
-    "chat.agent.enabled": true,
+  // Extensions
+  "extensions.ignoreRecommendations": true,
+  // Extensions: Dotfiles
+  "dotfiles.repository": "https://github.com/lnyousif/dotfiles.git",
+  "dotfiles.targetPath": "~/.dotfiles",
+  "dotfiles.installCommand": "bootstrap.sh",
+  // Extensions: GitHub Copilot
+  "github.copilot.chat.codesearch.enabled": true,
+  "github.copilot.chat.newWorkspaceCreation.enabled": true,
+  "github.copilot.chat.languageContext.fix.typescript.enabled": true,
+  "github.copilot.chat.languageContext.inline.typescript.enabled": true,
+  "github.copilot.chat.languageContext.typescript.enabled": true,
+  "github.copilot.chat.agent.thinkingTool": true,
+  "github.copilot.nextEditSuggestions.enabled": true,
+  "chat.agent.enabled": true,
 
-    // Window
-    "window.autoDetectHighContrast": false,
+  // Window
+  "window.autoDetectHighContrast": false,
 
-    // Zen Mode
-    "zenMode.fullScreen": false,
+  // Zen Mode
+  "zenMode.fullScreen": false,
 
-    // MISC
-    "geminicodeassist.project": "inspired-graph-xf3h4",
-    "containers.containerClient": "com.microsoft.visualstudio.containers.podman",
-    "containers.orchestratorClient": "com.microsoft.visualstudio.orchestrators.podmancompose",
-    "dev.containers.dockerPath": "podman",
-    "dev.containers.dockerComposePath": "podman-compose",
-    "dev.containers.dockerSocketPath": "/run/user/$(id -u)/podman/podman.socket",
-    "workbench.editor.enablePreview": false
+  // MISC
+  "geminicodeassist.project": "inspired-graph-xf3h4",
+  "containers.containerClient": "com.microsoft.visualstudio.containers.podman",
+  "containers.orchestratorClient": "com.microsoft.visualstudio.orchestrators.podmancompose",
+  "dev.containers.dockerPath": "podman",
+  "dev.containers.dockerComposePath": "podman-compose",
+  "dev.containers.dockerSocketPath": "/run/user/$(id -u)/podman/podman.socket",
+  "workbench.editor.enablePreview": false
 }
