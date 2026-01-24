@@ -4,11 +4,11 @@ packages:
       winget:
         - Microsoft.VisualStudioCode
         - RedHat.Podman
-        - RedHat.Podman-Desktop
         - CoreyButler.NVMforWindows
         - OpenJS.NodeJS.LTS
         - pnpm.pnpm
         - nektos.act
+        - Containers.PodmanTUI
       pips:
         - "--user -U commitizen"
         - "--user -U pre-commit"

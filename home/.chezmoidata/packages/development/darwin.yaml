@@ -11,9 +11,9 @@ packages:
         - podman-compose
         - act
         - kind
+        - podman-tui
       casks:
         - visual-studio-code
-        - podman-desktop
         - freelens
       apts:
       pips:
