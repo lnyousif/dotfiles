@@ -8,9 +8,9 @@ packages:
         - kind
       casks:
         - visual-studio-code
-        #- freelens
       apt:
         - chromium
+        - k9s
       pips:
         - commitizen
         - pre-commit

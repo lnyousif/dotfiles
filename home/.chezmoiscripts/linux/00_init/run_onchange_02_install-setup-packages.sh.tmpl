@@ -5,11 +5,7 @@ export PATH="$HOME/.local/bin/:$PATH"
 {{ range $setup, $value := .setups }}
 
   {{ if $value }}
-
-
     echo "Install Packages for: {{ $setup }}"
-    echo "installing from data packages"
-
     # Linux self installing packages
     echo "Installing self installing packages"
 
