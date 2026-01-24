@@ -10,6 +10,7 @@ packages:
         - visual-studio-code
       apt:
         - chromium
+        - podman-tui
         - k9s
       pips:
         - commitizen
