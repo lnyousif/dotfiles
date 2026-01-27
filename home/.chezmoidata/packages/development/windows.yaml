@@ -9,6 +9,7 @@ packages:
         - pnpm.pnpm
         - nektos.act
         - Containers.PodmanTUI
+        - k0sctl.k0sctl
       pips:
         - "--user -U commitizen"
         - "--user -U pre-commit"
