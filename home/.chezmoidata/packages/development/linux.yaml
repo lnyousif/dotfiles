@@ -5,13 +5,12 @@ packages:
         - podman
         - podman-compose
         - act
-        - kind
       casks:
         - visual-studio-code
       apt:
         - chromium
+        - kubernetes-client
         - podman-tui
-        - k9s
       pips:
         - commitizen
         - pre-commit
@@ -19,4 +18,5 @@ packages:
         - "@google/gemini-cli"
         - "@github/copilot"
       linux_cmd:
+        - curl --proto '=https' --tlsv1.2 -sSf https://get.k0s.sh | sudo sh
         #- curl https://raw.githubusercontent.com/nektos/act/master/install.sh | sudo bash
