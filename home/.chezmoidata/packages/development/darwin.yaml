@@ -10,7 +10,6 @@ packages:
         - podman
         - podman-compose
         - act
-        - kind
         - podman-tui
       casks:
         - visual-studio-code
@@ -24,3 +23,4 @@ packages:
         - "@github/copilot"
       darwin_cmd:
         - curl -fsSL https://bun.sh/install | bash -y
+        - curl --proto '=https' --tlsv1.2 -sSf https://get.k0s.sh | sudo sh
