@@ -19,8 +19,8 @@
   },
   "workbench.colorCustomizations": {
     "[*]": {
-      "sideBar.background": "#404040",
-      "terminal.background": "#330000"
+      "sideBar.background": "#171f47",
+      "terminal.background": "#1d2c45",
     }
   },
 
