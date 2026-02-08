@@ -11,6 +11,7 @@ packages:
         - chromium
         - kubernetes-client
         - podman-tui
+        - helm
       pips:
         - commitizen
         - pre-commit
@@ -18,5 +19,4 @@ packages:
         - "@google/gemini-cli"
         - "@github/copilot"
       linux_cmd:
-        - curl --proto '=https' --tlsv1.2 -sSf https://get.k0s.sh | sudo sh
-        #- curl https://raw.githubusercontent.com/nektos/act/master/install.sh | sudo bash
+        - "curl --proto '=https' --tlsv1.2 -sSf https://get.k0s.sh | sudo sh"
