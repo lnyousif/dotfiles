@@ -12,6 +12,7 @@ packages:
         - act
         - podman-tui
         - k0sproject/tap/k0sctl
+        - Helm.Helm
       casks:
         - visual-studio-code
         - freelens
