@@ -9,7 +9,7 @@ brew update
   {{ if $value }}
 
     {{ range index $.packages $setup "darwin" "darwin_cmd" }}
-        bash -c {{ tpl . $ | quote }}
+        bash -c {{ . $ | quote }}
     {{ end }}
 
 
