@@ -10,7 +10,7 @@ packages:
         - nektos.act
         - Containers.PodmanTUI
         - k0sctl.k0sctl
-        - Helm.Helm
+        - Google.ContainerTools.Skaffold
       pips:
         - "--user -U commitizen"
         - "--user -U pre-commit"
