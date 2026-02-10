@@ -105,6 +105,3 @@ launchctl unload -w /System/Library/LaunchAgents/com.apple.rcd.plist 2> /dev/nul
 
 
 
-{{ range index $.packages $setup "darwin" "darwin_cmd" }}
-  bash -c {{ . | quote }}
-{{ end }}

@@ -20,3 +20,4 @@ packages:
         - "@github/copilot"
       linux_cmd:
         - "curl --proto '=https' --tlsv1.2 -sSf https://get.k0s.sh | sudo sh"
+        - "curl -Lo skaffold https://storage.googleapis.com/skaffold/releases/latest/skaffold-linux-{$arch} && sudo install skaffold /usr/local/bin/"

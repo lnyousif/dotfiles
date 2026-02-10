@@ -10,7 +10,7 @@ export PATH="$HOME/.local/bin/:$PATH"
     echo "Installing self installing packages"
 
     {{ range index $.packages $setup "linux" "linux_cmd" }}
-      bash -c {{ . | quote }}
+      bash -c {{ tpl . $ | quote }}
     {{ end }}
 
     # Native packages
