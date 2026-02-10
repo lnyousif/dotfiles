@@ -2,9 +2,16 @@
 
 brew upgrade
 brew update
+
+
 {{ range $setup, $value := .setups }}
 
   {{ if $value }}
+
+    {{ range index $.packages $setup "darwin" "darwin_cmd" }}
+        bash -c {{ tpl . $ | quote }}
+    {{ end }}
+
 
     {{ range index $.packages $setup "darwin" "junk" -}}
         dockutil --no-restart --remove {{ . | quote }} || true
@@ -18,10 +25,16 @@ brew update
         brew install --cask {{ . | quote }}
     {{ end -}}
 
+    {{ range index $.packages $setup "darwin" "pnpm" }}
+        pnpm install -g {{. | quote }}
+    {{ end }}
+
     {{ $.superuser }} pipx ensurepath --global
     {{ range index $.packages $setup "darwin" "pips" -}}
         {{ $.superuser }} pipx install {{ . | quote }} --global
     {{ end }}
+
+
 
 
   {{ end }}
