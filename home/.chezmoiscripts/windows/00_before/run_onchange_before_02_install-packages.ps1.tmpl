@@ -2,6 +2,8 @@
 
 Write-Host -ForegroundColor Cyan "Starting Windows machine setup..."
 
+$ErrorActionPreference = "Continue"  # Don't stop on first error
+$FailedPackages = @()
 
 {{ range $setup, $value := .setups }}
 
@@ -9,7 +11,19 @@ Write-Host -ForegroundColor Cyan "Starting Windows machine setup..."
 
         # Winget Packages
         {{- range index $.packages $setup "windows" "winget" -}}
-            winget install -e --disable-interactivity --silent --accept-source-agreements --accept-package-agreements --id {{ . | quote }}
+            try {
+                Write-Host -ForegroundColor Yellow "Installing {{ . }}..."
+                winget install -e --disable-interactivity --silent --accept-source-agreements --accept-package-agreements --id {{ . | quote }}
+                if ($LASTEXITCODE -eq 0) {
+                    Write-Host -ForegroundColor Green "✓ {{ . }} installed successfully"
+                } else {
+                    Write-Host -ForegroundColor Red "✗ {{ . }} installation failed with exit code $LASTEXITCODE"
+                    $FailedPackages += {{ . | quote }}
+                }
+            } catch {
+                Write-Host -ForegroundColor Red "✗ Failed to install {{ . }}: $_"
+                $FailedPackages += {{ . | quote }}
+            }
         {{ end -}}
 
         {{- range index $.packages $setup "windows" "pips" -}}
@@ -27,3 +41,11 @@ Write-Host -ForegroundColor Cyan "Starting Windows machine setup..."
 
 
 Write-Host -ForegroundColor Magenta "Windows machine setup completed."
+
+if ($FailedPackages.Count -gt 0) {
+    Write-Host -ForegroundColor Red "`n⚠️  Some packages failed to install:"
+    $FailedPackages | ForEach-Object { Write-Host -ForegroundColor Red "  - $_" }
+    exit 1
+} else {
+    Write-Host -ForegroundColor Green "`n✅ All packages installed successfully!"
+}

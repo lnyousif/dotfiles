@@ -1,20 +1,19 @@
 # Linux .bashrc template contents
 # .bashrc
-export PATH=$PATH:/usr/bin/:/usr/local/bin
 
 # Source global definitions
 if [ -f /etc/bashrc ]; then
     . /etc/bashrc
 fi
 
-# User specific environment
-if ! [[ "$PATH" =~ "$HOME/.local/bin:$HOME/bin:" ]]; then
-    PATH="$HOME/.local/bin:$HOME/bin:$PATH"
+# Consolidated PATH management - add all custom paths first
+PATH="$HOME/.local/bin:$HOME/bin:$HOME/.myscripts/bin:/usr/local/bin:/usr/bin:$PATH"
+
+# Remove duplicate PATH entries
+if command -v awk &> /dev/null; then
+    PATH=$(echo "$PATH" | awk -v RS=':' '!a[$1]++ { if (NR > 1) printf RS; printf $1 }')
 fi
-# Add custom commands directory to PATH
-if [ -d "$HOME/.myscripts/bin" ] && ! [[ "$PATH" =~ "$HOME/.myscripts/bin" ]]; then
-    PATH="$HOME/.myscripts/bin:$PATH"
-fi
+
 export PATH
 export EDITOR=micro
 eval "$(starship init bash)"
