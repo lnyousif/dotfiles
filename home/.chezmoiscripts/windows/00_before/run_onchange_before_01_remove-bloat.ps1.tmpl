@@ -5,32 +5,36 @@
 #
 # FIXME automate running this script as Administrator
 
+# Remove WSB
+New-Item "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Windows Search" -Force
+New-ItemProperty "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Windows Search" -Name "EnableDynamicContentInWSB" -PropertyType DWORD -Value 0
+Add-Content -Path $PROFILE -Value 'Invoke-Expression (&starship init powershell)'
+
 
 # https://learn.microsoft.com/en-us/answers/questions/1421927/uninstall-unpin-spotify-whatsapp-etc-using-script
 
 "Removing apps for this user only."
 
-
 $Junk = {{ .packages.base.windows.junk | join "|" }}
 
 
-$packages = Get-AppxPackage | Where-Object {  $_.Name -match $Junk  } | Where-Object -Property NonRemovable -eq $false 
+$packages = Get-AppxPackage | Where-Object {  $_.Name -match $Junk  } | Where-Object -Property NonRemovable -eq $false
 foreach ($appx in $packages) {
     "Removing {0}" -f $appx.name
-    Remove-AppxPackage $appx   
+    Remove-AppxPackage $appx
 }
 ""
 "Removing apps for all users."
-$packages = Get-AppxPackage -AllUsers | Where-Object {  $_.Name -match $Junk  } | Where-Object -Property NonRemovable -eq $false 
+$packages = Get-AppxPackage -AllUsers | Where-Object {  $_.Name -match $Junk  } | Where-Object -Property NonRemovable -eq $false
 foreach ($appx in $packages) {
     "Removing {0}" -f $appx.name
-    Remove-AppxPackage $appx -AllUsers 
+    Remove-AppxPackage $appx -AllUsers
 }
 ""
 "Removing provisioned apps."
 $packages = Get-AppxProvisionedPackage -Online | Where-Object {  $_.DisplayName -match $Junk  }
 foreach ($appx in $packages) {
     "Removing {0}" -f $appx.displayname
-    Remove-AppxProvisionedPackage -online -allusers -PackageName $appx.PackageName 
+    Remove-AppxProvisionedPackage -online -allusers -PackageName $appx.PackageName
 }
 

@@ -1,3 +1,8 @@
+# PowerShell script to initialize setup for a Windows machine
+
+Write-Host -ForegroundColor Cyan "Starting Windows machine setup..."
+
+
 {{ range $setup, $value := .setups }}
 
   {{ if $value }}
@@ -11,6 +16,14 @@
             pip install {{ . | quote }}
         {{ end -}}
 
+        {{ range index $.packages $setup "windows" "pnpm" }}
+            pnpm install -g {{. | quote }}
+        {{ end }}
+
   {{ end }}
 
 {{ end }}
+
+
+
+Write-Host -ForegroundColor Magenta "Windows machine setup completed."

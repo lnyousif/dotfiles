@@ -21,9 +21,7 @@ win-install.ps1
 {{ if eq .chezmoi.os "linux" }}
 .chezmoiscripts/windows/**
 .chezmoiscripts/darwin/**
-{{ end }}
-
-{{ if ne .chezmoi.os "linux" }}
+{{ else }}
 .config/Code/**
 {{ end }}
 
@@ -31,18 +29,14 @@ win-install.ps1
 .chezmoiscripts/linux/**
 .chezmoiscripts/darwin/**
 .myscripts/**
-{{ end }}
-
-{{ if ne .chezmoi.os "windows" }}
+{{ else }}
 AppData/**
 {{ end }}
 
 {{ if eq .chezmoi.os "darwin" }}
 .chezmoiscripts/linux/**
 .chezmoiscripts/windows/**
-{{ end }}
-
-{{ if ne .chezmoi.os "darwin" }}
+{{ else }}
 Library/**
 {{ end }}
 
