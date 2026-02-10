@@ -20,7 +20,7 @@
   "workbench.colorCustomizations": {
     "[*]": {
       "sideBar.background": "#171f47",
-      "terminal.background": "#1d2c45",
+      "terminal.background": "#1d2c45"
     }
   },
 
@@ -147,7 +147,7 @@
   "dev.containers.dockerComposePath": "podman-compose",
   "dev.containers.dockerSocketPath": "/run/user/$(id -u)/podman/podman.socket",
   "workbench.editor.enablePreview": false,
-  
+
   // CoPilot Setup
   "chat.agent.enabled": true,
   "chat.viewSessions.orientation": "stacked",
@@ -157,11 +157,10 @@
     "claude-desktop": true,
     "windsurf": true,
     "cursor-global": true,
-    "cursor-workspace": true,
+    "cursor-workspace": true
   },
   "chat.mcp.gallery.enabled": true,
   "chat.tools.terminal.autoApprove": {
-    
     "cd": true,
     "echo": true,
     "ls": true,
@@ -282,6 +281,6 @@
     "xargs": false,
     "eval": false,
     "Invoke-Expression": false,
-    "iex": false,
-  },
+    "iex": false
+  }
 }
