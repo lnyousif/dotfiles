@@ -9,6 +9,7 @@ packages:
         - visual-studio-code
       apt:
         - chromium
+        - kubectl
         - kubernetes-client
         - podman-tui
         - helm
@@ -20,4 +21,4 @@ packages:
         - "@github/copilot"
       linux_cmd:
         - "curl --proto '=https' --tlsv1.2 -sSf https://get.k0s.sh | sudo sh"
-        - "curl -Lo skaffold https://storage.googleapis.com/skaffold/releases/latest/skaffold-linux-{{ .chezmoi.arch }} && sudo install skaffold /usr/local/bin/"
+        - "curl -Lo skaffold https://storage.googleapis.com/skaffold/releases/latest/skaffold-linux-{arch} && sudo install skaffold /usr/local/bin/"
