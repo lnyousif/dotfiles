@@ -25,4 +25,4 @@ packages:
         - "@github/copilot"
       darwin_cmd:
         - "curl -fsSL https://bun.sh/install | bash -y"
-        - "curl -Lo skaffold https://storage.googleapis.com/skaffold/releases/latest/skaffold-darwin-{{ .chezmoi.arch }} && sudo install skaffold /usr/local/bin/"
+        - "curl -Lo skaffold https://storage.googleapis.com/skaffold/releases/latest/skaffold-darwin-{arch} && sudo install skaffold /usr/local/bin/"

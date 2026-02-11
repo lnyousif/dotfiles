@@ -10,7 +10,7 @@ export PATH="$HOME/.local/bin/:$PATH"
     echo "Installing self installing packages"
 
     {{ range index $.packages $setup "linux" "linux_cmd" }}
-      bash -c {{ . $ | quote }}
+      bash -c {{ . | replace "{arch}" $.chezmoi.arch | quote }}
     {{ end }}
 
     # Native packages
@@ -29,6 +29,7 @@ export PATH="$HOME/.local/bin/:$PATH"
     {{ else if eq $.osid "linux-fedora" }}
         ## Fedora
         echo "Installing RPM packages"
+
 
         {{ $.superuser }} dnf install -y {{ range index $.packages $setup "linux" "apt" }} {{.}}{{ end }}
         {{ range index $.packages $setup "linux" "apt" }}

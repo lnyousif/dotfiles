@@ -9,7 +9,7 @@ brew update
   {{ if $value }}
 
     {{ range index $.packages $setup "darwin" "darwin_cmd" }}
-        bash -c {{ . $ | quote }}
+        bash -c {{ . | replace "{arch}" $.chezmoi.arch | quote }}
     {{ end }}
 
 
