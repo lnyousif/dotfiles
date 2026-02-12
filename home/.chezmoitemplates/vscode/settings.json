@@ -7,23 +7,9 @@
   "workbench.sideBar.location": "left",
   "workbench.activityBar.location": "default",
   "workbench.iconTheme": "material-icon-theme",
-  "workbench.colorTheme": "Tomorrow Night Blue",
+  "workbench.colorTheme": "Default Dark+",
   "workbench.statusBar.visible": true,
-  "editor.tokenColorCustomizations": {
-    "comments": "#6A9955",
-    "keywords": "#569CD6",
-    "functions": "#DCDCAA",
-    "variables": "#9CDCFE",
-    "strings": "#CE9178",
-    "numbers": "#B5CEA8"
-  },
-  "workbench.colorCustomizations": {
-    "[*]": {
-      "sideBar.background": "#171f47",
-      "terminal.background": "#1d2c45"
-    }
-  },
-
+ 
   // Editor: Appearance & Behavior
   "editor.wordWrap": "off",
   "editor.tabSize": 2,
