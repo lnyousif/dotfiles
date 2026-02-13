@@ -1,3 +1,5 @@
+PATH="~/.local/bin:/root/.local/bin:${PATH}"
+
 eval "$(starship init zsh)"
 export EDITOR=micro
 

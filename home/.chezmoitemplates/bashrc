@@ -7,7 +7,7 @@ if [ -f /etc/bashrc ]; then
 fi
 
 # Consolidated PATH management - add all custom paths first
-PATH="$HOME/.local/bin:$HOME/bin:$HOME/.myscripts/bin:/usr/local/bin:/usr/bin:$PATH"
+PATH="$HOME/.local/bin:$HOME/bin:$HOME/.myscripts/bin:/root/.local/bin:/usr/local/bin:/usr/bin:$PATH"
 
 # Remove duplicate PATH entries
 if command -v awk &> /dev/null; then

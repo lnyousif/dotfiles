@@ -1,4 +1,4 @@
-PATH="~/.local/bin:${PATH}"
+PATH="~/.local/bin:/root/.local/bin:${PATH}"
 export PATH
 
 # Add custom commands directory to PATH
