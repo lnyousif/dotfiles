@@ -75,9 +75,9 @@ export PATH="$HOME/.local/bin/:$PATH"
 
     {{ range index $.packages $setup "linux" "pips" }}
       if command -v pipx &>/dev/null; then
-        {{ $.superuser }} pipx reinstall {{ . | quote }}
+        {{ $.superuser }} pipx install {{ . | quote }}
       else
-        {{ $.superuser }} pip reinstall {{ . | quote }}
+        {{ $.superuser }} pip install {{ . | quote }}
       fi
     {{ end }}
 
