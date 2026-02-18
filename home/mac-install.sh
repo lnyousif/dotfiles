@@ -84,7 +84,7 @@ switch_git_remote() {
 
 # Main installation process
 main() {
-    echo "🤚  This script will setup .dotfiles for you."
+    echo "This script will setup .dotfiles for you."
     read -n 1 -r -s -p $'    Press any key to continue or Ctrl+C to abort...\n\n'
 
     install_dependencies
@@ -114,7 +114,7 @@ main() {
     fi
 
     echo "======================================================"
-    echo "✅ Dotfiles setup complete!"
+    echo "Dotfiles setup complete!"
     echo "   Backup of previous configuration saved to: $BACKUP_DIR"
     echo "======================================================"
 

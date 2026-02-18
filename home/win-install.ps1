@@ -103,7 +103,7 @@ function Switch-GitRemote {
 
 # Main installation process
 function Install-Dotfiles {
-    Write-Host "🤚  This script will setup .dotfiles for you."
+    Write-Host "This script will setup .dotfiles for you."
     Write-Host "    Press any key to continue or Ctrl+C to abort..."
     $null = $Host.UI.RawUI.ReadKey("NoEcho,IncludeKeyDown")
     Write-Host ""
@@ -156,7 +156,7 @@ function Install-Dotfiles {
     }
 
     Write-Host "======================================================"
-    Write-Host "✅ Dotfiles setup complete!" -ForegroundColor Green
+    Write-Host "Dotfiles setup complete!" -ForegroundColor Green
     Write-Host "   Backup of previous configuration saved to: $backupDir"
     Write-Host "======================================================"
 

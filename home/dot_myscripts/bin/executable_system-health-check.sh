@@ -17,9 +17,9 @@ TOOLS=("git" "chezmoi" "starship" "micro" "tmux")
 for tool in "${TOOLS[@]}"; do
     if command -v "$tool" &> /dev/null; then
         version=$(command "$tool" --version 2>&1 | head -n1 || echo "")
-        echo -e "${GREEN}✓${NC} $tool ${YELLOW}($version)${NC}"
+        echo -e "${GREEN}OK${NC} $tool ${YELLOW}($version)${NC}"
     else
-        echo -e "${RED}✗${NC} $tool (missing)"
+        echo -e "${RED}MISSING${NC} $tool (missing)"
     fi
 done
 
@@ -28,9 +28,9 @@ echo -e "\n${BLUE}Checking optional CLI tools:${NC}"
 OPTIONAL_TOOLS=("fzf" "ripgrep" "fd" "bat" "exa" "zoxide" "delta" "btop" "duf" "dust")
 for tool in "${OPTIONAL_TOOLS[@]}"; do
     if command -v "$tool" &> /dev/null; then
-        echo -e "${GREEN}✓${NC} $tool"
+        echo -e "${GREEN}OK${NC} $tool"
     else
-        echo -e "${YELLOW}○${NC} $tool (optional, not installed)"
+        echo -e "${YELLOW}OPTIONAL${NC} $tool (optional, not installed)"
     fi
 done
 
@@ -39,9 +39,9 @@ echo -e "\n${BLUE}Checking shell configuration:${NC}"
 CONFIGS=("$HOME/.bashrc" "$HOME/.zshrc" "$HOME/.bash_aliases" "$HOME/.myscripts/bash_functions")
 for config in "${CONFIGS[@]}"; do
     if [ -f "$config" ]; then
-        echo -e "${GREEN}✓${NC} $(basename $config)"
+        echo -e "${GREEN}OK${NC} $(basename $config)"
     else
-        echo -e "${YELLOW}○${NC} $(basename $config) (not found)"
+        echo -e "${YELLOW}OPTIONAL${NC} $(basename $config) (not found)"
     fi
 done
 
@@ -64,9 +64,9 @@ echo "$PATH" | tr ':' '\n' | head -10 | nl -w2 -s'. '
 # Check for duplicate PATH entries
 duplicate_count=$(echo "$PATH" | tr ':' '\n' | sort | uniq -d | wc -l)
 if [ "$duplicate_count" -gt 0 ]; then
-    echo -e "\n${YELLOW}⚠ Warning: Found $duplicate_count duplicate PATH entries${NC}"
+    echo -e "\n${YELLOW}WARNING: Found $duplicate_count duplicate PATH entries${NC}"
 else
-    echo -e "\n${GREEN}✓${NC} No duplicate PATH entries"
+    echo -e "\n${GREEN}No duplicate PATH entries${NC}"
 fi
 
 # System info

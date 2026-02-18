@@ -15,13 +15,13 @@ $FailedPackages = @()
                 Write-Host -ForegroundColor Yellow "Installing {{ . }}..."
                 winget install -e --disable-interactivity --silent --accept-source-agreements --accept-package-agreements --id {{ . | quote }}
                 if ($LASTEXITCODE -eq 0) {
-                    Write-Host -ForegroundColor Green "✓ {{ . }} installed successfully"
+                    Write-Host -ForegroundColor Green " {{ . }} installed successfully"
                 } else {
-                    Write-Host -ForegroundColor Red "✗ {{ . }} installation failed with exit code $LASTEXITCODE"
+                    Write-Host -ForegroundColor Red " {{ . }} installation failed with exit code $LASTEXITCODE"
                     $FailedPackages += {{ . | quote }}
                 }
             } catch {
-                Write-Host -ForegroundColor Red "✗ Failed to install {{ . }}: $_"
+                Write-Host -ForegroundColor Red " Failed to install {{ . }}: $_"
                 $FailedPackages += {{ . | quote }}
             }
         {{ end -}}
@@ -43,9 +43,9 @@ $FailedPackages = @()
 Write-Host -ForegroundColor Magenta "Windows machine setup completed."
 
 if ($FailedPackages.Count -gt 0) {
-    Write-Host -ForegroundColor Red "`n⚠️  Some packages failed to install:"
+    Write-Host -ForegroundColor Red "`nWARNING: Some packages failed to install:"
     $FailedPackages | ForEach-Object { Write-Host -ForegroundColor Red "  - $_" }
     exit 1
 } else {
-    Write-Host -ForegroundColor Green "`n✅ All packages installed successfully!"
+    Write-Host -ForegroundColor Green "`nAll packages installed successfully!"
 }

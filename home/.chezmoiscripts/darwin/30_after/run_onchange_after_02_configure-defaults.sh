@@ -39,7 +39,7 @@ defaults write com.apple.finder FXEnableExtensionChangeWarning -int 0
 
 
 
-// Configure Notifications.
+# Configure Notifications.
 
 set -eufo pipefail
 

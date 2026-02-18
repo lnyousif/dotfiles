@@ -3,7 +3,7 @@
 
 OUTPUT_FILE="$HOME/INSTALLED_PACKAGES.md"
 
-echo "📝 Generating package list..."
+echo "Generating package list..."
 
 cat > "$OUTPUT_FILE" << EOF
 # Installed Packages
@@ -142,9 +142,9 @@ EOF
 fi
 
 echo ""
-echo "✅ Package list generated: $OUTPUT_FILE"
+echo "Package list generated: $OUTPUT_FILE"
 echo ""
-echo "📊 Quick stats:"
+echo "Quick stats:"
 if command -v wc &> /dev/null; then
     line_count=$(wc -l < "$OUTPUT_FILE")
     echo "   Total lines: $line_count"
