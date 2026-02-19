@@ -37,9 +37,7 @@ defaults write com.apple.finder _FXSortFoldersFirst -int 1
 defaults write com.apple.finder FXRemoveOldTrashItems -int 1
 defaults write com.apple.finder FXEnableExtensionChangeWarning -int 0
 
-
-
-// Configure Notifications.
+# Configure Notifications.
 
 set -eufo pipefail
 
