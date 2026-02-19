@@ -5,6 +5,7 @@ packages:
         - 7zip.7zip
         - Git.Git
         - Microsoft.WindowsTerminal
+        - Microsoft.PowerShell
         - Starship.Starship
         - zyedidia.micro
         - KeePassXCTeam.KeePassXC
