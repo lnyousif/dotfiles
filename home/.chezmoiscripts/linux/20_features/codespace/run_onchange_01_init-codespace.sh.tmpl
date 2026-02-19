@@ -12,8 +12,8 @@ RESET="\033[0m"
 
 # Display a clear and colorful terminal message
 echo -e "${CYAN}========================================${RESET}"
-echo -e "${GREEN}Welcome to your CodeSpace Environment!${RESET}"
-echo -e "${YELLOW}Setting up your environment using DotFiles...${RESET}"
+echo -e "${GREEN}🚀 Welcome to your CodeSpace Environment!${RESET}"
+echo -e "${YELLOW}🔧 Setting up your environment using DotFiles...${RESET}"
 echo -e "${CYAN}========================================${RESET}"
 
 # Function to check if a command exists
@@ -23,17 +23,17 @@ command_exists() {
 
 # Function to display status messages
 status_msg() {
-  echo -e "${YELLOW}INFO: $1${RESET}"
+  echo -e "${YELLOW}➡️ $1${RESET}"
 }
 
 # Function to display success messages
 success_msg() {
-  echo -e "${GREEN}OK: $1${RESET}"
+  echo -e "${GREEN}✅ $1${RESET}"
 }
 
 # Function to display error messages
 error_msg() {
-  echo -e "${RED}ERROR: $1${RESET}"
+  echo -e "${RED}❌ $1${RESET}"
 }
 
 # Check for essential development tools
@@ -113,8 +113,8 @@ fi
 
 # Display completion message
 echo -e "${CYAN}========================================${RESET}"
-echo -e "${GREEN}CodeSpace environment setup complete!${RESET}"
-echo -e "${YELLOW}Tip: Use 'proj' alias to navigate to your project folder${RESET}"
+echo -e "${GREEN}✨ CodeSpace environment setup complete!${RESET}"
+echo -e "${YELLOW}💡 Tip: Use 'proj' alias to navigate to your project folder${RESET}"
 echo -e "${CYAN}========================================${RESET}"
 
 # Return success

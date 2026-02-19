@@ -110,38 +110,38 @@ alias r=repeat
 # Keeps all apps and packages up to date.
 # Syntax: `update`
 function update() {
-    echo "Starting system update..."
+    echo "🔄 Starting system update..."
     local failed=()
 
     # macOS system updates
     if command -v softwareupdate &> /dev/null; then
-        echo "Checking for macOS updates..."
+        echo "⏳ Checking for macOS updates..."
         if softwareupdate -l -i -a; then
-            echo "macOS updated"
+            echo "✅ macOS updated"
         else
-            echo "macOS update failed"
+            echo "❌ macOS update failed"
             failed+=("macOS")
         fi
     fi
 
     # Homebrew updates
     if command -v brew &> /dev/null; then
-        echo "Updating Homebrew packages..."
+        echo "⏳ Updating Homebrew packages..."
         if brew update && brew upgrade && brew cleanup; then
-            echo "Homebrew updated"
+            echo "✅ Homebrew updated"
         else
-            echo "Homebrew update failed"
+            echo "❌ Homebrew update failed"
             failed+=("Homebrew")
         fi
     fi
 
     # App Store updates
     if command -v mas &> /dev/null; then
-        echo "Updating App Store applications..."
+        echo "⏳ Updating App Store applications..."
         if mas upgrade; then
-            echo "App Store updated"
+            echo "✅ App Store updated"
         else
-            echo "App Store update failed"
+            echo "❌ App Store update failed"
             failed+=("App Store")
         fi
     fi
@@ -149,11 +149,11 @@ function update() {
     # APT updates (Debian/Ubuntu)
     if ! [[ "$OSTYPE" =~ ^darwin ]]; then
         if command -v apt &> /dev/null; then
-            echo "Updating apt packages..."
+            echo "⏳ Updating apt packages..."
             if sudo apt update && sudo apt full-upgrade -y && sudo apt autoremove -y && sudo apt clean; then
-                echo "APT updated"
+                echo "✅ APT updated"
             else
-                echo "APT update failed"
+                echo "❌ APT update failed"
                 failed+=("APT")
             fi
         fi
@@ -161,22 +161,22 @@ function update() {
 
     # Dotfiles update
     if command -v chezmoi &> /dev/null; then
-        echo "Updating dotfiles..."
+        echo "⏳ Updating dotfiles..."
         if chezmoi update; then
-            echo "Dotfiles updated"
+            echo "✅ Dotfiles updated"
         else
-            echo "Dotfiles update failed"
+            echo "❌ Dotfiles update failed"
             failed+=("dotfiles")
         fi
     fi
 
     # NPM global packages
     if command -v npm &> /dev/null; then
-        echo "Updating npm global packages..."
+        echo "⏳ Updating npm global packages..."
         if npm update -g; then
-            echo "NPM updated"
+            echo "✅ NPM updated"
         else
-            echo "NPM update failed"
+            echo "❌ NPM update failed"
             failed+=("NPM")
         fi
     fi
@@ -184,9 +184,9 @@ function update() {
     # Summary
     echo ""
     if [ ${#failed[@]} -eq 0 ]; then
-        echo "All updates completed successfully!"
+        echo "🎉 All updates completed successfully!"
     else
-        echo "WARNING: Some updates failed: ${failed[*]}"
+        echo "⚠️  Some updates failed: ${failed[*]}"
         return 1
     fi
 

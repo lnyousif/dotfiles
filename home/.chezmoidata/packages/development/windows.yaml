@@ -2,6 +2,7 @@ packages:
   development:
     windows:
       winget:
+        - Python.Python.3.12
         - Microsoft.VisualStudioCode
         - RedHat.Podman
         - CoreyButler.NVMforWindows

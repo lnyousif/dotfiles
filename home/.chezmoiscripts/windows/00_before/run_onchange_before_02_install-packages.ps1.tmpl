@@ -1,51 +1,103 @@
-# PowerShell script to initialize setup for a Windows machine
-
+# PowerShell setup for Windows
 Write-Host -ForegroundColor Cyan "Starting Windows machine setup..."
 
-$ErrorActionPreference = "Continue"  # Don't stop on first error
+$ErrorActionPreference = "Continue" 
 $FailedPackages = @()
 
+function Resolve-PipCommand {
+    if (Get-Command pip -ErrorAction SilentlyContinue) {
+        return "pip"
+    }
+    if (Get-Command py -ErrorAction SilentlyContinue) {
+        return "py -m pip"
+    }
+    if (Get-Command python -ErrorAction SilentlyContinue) {
+        return "python -m pip"
+    }
+    return $null
+}
+ 
 {{ range $setup, $value := .setups }}
-
   {{ if $value }}
 
         # Winget Packages
-        {{- range index $.packages $setup "windows" "winget" -}}
+        {{- if index $.packages $setup "windows" "winget" }}
+        {{- range index $.packages $setup "windows" "winget" }}
             try {
-                Write-Host -ForegroundColor Yellow "Installing {{ . }}..."
-                winget install -e --disable-interactivity --silent --accept-source-agreements --accept-package-agreements --id {{ . | quote }}
-                if ($LASTEXITCODE -eq 0) {
-                    Write-Host -ForegroundColor Green " {{ . }} installed successfully"
-                } else {
-                    Write-Host -ForegroundColor Red " {{ . }} installation failed with exit code $LASTEXITCODE"
-                    $FailedPackages += {{ . | quote }}
+                $WingetPackageId = {{ . | quote }}
+                Write-Host -ForegroundColor Yellow "Installing $WingetPackageId via Winget..."
+                # Use --accept-source-agreements to avoid interactive hangs
+                $WingetOutput = winget install -e --disable-interactivity --silent --accept-source-agreements --accept-package-agreements --id $WingetPackageId 2>&1 | Out-String
+                
+                if ($LASTEXITCODE -ne 0) {
+                    if ($WingetOutput -match "already installed|No available upgrade found|Found an existing package already installed") {
+                        Write-Host -ForegroundColor Yellow " $WingetPackageId is already installed. Skipping."
+                        continue
+                    }
+                    throw "Exit code $LASTEXITCODE`n$WingetOutput"
                 }
+                Write-Host -ForegroundColor Green " $WingetPackageId installed successfully"
             } catch {
-                Write-Host -ForegroundColor Red " Failed to install {{ . }}: $_"
-                $FailedPackages += {{ . | quote }}
+                Write-Host -ForegroundColor Red " Failed to install ${WingetPackageId}: $_"
+                $FailedPackages += $WingetPackageId
             }
-        {{ end -}}
+        {{- end }}
+        {{- end }}
 
-        {{- range index $.packages $setup "windows" "pips" -}}
-            pip install {{ . | quote }}
-        {{ end -}}
+    if (Get-Command pnpm -ErrorAction SilentlyContinue) {
+        Write-Host "pnpm is installed. Running 'pnpm setup'..."
+        pnpm setup
+    }
 
-        {{ range index $.packages $setup "windows" "pnpm" }}
-            pnpm install -g {{. | quote }}
-        {{ end }}
+        # Python Packages
+        {{- if index $.packages $setup "windows" "pips" }}
+        {{- range index $.packages $setup "windows" "pips" }}
+            $PipPackage = {{ . | quote }}
+            Write-Host -ForegroundColor Yellow "Installing {{ . }} via Pip..."
+            $PipCommand = Resolve-PipCommand
+            if ($PipCommand) {
+                $PipOutput = Invoke-Expression "$PipCommand install $PipPackage" 2>&1 | Out-String
+                if ($LASTEXITCODE -ne 0) {
+                    if ($PipOutput -match "Requirement already satisfied|already satisfied|already installed") {
+                        Write-Host -ForegroundColor Yellow " $PipPackage is already installed or satisfied. Skipping."
+                    } else {
+                        Write-Host -ForegroundColor Red " Pip failed for $PipPackage"
+                        $FailedPackages += "pip: $PipPackage"
+                    }
+                }
+            } else {
+                Write-Host -ForegroundColor Red " Pip failed for ${PipPackage}: Python/pip was not found in PATH"
+                $FailedPackages += "pip: $PipPackage"
+            }
+        {{- end }}
+        {{- end }}
+
+        # PNPM Global Packages
+        {{- if index $.packages $setup "windows" "pnpm" }}
+        {{- range index $.packages $setup "windows" "pnpm" }}
+            $PnpmPackage = {{ . | quote }}
+            Write-Host -ForegroundColor Yellow "Installing $PnpmPackage via PNPM..."
+            $PnpmOutput = pnpm install -g $PnpmPackage 2>&1 | Out-String
+            if ($LASTEXITCODE -ne 0) {
+                if ($PnpmOutput -match "already up to date|up to date|already installed") {
+                    Write-Host -ForegroundColor Yellow " $PnpmPackage is already installed or up to date. Skipping."
+                } else {
+                    Write-Host -ForegroundColor Red " PNPM failed for $PnpmPackage"
+                    $FailedPackages += "pnpm: $PnpmPackage"
+                }
+            }
+        {{- end }}
+        {{- end }}
 
   {{ end }}
-
 {{ end }}
-
-
 
 Write-Host -ForegroundColor Magenta "Windows machine setup completed."
 
 if ($FailedPackages.Count -gt 0) {
-    Write-Host -ForegroundColor Red "`nWARNING: Some packages failed to install:"
+    Write-Host -ForegroundColor Red "`n  The following packages failed:"
     $FailedPackages | ForEach-Object { Write-Host -ForegroundColor Red "  - $_" }
     exit 1
 } else {
-    Write-Host -ForegroundColor Green "`nAll packages installed successfully!"
+    Write-Host -ForegroundColor Green "`n All packages installed successfully!"
 }

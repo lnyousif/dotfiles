@@ -80,7 +80,7 @@ main() {
     chezmoi init https://github.com/lnyousif/dotfiles.git --apply || error_exit "Failed to initialize and apply chezmoi"
 
     echo "======================================================"
-    echo "Dotfiles setup complete!"
+    echo "✅ Dotfiles setup complete!"
     echo "======================================================"
 
     switch_git_remote

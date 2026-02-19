@@ -8,7 +8,8 @@ packages:
         - Starship.Starship
         - zyedidia.micro
         - KeePassXCTeam.KeePassXC
-      pips:
+      pips: []
+      pnpm: []
       junk:
         - Clipchamp.Clipchamp
         - Microsoft.549981C3F5F10
