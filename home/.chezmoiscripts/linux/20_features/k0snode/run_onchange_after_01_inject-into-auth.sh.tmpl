@@ -1,0 +1,54 @@
+#!/usr/bin/env bash
+
+set -e  # Exit immediately if a command fails
+
+# Colors for output
+GREEN="\033[0;32m"
+BLUE="\033[0;34m"
+YELLOW="\033[0;33m"
+NC="\033[0m" # No Color
+
+# Function to log messages with color
+log() {
+  echo -e "${BLUE}[SSH SETUP]${NC} $1"
+}
+
+log "Setting up SSH authorized keys..."
+
+# Ensure .ssh directory exists with proper permissions
+mkdir -p "$HOME/.ssh"
+chmod 700 "$HOME/.ssh"
+
+# Get SSH public key from Chezmoi data
+SSH_KEY="{{ includeTemplate "k0s/node_key" . }}"
+
+
+echo "$SSH_KEY"
+
+if [ -z "$SSH_KEY" ]; then
+  log "${YELLOW}Warning: No SSH key found in Chezmoi data. Skipping.${NC}"
+  exit 0
+fi
+
+# Check if the key is already in the authorized_keys file
+if [ -f "$HOME/.ssh/authorized_keys" ]; then
+  log "Found existing authorized_keys file"
+
+  if grep -q "$SSH_KEY" "$HOME/.ssh/authorized_keys"; then
+    log "${GREEN}SSH key already exists in authorized_keys. No changes made.${NC}"
+  else
+    log "Appending SSH key to authorized_keys file"
+    echo "$SSH_KEY" >> "$HOME/.ssh/authorized_keys"
+    log "${GREEN}SSH key added successfully!${NC}"
+  fi
+else
+  log "Creating new authorized_keys file"
+  echo "$SSH_KEY" > "$HOME/.ssh/authorized_keys"
+  log "${GREEN}SSH key added successfully!${NC}"
+fi
+
+# Ensure correct permissions on authorized_keys file
+chmod 600 "$HOME/.ssh/authorized_keys"
+
+log "${GREEN}SSH authorized keys setup complete!${NC}"
+exit 0

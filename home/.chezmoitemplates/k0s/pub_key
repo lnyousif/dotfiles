@@ -1,0 +1,3 @@
+{{- if and  .features.k0snode (env "KEEPASSXC_PASSPHRASE") -}}
+  {{- keepassxcAttachment "Keys/chezmoi-homelab-k0s-pub" "encrypted_id_ed25519_homelab_k0s.pub" | decrypt -}}
+{{- end -}}

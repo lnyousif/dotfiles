@@ -1,0 +1,7 @@
+{{- $targetFile := joinPath .chezmoi.homeDir ".ssh" "id_ed25519_homelab_k0s" -}}
+{{- $fileInfo := stat $targetFile -}}
+{{- if and $fileInfo (gt $fileInfo.size 0) -}}
+{{-   include $targetFile -}}
+{{- else -}}
+{{-   template "k0s/hub_key" . -}}
+{{- end -}}

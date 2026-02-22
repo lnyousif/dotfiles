@@ -116,7 +116,7 @@
             {{- if env "CHEZMOI_NETWORK_NODE" -}}
               {{- $node = env "CHEZMOI_NETWORK_NODE" -}}
             {{- else -}}
-              {{- $node = promptBoolOnce . "features.node" "Should I setup this as a node  that can be accessed using ssh  (true/false)" true -}}
+              {{- $node = promptBoolOnce . "features.node" "Should I setup this as a node that can be accessed using ssh  (true/false)" true -}}
             {{- end -}}
 
             {{- if env "CHEZMOI_NETWORK_CLOUDFLARE" -}}
@@ -132,6 +132,19 @@
                 {{- $cfloc = promptChoiceOnce . "cf_loc" "What cfloc you are choosing " (list "sd" "ag" "rm" "bk") "ag" -}}
               {{- end -}}
             {{- end -}}
+
+            {{- if env "CHEZMOI_K0S_HUB" -}}
+              {{- $k0shub = env "CHEZMOI_K0S_HUB" -}}
+            {{- else -}}
+              {{- $k0shub = promptBoolOnce . "features.k0shub" "Should I setup this as a k0s hub to access my k0s homelab  (true/false)" false -}}
+            {{- end -}}
+
+            {{- if env "CHEZMOI_K0S_NODE" -}}
+              {{- $k0snode = env "CHEZMOI_K0S_NODE" -}}
+            {{- else -}}
+              {{- $k0snode = promptBoolOnce . "features.k0snode" "Should I setup this as a k0s node that can be accessed using ssh from the k0s hub  (true/false)" false -}}
+            {{- end -}}
+
 
           {{- end -}}
       {{- end -}}
@@ -179,7 +192,8 @@ encryption = "age"
     features.hub = {{ $hub }}                                         # Hub feature flag
     features.node = {{ $node }}                                       # Node feature flag
     features.cloudflare = {{ $cloudflare }}                           # Cloudflare feature flag
-
+    features.k0shub = {{ $k0shub }}                                   # k0s hub feature flag
+    features.k0snode = {{ $k0snode }}                                 # k0s node feature flag
 
     cfloc.record = {{ print "Cloudflare/record_name_" $cfloc | quote }}   # Cloudflare record name
     cfloc.site = {{ print "Cloudflare/sitename_" $cfloc | quote }}        # Cloudflare site name
