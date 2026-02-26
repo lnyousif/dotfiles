@@ -1,0 +1,13 @@
+{{- if lookPath "bash" -}}
+  if [ -f /etc/bashrc ]; then
+      . /etc/bashrc
+  fi
+  {{-   template "shell/shellrc" . -}}
+  {{- if eq .chezmoi.os "linux" -}}
+      eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv bash)"
+  {{- end -}}
+    {{- if eq .chezmoi.os "darwin" -}}
+      eval "$(/opt/homebrew/bin//brew shellenv bash)"
+  {{- end -}}
+  eval "$(starship init bash)"
+{{- end -}}

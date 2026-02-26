@@ -1,0 +1,40 @@
+# Searches history for a string, or lists all history.
+# Syntax: `historysearch <string>`
+function history_search() {
+    if [ -z "$1" ]; then
+        history
+    else
+        history | fzf "$1"
+    fi
+}
+
+# Searches session history for a string, or lists all session history.
+# Syntax: `history_session_search <string>`
+function history_session_search() {
+    prefix=$(date +"$HISTTIMEFORMAT")
+    offset=$((8 + ${#prefix}))
+    comm -23 <(history | cut -c ${offset}-) "${HISTFILE:-'~/.bash_history'}" | grep "$1"
+}
+
+# Copies contents to the clipboard.
+function cb() {
+    if [ -z "$1" ]; then
+        echo "Usage: cb <path>"
+        echo "Help: cb copies a file contents to the clipboard."
+        return 0
+    fi
+
+    if command -v pbcopy > /dev/null; then
+        pbcopy < "$1"
+    elif command -v xclip > /dev/null; then
+        xclip -selection clipboard < "$1"
+    elif command -v xsel > /dev/null; then
+        xsel -ib < "$1"
+    elif command -v clipboard > /dev/null; then # node.js clipboard-cli
+        clipboard < "$1"
+    elif command -v clip > /dev/null; then
+        clip < "$1"
+    elif command -v powershell > /dev/null; then
+        powershell -NoProfile -Command "Set-Clipboard"
+    fi
+}

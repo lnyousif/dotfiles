@@ -9,6 +9,10 @@ packages:
         - Starship.Starship
         - zyedidia.micro
         - KeePassXCTeam.KeePassXC
+        - sharkdp.fd
+        - junegunn.fzf
+        - tldr-pages.tldr
+        - sharkdp.bat
       pips: []
       pnpm: []
       junk:

@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 
 export PATH="$HOME/.local/bin/:$PATH"
-
 {{ range $setup, $value := .setups }}
 
   {{ if $value }}
@@ -10,7 +9,7 @@ export PATH="$HOME/.local/bin/:$PATH"
     echo "Installing self installing packages"
 
     {{ range index $.packages $setup "linux" "linux_cmd" }}
-      bash -c {{ . | replace "{arch}" $.chezmoi.arch | quote }}
+      {{ if . }}bash -c {{ . | replace "{arch}" $.chezmoi.arch | quote }}{{ end }}
     {{ end }}
 
     # Native packages

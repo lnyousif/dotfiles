@@ -1,3 +1,1 @@
-{{- if or (eq .chezmoi.os "darwin") (eq .chezmoi.os "linux") -}}
-{{-   template "bashrc" . -}}
-{{- end -}}
+{{-   template "shell/bashrc" . -}}

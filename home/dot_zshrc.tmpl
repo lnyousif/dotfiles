@@ -1,6 +1,1 @@
-{{- if eq .chezmoi.os "darwin" -}}
-  {{-   template "mac_zshrc" . -}}
-{{- else if eq .chezmoi.os "linux" -}}
-  {{-   template "linux_zshrc" . -}}
-{{- end -}}
-
+{{-   template "shell/zshrc" . -}}

@@ -17,6 +17,9 @@ packages:
         - tmux
         - xclip
         - keepassxc
+        - fd-find
+        - fzf
+        - bat
       apt_junk:
         - firefox
         - libreoffice-data

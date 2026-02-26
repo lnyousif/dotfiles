@@ -12,6 +12,9 @@ packages:
         - starship
         - tmux
         - micro
+        - fd-find
+        - fzf
+        - bat
       casks:
         - google-chrome
         - keepassxc
@@ -35,4 +38,3 @@ packages:
         - Numbers
         - Pages
         - App Store
-

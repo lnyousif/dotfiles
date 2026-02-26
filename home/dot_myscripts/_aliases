@@ -1,0 +1,45 @@
+# Makes file commands verbose.
+
+alias cp='cp -v';
+alias mv='mv -v';
+
+# Displays drives and space in human readable format.
+
+# alias df='df -h'
+
+# Colorizes diff output, if possible.
+
+if type 'colordiff' &> /dev/null; then
+alias diff='colordiff'
+fi
+
+# Prints disk usage per directory non-recursively, in human readable format.
+
+alias du='du -h -d1'
+
+# Makes `mount` command output pretty and with a human readable format.
+
+alias mount='mount | column -t'
+
+alias ls='ls --color=auto'
+alias ll='ls -alF'
+alias la='ls -A'
+alias l='ls -CF'
+
+# General aliases
+
+# -----------------------------------------------------------------------------
+
+# Searches history.
+
+alias h='history_search' # see file `functions`
+alias hs='history_session_search' # see file `functions`
+
+# Sets editors and defaults.
+
+alias edit='micro'
+
+# Add aliases for better workflow
+
+alias fd='fdfind' # On Debian/Ubuntu
+alias fp='fzf --preview "bat --style=numbers --color=always --line-range :500 {}"'

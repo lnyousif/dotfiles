@@ -1,0 +1,51 @@
+
+# Consolidated PATH management - add all custom paths first
+PATH="c/.local/bin:$HOME/bin:$HOME/.myscripts/bin:/root/.local/bin:/usr/local/bin:/usr/bin:$PATH"
+
+# Remove duplicate PATH entries
+if command -v awk &> /dev/null; then
+    PATH=$(echo "$PATH" | awk -v RS=':' '!a[$1]++ { if (NR > 1) printf RS; printf $1 }')
+fi
+
+export PATH
+export EDITOR=micro
+
+# Add custom commands directory to PATH
+if [ -d "$HOME/.myscripts/bin" ] && ! [[ "$PATH" =~ "$HOME/.myscripts/bin" ]]; then
+    PATH="$HOME/.myscripts/bin:$PATH"
+fi
+export PATH
+
+# Load cross-compatible Bash functions declarations from separate file.
+if [ -f "$HOME"/.myscripts/bash_functions ]; then
+    \. "$HOME"/.myscripts/_functions
+fi
+
+# Load cross-compatible Bash extra functions declarations from separate file.
+if [ -f "$HOME"/.myscripts/bash_extra ]; then
+    \. "$HOME"/.myscripts/_extra
+fi
+
+
+# Load cross-compatible Bash alias definitions from separate file.
+if [ -f "$HOME"/.myscripts/bash_aliases ]; then
+    \. "$HOME"/.myscripts/_aliases
+fi
+
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+export PNPM_HOME="$HOME/.local/share/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+
+# 1. Use fd for fzf (includes hidden/gitignored files)
+export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+
+# 2. Use bat for fzf preview window
+export FZF_DEFAULT_OPTS="--ansi --preview 'bat --color=always --style=numbers --line-range :500 {}'"
