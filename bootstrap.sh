@@ -32,6 +32,8 @@ export CHEZMOI_ENCRYPTION=false           # Set to true to enable encryption
 export CHEZMOI_PASS_MANAGER=false         # Set to true to enable password manager
 export CHEZMOI_NETWORK_HUB=false          # Set to true if this is a network hub
 export CHEZMOI_NETWORK_NODE=false         # Set to true if this is a node machine
+export CHEZMOI_K0S_HUB=false          # Set to true if this is a k0s hub
+export CHEZMOI_K0S_NODE=false         # Set to true if this is a k0s node
 export CHEZMOI_NETWORK_CLOUDFLARE=false   # Set to true to enable Cloudflare DDNS updates
 export CHEZMOI_NETWORK_CFLOC=""           # Cloudflare location for DDNS updates
 

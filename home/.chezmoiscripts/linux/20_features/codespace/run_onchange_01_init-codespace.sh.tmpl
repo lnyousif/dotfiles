@@ -69,12 +69,6 @@ if command_exists git; then
   # Set GPG signing key
   git config --global user.signingkey EA6B1EE06E66135725CCA17ED7101733BB16C507
 
-  # Add useful Git aliases
-  git config --global alias.co checkout
-  git config --global alias.br branch
-  git config --global alias.st status
-  git config --global alias.lg "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
-
   success_msg "Git configuration complete"
 fi
 
@@ -91,10 +85,6 @@ cat << 'EOF' >> "$ALIASES_FILE"
 
 # CodeSpace specific aliases
 alias proj="cd $CODESPACE_VSCODE_FOLDER"
-alias refresh="source ~/.bashrc"
-alias gs="git status"
-alias gp="git pull"
-alias gcm="git commit -m"
 alias update-dotfiles="chezmoi update"
 EOF
 success_msg "Added CodeSpace-specific aliases"

@@ -5,7 +5,7 @@ alias mv='mv -v';
 
 # Displays drives and space in human readable format.
 
-# alias df='df -h'
+alias df='df -h'
 
 # Colorizes diff output, if possible.
 
@@ -40,6 +40,4 @@ alias hs='history_session_search' # see file `functions`
 alias edit='micro'
 
 # Add aliases for better workflow
-
-alias fd='fdfind' # On Debian/Ubuntu
 alias fp='fzf --preview "bat --style=numbers --color=always --line-range :500 {}"'
