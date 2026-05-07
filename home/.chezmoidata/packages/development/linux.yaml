@@ -13,6 +13,7 @@ packages:
         - kubernetes-client
         - podman-tui
         - helm
+        - make
       pips:
         - commitizen
         - pre-commit

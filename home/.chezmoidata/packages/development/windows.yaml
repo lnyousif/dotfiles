@@ -12,6 +12,7 @@ packages:
         - Containers.PodmanTUI
         - k0sctl.k0sctl
         - Google.ContainerTools.Skaffold
+        - ezwinports.make
       pips:
         - "--user -U commitizen"
         - "--user -U pre-commit"
