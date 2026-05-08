@@ -22,6 +22,9 @@ vscode:
       - ms-python.vscode-python-envs
       - golang.go
       - ms-vscode.makefile-tools
+      - saoudrizwan.claude-dev
+      - naumovs.color-highlight
+      - johnpapa.vscode-peacock
     windows:
       - ms-vscode-remote.remote-wsl
     darwin:
