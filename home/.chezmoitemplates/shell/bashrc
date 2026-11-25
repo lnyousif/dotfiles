@@ -1,13 +1,18 @@
 {{- if lookPath "bash" -}}
-  if [ -f /etc/bashrc ]; then
-      . /etc/bashrc
-  fi
-  {{-   template "shell/shellrc" . -}}
-  {{- if eq .chezmoi.os "linux" -}}
-      eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv bash)"
-  {{- end -}}
-    {{- if eq .chezmoi.os "darwin" -}}
-      eval "$(/opt/homebrew/bin//brew shellenv bash)"
-  {{- end -}}
-  eval "$(starship init bash)"
+# Environment first, so non-interactive shells (scripts, `ssh host cmd`) get PATH too
+if [ -r "$HOME/.config/shell/env.sh" ]; then
+    . "$HOME/.config/shell/env.sh"
+fi
+
+# Nothing below is needed outside an interactive shell
+case $- in
+    *i*) ;;
+    *) return ;;
+esac
+
+if [ -f /etc/bashrc ]; then
+    . /etc/bashrc
+fi
+{{ template "shell/shellrc" . }}
+{{ template "shell/prompt" (dict "shell" "bash") }}
 {{- end -}}

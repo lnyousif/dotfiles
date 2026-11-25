@@ -126,7 +126,7 @@ if [[ ! $old_ip =~ ^$ipv6_regex$ ]]; then
 fi
 
 # Compare if they're the same
-if [[ $ip == $old_ip ]]; then
+if [[ $ip == "$old_ip" ]]; then
     logger "$log_header_name: IP ($ip) for ${record_name} has not changed."
     exit 0
 fi

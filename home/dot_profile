@@ -1,0 +1,6 @@
+# shellcheck shell=sh
+# ~/.profile — read by login sh/dash shells and Linux desktop sessions (so GUI apps
+# get the same PATH). Bash login shells read ~/.bash_profile, which sources this.
+if [ -r "$HOME/.config/shell/env.sh" ]; then
+    . "$HOME/.config/shell/env.sh"
+fi

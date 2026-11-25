@@ -1,0 +1,6 @@
+# ~/.zprofile — zsh login shells.
+# On macOS, /etc/zprofile runs path_helper after ~/.zshenv and moves system paths
+# in front of ours; sourcing env.sh again restores our order (it's idempotent).
+if [ -r "$HOME/.config/shell/env.sh" ]; then
+    . "$HOME/.config/shell/env.sh"
+fi

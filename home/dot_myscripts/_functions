@@ -4,7 +4,7 @@ function history_search() {
     if [ -z "$1" ]; then
         history
     else
-        history | fzf "$1"
+        history | fzf --query "$1"
     fi
 }
 
@@ -13,7 +13,7 @@ function history_search() {
 function history_session_search() {
     prefix=$(date +"$HISTTIMEFORMAT")
     offset=$((8 + ${#prefix}))
-    comm -23 <(history | cut -c ${offset}-) "${HISTFILE:-'~/.bash_history'}" | grep "$1"
+    comm -23 <(history | cut -c ${offset}-) "${HISTFILE:-$HOME/.bash_history}" | grep "$1"
 }
 
 # Copies contents to the clipboard.
@@ -35,6 +35,6 @@ function cb() {
     elif command -v clip > /dev/null; then
         clip < "$1"
     elif command -v powershell > /dev/null; then
-        powershell -NoProfile -Command "Set-Clipboard"
+        powershell -NoProfile -Command "Set-Clipboard" < "$1"
     fi
 }

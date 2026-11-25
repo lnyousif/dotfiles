@@ -24,8 +24,8 @@
     # Disable line endings conversion.
     autocrlf = false
 
-    # Default editor for commit messages.
-    editor = micro
+    # No `editor` here: git falls back to $VISUAL/$EDITOR, which
+    # ~/.config/shell/env.sh sets to the first of micro, nano, vi that exists.
 
     # Set comment character to something that allows mentioning issue numbers.
     commentChar = ";"

@@ -1,6 +1,4 @@
 {{- if lookPath "zsh" -}}
-  {{-   template "shell/shellrc" . -}}
-  eval "$(/opt/homebrew/bin//brew zsh)"
-  eval "$(starship init zsh)"
+{{ template "shell/shellrc" . }}
+{{ template "shell/prompt" (dict "shell" "zsh") }}
 {{- end -}}
-

@@ -1,3 +1,12 @@
+{{- /* Credentials come from KeePassXC. If it isn't unlocked (no KEEPASSXC_PASSPHRASE),  */ -}}
+{{- /* keep the already deployed script instead of failing, or removing it from disk.    */ -}}
 {{- if .features.cloudflare -}}
-{{- template "cloudflare/template.sh" . -}}
-{{ end -}}
+{{-   $target := joinPath .chezmoi.homeDir ".cloudflare-ddns-updater" "cloudflare.sh" -}}
+{{-   if env "KEEPASSXC_PASSPHRASE" -}}
+{{-     template "cloudflare/template.sh" . -}}
+{{-   else if stat $target -}}
+{{-     include $target -}}
+{{-   else -}}
+{{-     warnf "KEEPASSXC_PASSPHRASE not set: skipping %s" $target -}}
+{{-   end -}}
+{{- end -}}

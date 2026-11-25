@@ -7,23 +7,22 @@ JOBS=(
     "0 */2 * * * /bin/bash ~/.cloudflare-ddns-updater/cloudflarev6.sh"
 )
 
-# Get current crontab content or an empty string if none exists
-(crontab -l 2>/dev/null || :) | while IFS= read -r line; do
-    echo "$line"
-done > /tmp/current_crontab.tmp
+# Work on a private temp copy of the current crontab (empty if none exists)
+tmp_crontab="$(mktemp)"
+trap 'rm -f "$tmp_crontab"' EXIT
+crontab -l 2>/dev/null > "$tmp_crontab" || :
 
 # Loop through the jobs and add them if they don't exist
 for job in "${JOBS[@]}"; do
-    if ! grep -Fq "$job" /tmp/current_crontab.tmp; then
+    if ! grep -Fq "$job" "$tmp_crontab"; then
         echo "Adding new cron job: $job"
-        echo "$job" >> /tmp/current_crontab.tmp
+        echo "$job" >> "$tmp_crontab"
     else
         echo "Job already exists, skipping: $job"
     fi
 done
 
 # Install the updated crontab file
-crontab /tmp/current_crontab.tmp
-rm /tmp/current_crontab.tmp
+crontab "$tmp_crontab"
 
 echo "Crontab configuration complete."

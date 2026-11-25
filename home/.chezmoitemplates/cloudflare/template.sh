@@ -27,10 +27,10 @@ IP_SERVICES=(
 )
 
 # Try all the ip services for a valid IPv4 address
-for service in ${IP_SERVICES[@]}; do
-  RAW_IP=$(curl -s $service)
+for service in "${IP_SERVICES[@]}"; do
+  RAW_IP=$(curl -s "$service")
   if [[ $RAW_IP =~ $REGEX_IPV4 ]]; then
-    CURRENT_IP=$BASH_REMATCH
+    CURRENT_IP=${BASH_REMATCH[0]}
     logger -s "DDNS Updater: Fetched IP $CURRENT_IP"
     break
   else
@@ -76,7 +76,7 @@ fi
 ###########################################
 old_ip=$(echo "$record" | sed -E 's/.*"content":"(([0-9]{1,3}\.){3}[0-9]{1,3})".*/\1/')
 # Compare if they're the same
-if [[ $CURRENT_IP == $old_ip ]]; then
+if [[ $CURRENT_IP == "$old_ip" ]]; then
   logger "DDNS Updater: IP ($CURRENT_IP) for ${record_name} has not changed."
   exit 0
 fi

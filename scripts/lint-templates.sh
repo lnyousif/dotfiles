@@ -30,6 +30,19 @@ while IFS= read -r -d '' tmpl; do
     echo "::error file=$tmpl::ShellCheck failed (rendered output above)"
     status=1
   fi
-done < <(find "$repo_root/home" -name '*.sh.tmpl' -print0)
+done < <(find "$repo_root/home" \( -name '*.sh.tmpl' -o -name 'dot_bashrc.tmpl' -o -name 'dot_zshrc.tmpl' \) -print0)
+
+# Sourced helper files have no extension or shebang, so name the shell explicitly
+if ! shellcheck --severity=warning --shell=bash "$repo_root"/home/dot_myscripts/_* \
+    "$repo_root"/home/dot_bash_profile; then
+  echo "::error::ShellCheck failed for dot_myscripts helpers"
+  status=1
+fi
+
+# Must stay POSIX: sourced by sh/dash (~/.profile) as well as bash and zsh
+if ! shellcheck --severity=warning --shell=sh "$repo_root"/home/dot_config/shell/env.sh "$repo_root"/home/dot_profile; then
+  echo "::error::ShellCheck failed for POSIX env files"
+  status=1
+fi
 
 exit "$status"
