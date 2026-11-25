@@ -1,8 +1,18 @@
 #!/usr/bin/env bash
+set -euo pipefail
 
-export PATH="$HOME/.local/bin/:$PATH"
+export PATH="$HOME/.local/bin:$PATH"
+LINE="-------------------------------------------"
+
 echo -e "\e[1;34m${LINE}\e[0m"
 echo -e "Operating system {{ .osid }}"
 echo -e "\e[1;34m${LINE}\e[0m"
 
-curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh |  bash
+BREW_BIN="/home/linuxbrew/.linuxbrew/bin/brew"
+
+if [ -x "${BREW_BIN}" ]; then
+  echo "Homebrew already installed."
+else
+  # NONINTERACTIVE skips the "Press RETURN" prompt so unattended installs don't hang
+  NONINTERACTIVE=1 bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+fi

@@ -21,8 +21,11 @@
     whitespace = fix
 
 [core]
-    # Disable line endings output conversion.
-    autocrlf = input
+    # Disable line endings conversion.
+    autocrlf = false
+
+    # Default editor for commit messages.
+    editor = micro
 
     # Set comment character to something that allows mentioning issue numbers.
     commentChar = ";"
@@ -41,6 +44,9 @@
 [diff]
     # List submodules commits in the range.
     submodule = log
+
+    # Default diff tool.
+    tool = micro
 
 [difftool "sourcetree"]
     # Specify the command to invoke Sourcetree.
@@ -70,6 +76,10 @@
     # Turn a content that by itself is unusable into a usable content.
     required = true
 
+[init]
+    # Default branch name for new repositories.
+    defaultBranch = main
+
 [help]
     # Correct and execute mistyped commands.
     autocorrect = 1
@@ -77,6 +87,12 @@
 [merge]
     # Include summaries of merged commits in newly created merge commit messages.
     log = true
+
+    # Only allow fast-forward merges.
+    ff = only
+
+    # Default merge tool.
+    tool = micro
 
 [mergetool]
     # Avoid saving an `.orig` backup file after a merge.
@@ -107,6 +123,25 @@
 
     # Specify the username of the author/committer.
     name = "{{ .name }}"
+{{- /* Signing only on development machines; codespaces have no GPG key */}}
+{{- if and .setups.development (not .features.codespace) }}
+
+    # GPG key used to sign commits and tags.
+    signingkey = EA6B1EE06E66135725CCA17ED7101733BB16C507
+
+[commit]
+    # Sign all commits.
+    gpgsign = true
+
+[tag]
+    # Sign annotated tags.
+    forceSignAnnotated = true
+{{- if eq .chezmoi.os "windows" }}
+
+[gpg]
+    program = "C:/Program Files (x86)/GnuPG/bin/gpg.exe"
+{{- end }}
+{{- end }}
 
 [include]
     # Include aliases.

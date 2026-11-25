@@ -20,7 +20,7 @@ mkdir -p "$HOME/.ssh"
 chmod 700 "$HOME/.ssh"
 
 # Get SSH public key from Chezmoi data
-SSH_KEY="{{ includeTemplate "k0s/node_key" . }}"
+SSH_KEY="{{ includeTemplate "k0s/pub_key" . }}"
 
 
 echo "$SSH_KEY"

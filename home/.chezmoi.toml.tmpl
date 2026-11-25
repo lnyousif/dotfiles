@@ -91,7 +91,7 @@
           # Prompt for enabling encryption with a default value of true
 
           {{- if env "CHEZMOI_ENCRYPTION" -}}
-            {{- $encryption = env "CHEZMOI_ENCRYPTION" -}}
+            {{- $encryption = eq (env "CHEZMOI_ENCRYPTION" | lower) "true" -}}
           {{- else -}}
             {{- $encryption = promptBoolOnce . "features.encryption" "Should I setup Encryption Decryption  (true/false)" true -}}
           {{- end -}}
@@ -100,7 +100,7 @@
           # If encryption are enabled, prompt for the seting up password manager database path
           {{- if $encryption -}}
             {{- if env "CHEZMOI_PASS_MANAGER" -}}
-              {{- $passman = env "CHEZMOI_PASS_MANAGER" -}}
+              {{- $passman = eq (env "CHEZMOI_PASS_MANAGER" | lower) "true" -}}
             {{- else -}}
               {{- $passman = promptBoolOnce . "features.passman" "Should I setup a Password Manager  (true/false)" true -}}
             {{- end -}}
@@ -110,19 +110,19 @@
           {{- if and $encryption $passman -}}
 
             {{- if env "CHEZMOI_NETWORK_HUB" -}}
-              {{- $hub = env "CHEZMOI_NETWORK_HUB" -}}
+              {{- $hub = eq (env "CHEZMOI_NETWORK_HUB" | lower) "true" -}}
             {{- else -}}
               {{- $hub = promptBoolOnce . "features.hub" "Should I setup this as a network hub to access other machines  (true/false)" false -}}
             {{- end -}}
 
             {{- if env "CHEZMOI_NETWORK_NODE" -}}
-              {{- $node = env "CHEZMOI_NETWORK_NODE" -}}
+              {{- $node = eq (env "CHEZMOI_NETWORK_NODE" | lower) "true" -}}
             {{- else -}}
               {{- $node = promptBoolOnce . "features.node" "Should I setup this as a node that can be accessed using ssh  (true/false)" true -}}
             {{- end -}}
 
             {{- if env "CHEZMOI_NETWORK_CLOUDFLARE" -}}
-              {{- $cloudflare = env "CHEZMOI_NETWORK_CLOUDFLARE" -}}
+              {{- $cloudflare = eq (env "CHEZMOI_NETWORK_CLOUDFLARE" | lower) "true" -}}
             {{- else -}}
               {{- $cloudflare = promptBoolOnce . "features.cloudflare" "Should I setup this as a cloudflare dns updater (true/false)" false -}}
             {{- end -}}
@@ -136,13 +136,13 @@
             {{- end -}}
 
             {{- if env "CHEZMOI_K0S_HUB" -}}
-              {{- $k0shub = env "CHEZMOI_K0S_HUB" -}}
+              {{- $k0shub = eq (env "CHEZMOI_K0S_HUB" | lower) "true" -}}
             {{- else -}}
               {{- $k0shub = promptBoolOnce . "features.k0shub" "Should I setup this as a k0s hub to access my k0s homelab  (true/false)" false -}}
             {{- end -}}
 
             {{- if env "CHEZMOI_K0S_NODE" -}}
-              {{- $k0snode = env "CHEZMOI_K0S_NODE" -}}
+              {{- $k0snode = eq (env "CHEZMOI_K0S_NODE" | lower) "true" -}}
             {{- else -}}
               {{- $k0snode = promptBoolOnce . "features.k0snode" "Should I setup this as a k0s node that can be accessed using ssh from the k0s hub  (true/false)" false -}}
             {{- end -}}
