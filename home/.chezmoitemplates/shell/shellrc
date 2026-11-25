@@ -1,14 +1,5 @@
+# Interactive shell setup shared by bash and zsh (environment lives in ~/.config/shell/env.sh)
 
-# Consolidated PATH management - add all custom paths first
-PATH="$HOME/.local/bin:$HOME/bin:$HOME/.myscripts/bin:/usr/local/bin:/usr/bin:$PATH"
-
-# Remove duplicate PATH entries
-if command -v awk &> /dev/null; then
-    PATH=$(echo "$PATH" | awk -v RS=':' '!a[$1]++ { if (NR > 1) printf RS; printf $1 }')
-fi
-
-export PATH
-export EDITOR=micro
 
 # Load shared functions, extras and aliases (bash and zsh compatible)
 for rc_file in _functions _extra _aliases; do
@@ -22,12 +13,6 @@ unset rc_file
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
-export PNPM_HOME="$HOME/.local/share/pnpm"
-case ":$PATH:" in
-  *":$PNPM_HOME:"*) ;;
-  *) export PATH="$PNPM_HOME:$PATH" ;;
-esac
 
 # 1. Use fd for fzf (includes hidden/gitignored files)
 export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'

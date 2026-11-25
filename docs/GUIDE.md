@@ -93,7 +93,37 @@ Script prefixes:
 - `run_onchange_` re-runs only when the script's rendered content changes.
 - `run_once_` runs once per machine.
 
-## 4. How secrets flow
+## 4. Shell startup and PATH
+
+Every shell type loads one environment file, `~/.config/shell/env.sh` (`home/dot_config/shell/env.sh`):
+
+```
+~/.config/shell/env.sh   PATH, EDITOR/VISUAL, HOMEBREW_PREFIX, PNPM_HOME (POSIX, idempotent)
+   ▲ sourced by
+   ├── ~/.profile        sh/dash login shells, Linux desktop sessions (GUI apps)
+   ├── ~/.bash_profile   bash login shells (SSH, macOS) → ~/.profile, then ~/.bashrc if interactive
+   ├── ~/.zshenv         every zsh, including scripts and `ssh host cmd`
+   ├── ~/.zprofile       zsh login, re-applied after macOS path_helper reorders PATH
+   └── ~/.bashrc         loads it first, then returns early when the shell isn't interactive
+```
+
+- **What goes where:**
+  - Environment variables go in `env.sh`.
+  - Interactive-only things (aliases, functions, prompt, fzf, nvm) go in `.chezmoitemplates/shell/shellrc`.
+- **PATH order:**
+  1. `~/.local/bin` (chezmoi, pipx, micro fallback)
+  2. `~/.myscripts/bin`
+  3. `~/bin`
+  4. `~/.cargo/bin`, `~/go/bin`, `~/.bun/bin`, pnpm
+  5. Homebrew
+  6. System paths
+
+  Directories that don't exist are skipped.
+- **Editor:** the first available of `micro`, `nano`, `vi`. Git has no `core.editor`, so it uses the same one.
+- **Per-machine additions:** put them in `~/.config/shell/env.local.sh`, which chezmoi doesn't manage.
+- **micro on Linux:** if no package manager provided it (no sudo, or a distro without the package), it's installed into `~/.local/bin` with the official installer.
+
+## 5. How secrets flow
 
 ```
 AGE_PASSPHRASE ──► key.txt.age ──► ~/.config/chezmoi/key.txt   (age identity)
@@ -136,7 +166,7 @@ Follow the same pattern for new secrets; see `private_dot_ssh/*.tmpl`.
 | `Keys/chezmoi-homelab-k0s-pub` → `encrypted_id_ed25519_homelab_k0s.pub` | `authorized_keys` (k0snode) |
 | `Cloudflare/*`, `Cloudflare/record_name_<loc>`, `Cloudflare/sitename_<loc>` | DDNS scripts |
 
-## 5. Common tasks
+## 6. Common tasks
 
 ### Set up a new machine with secrets
 
@@ -194,17 +224,18 @@ Edit `home/.chezmoidata/packages/<setup>/<os>.yaml`. Linux keys:
 
 The install script re-runs on the next apply because its rendered content changed.
 
-## 6. Troubleshooting
+## 7. Troubleshooting
 
 | Symptom | Cause / fix |
 |---------|-------------|
 | `error calling keepassxc: ... exit status 1` | Wrong or empty `KEEPASSXC_PASSPHRASE`, missing `~/.keepassxc/keypass.keyx`, or the entry doesn't exist. chezmoi hides the reason; run the command it prints yourself, e.g. `my_chezmoi_keepassxc.sh show -k ~/.keepassxc/keypass.keyx ~/.keepassxc/chezmoi.kdbx Cloudflare/auth_email` |
 | `age: no identity matched` / decrypt fails | `~/.config/chezmoi/key.txt` missing or wrong. Delete it and re-run `chezmoi apply` with `AGE_PASSPHRASE` set |
 | A setting in `~/.gitconfig` disappears | Something ran `git config --global`. That file is managed by `dot_gitconfig.tmpl`; put the setting there, or in `~/.gitconfig_local` (unmanaged, already included) |
+| Command not found right after install | The installing shell can't pick up new PATH entries: run `exec $SHELL` or open a new terminal. If it's still missing, check `echo $PATH` contains `~/.local/bin` and that `~/.config/shell/env.sh` exists (`chezmoi apply`) |
 | Changed a script but it didn't run | `run_once_` scripts don't re-run; `chezmoi state delete-bucket --bucket=scriptState` resets them |
 | See what would change | `chezmoi diff`, or `chezmoi execute-template < file.tmpl` to render one template |
 
-## 7. Checks
+## 8. Checks
 
 - `pre-commit` runs commitizen, file hygiene and ShellCheck on plain `.sh` files.
 - `scripts/lint-templates.sh` renders every script template and the shell rc files with secrets disabled, then ShellChecks the output.

@@ -1,4 +1,4 @@
 {{- if lookPath "zsh" -}}
 {{ template "shell/shellrc" . }}
-{{ template "shell/brew_starship" (dict "shell" "zsh") }}
+{{ template "shell/prompt" (dict "shell" "zsh") }}
 {{- end -}}

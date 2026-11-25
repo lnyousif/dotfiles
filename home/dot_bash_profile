@@ -1,0 +1,11 @@
+# shellcheck shell=bash
+# ~/.bash_profile — bash login shells (SSH sessions, macOS terminals, tty).
+# Bash reads only this file at login, so pull in the environment and, for
+# interactive shells, the usual ~/.bashrc.
+if [ -r "$HOME/.profile" ]; then
+    . "$HOME/.profile"
+fi
+
+case $- in
+    *i*) [ -r "$HOME/.bashrc" ] && . "$HOME/.bashrc" ;;
+esac

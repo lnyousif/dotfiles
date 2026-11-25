@@ -18,7 +18,11 @@ fi
     {{ end }}
 
     # Native packages
-    {{ if or (eq $.osid "linux-debian") (eq $.osid "linux-ubuntu") (eq $.osid "linux-debian ubuntu") (eq $.osid "linux-ubuntu debian") }}
+    {{/* Native packages need root; "normal" users skip straight to the user-level installs */}}
+    {{ if not $.superuser }}
+        echo "No sudo access: skipping native packages"
+
+    {{ else if or (contains "debian" $.osid) (contains "ubuntu" $.osid) }}
         ## Debian
         echo "Installing Debian Packages"
 
@@ -30,7 +34,7 @@ fi
         {{ $.superuser }} apt remove -y {{ . | quote }}
         {{ end }}
 
-    {{ else if eq $.osid "linux-fedora" }}
+    {{ else if contains "fedora" $.osid }}
         ## Fedora
         echo "Installing RPM packages"
 
@@ -44,7 +48,7 @@ fi
         {{ end }}
 
 
-    {{ else if eq $.osid "linux-alpine" }}
+    {{ else if contains "alpine" $.osid }}
         ## Alpine
         echo "Installing APK packages"
 
@@ -57,7 +61,7 @@ fi
         {{ end }}
 
 
-    {{ else if eq $.osid "linux-arch" }}
+    {{ else if contains "arch" $.osid }}
         ## Arch
         echo "Installing Arch packages"
 
@@ -87,3 +91,11 @@ fi
   {{ end }}
 
 {{ end }}
+
+# Fallback: micro isn't packaged everywhere (e.g. RHEL without EPEL) or there was no sudo.
+# The official installer drops a static binary into the current directory.
+if ! command -v micro &> /dev/null; then
+  echo "micro not found; installing it to ~/.local/bin"
+  mkdir -p "$HOME/.local/bin"
+  (cd "$HOME/.local/bin" && curl -fsSL https://getmic.ro | bash) || echo "micro install failed"
+fi
