@@ -8,6 +8,9 @@ This repository contains personal dotfiles and configuration files, managed usin
 - ☁️ **GitHub Codespaces**
 - 🐳 **DevContainers** (VS Code Remote Containers)
 
+> 📖 **How it works** (machine profiles, script order, secrets, adding/rotating keys,
+> troubleshooting): see [docs/GUIDE.md](docs/GUIDE.md).
+
 ## Quick Start
 
 ### 🚀 One-Line Install
@@ -138,7 +141,16 @@ export CHEZMOI_PASS_MANAGER=false
 export CHEZMOI_NETWORK_HUB=false
 export CHEZMOI_NETWORK_NODE=false
 export CHEZMOI_NETWORK_CLOUDFLARE=false
+export CHEZMOI_NETWORK_CFLOC=""          # Cloudflare site: sd, ag, rm, bk
+export CHEZMOI_K0S_HUB=false
+export CHEZMOI_K0S_NODE=false
+
+# Secrets (only needed with encryption / password manager)
+export AGE_PASSPHRASE='…'                # decrypts home/key.txt.age
+export KEEPASSXC_PASSPHRASE='…'          # unlocks the KeePassXC database
 ```
+
+Boolean flags must be exactly `true` or `false`; unset ones are prompted for.
 
 ## Common Tasks
 
@@ -202,18 +214,21 @@ This dotfile setup is designed to be forked and customized:
 
 ### Custom Aliases
 
-Pre-configured useful aliases:
-- `ll` - Detailed list view
-- `la` - List all including hidden
-- `..` - Go up one directory
-- Git shortcuts: `gst`, `gco`, `glog`
+Defined in `home/dot_myscripts/_aliases`:
+- `ll`, `la`, `l` - List views
+- `h` / `hs` - Search shell / session history (fzf)
+- `fp` - fzf with a bat preview
+- `edit` - Open micro
+- `cp`, `mv`, `df`, `du`, `mount` - Verbose / human-readable defaults
+
+Functions (`_functions`, `_extra`): `cb <file>` copies a file to the clipboard,
+`toggle_origin_remote` switches `origin` between HTTPS and SSH.
 
 ### Git Enhancements
 
-- Beautiful log view: `git lg`
 - Pre-configured global `.gitignore`
-- Commit signing support
-- Useful aliases
+- Commit and tag signing on development machines
+- Machine-specific settings go in `~/.gitconfig_local` (included, not managed)
 
 ### Starship Prompt
 
