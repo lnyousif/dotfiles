@@ -55,26 +55,20 @@ install_dependencies() {
 
 # Function to switch git remote between HTTPS and SSH
 switch_git_remote() {
-    chezmoi cd
-    # Script to toggle origin remote between HTTPS and SSH
-    echo "Toggling origin remote between HTTPS and SSH..."
+    # `chezmoi cd` opens an interactive subshell, so cd into the working tree instead
+    cd "$(chezmoi source-path)" || error_exit "Could not cd into chezmoi source"
 
-    # Get the current origin URL
+    echo "Toggling origin remote between HTTPS and SSH..."
     current_url=$(git remote get-url origin)
 
-    # Check if the URL is HTTPS or SSH
     if [[ $current_url == https://* ]]; then
-        # Convert HTTPS URL to SSH URL
-        ssh_url=$(echo "$current_url" | sed -e 's|https://|git@|' -e 's|/|:|' -e 's|\.com/|\.com:|')
-
-        # Set the new SSH URL as the origin remote
+        # https://github.com/user/repo.git -> git@github.com:user/repo.git
+        ssh_url=$(echo "$current_url" | sed -E 's|^https://([^/]+)/|git@\1:|')
         git remote set-url origin "$ssh_url"
         echo "Origin remote switched to SSH: $ssh_url"
     elif [[ $current_url == git@* ]]; then
-        # Convert SSH URL to HTTPS URL
-        https_url=$(echo "$current_url" | sed -e 's|git@|https://|' -e 's|:|/|' -e 's|\.com:|\.com/|')
-
-        # Set the new HTTPS URL as the origin remote
+        # git@github.com:user/repo.git -> https://github.com/user/repo.git
+        https_url=$(echo "$current_url" | sed -E 's|^git@([^:]+):|https://\1/|')
         git remote set-url origin "$https_url"
         echo "Origin remote switched to HTTPS: $https_url"
     else

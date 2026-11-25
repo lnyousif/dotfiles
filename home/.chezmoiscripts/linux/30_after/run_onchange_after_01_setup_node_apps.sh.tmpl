@@ -1,4 +1,11 @@
-#!/bin/bash
+#!/usr/bin/env bash
+
+export PATH="$HOME/.local/bin:$PATH"
+
+# Homebrew isn't on PATH yet on a fresh machine (shell rc files aren't sourced here)
+if [ -x /home/linuxbrew/.linuxbrew/bin/brew ]; then
+  eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+fi
 
 {{ range $setup, $value := .setups }}
 

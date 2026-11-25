@@ -1,11 +1,30 @@
 #!/bin/sh
+set -eu
 
-if [ ! -f "${HOME}/.config/chezmoi/key.txt" ]; then
-mkdir -p "${HOME}/.config/chezmoi"
-expect -c "
-spawn chezmoi age decrypt --output "${HOME}/.config/chezmoi/key.txt" --passphrase "{{ .chezmoi.sourceDir }}/key.txt.age"
-expect \"Enter passphrase:\"
-send \"$AGE_PASSPHRASE\r\"
-expect eof"
-chmod 600 "${HOME}/.config/chezmoi/key.txt"
+key_file="${HOME}/.config/chezmoi/key.txt"
+encrypted_key="{{ .chezmoi.sourceDir }}/key.txt.age"
+
+if [ ! -f "${key_file}" ]; then
+  mkdir -p "$(dirname "${key_file}")"
+
+  if [ -n "${AGE_PASSPHRASE:-}" ] && command -v expect >/dev/null 2>&1; then
+    # Unattended: expect answers chezmoi's passphrase prompt. Values are read from
+    # the environment inside expect, so quotes/$/[ in the passphrase are safe.
+    KEY_OUT="${key_file}" KEY_IN="${encrypted_key}" expect -c '
+      spawn chezmoi age decrypt --output $env(KEY_OUT) --passphrase $env(KEY_IN)
+      expect "Enter passphrase:"
+      send -- "$env(AGE_PASSPHRASE)\r"
+      expect eof
+    '
+  else
+    # Interactive fallback: chezmoi prompts for the passphrase itself
+    chezmoi age decrypt --output "${key_file}" --passphrase "${encrypted_key}"
+  fi
+
+  if [ ! -s "${key_file}" ]; then
+    echo "Failed to decrypt age key (wrong passphrase?)" >&2
+    rm -f "${key_file}"
+    exit 1
+  fi
+  chmod 600 "${key_file}"
 fi

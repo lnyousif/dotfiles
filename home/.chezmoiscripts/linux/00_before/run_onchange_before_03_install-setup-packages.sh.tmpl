@@ -1,6 +1,11 @@
 #!/usr/bin/env bash
 
-export PATH="$HOME/.local/bin/:$PATH"
+export PATH="$HOME/.local/bin:$PATH"
+
+# Homebrew isn't on PATH yet on a fresh machine (shell rc files aren't sourced here)
+if [ -x /home/linuxbrew/.linuxbrew/bin/brew ]; then
+  eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+fi
 {{ range $setup, $value := .setups }}
 
   {{ if $value }}
@@ -30,7 +35,6 @@ export PATH="$HOME/.local/bin/:$PATH"
         echo "Installing RPM packages"
 
 
-        {{ $.superuser }} dnf install -y {{ range index $.packages $setup "linux" "apt" }} {{.}}{{ end }}
         {{ range index $.packages $setup "linux" "apt" }}
         {{ $.superuser }} dnf install -y {{ . | quote }}
         {{ end }}
@@ -44,13 +48,12 @@ export PATH="$HOME/.local/bin/:$PATH"
         ## Alpine
         echo "Installing APK packages"
 
-        {{ $.superuser }} apk add --no-cache {{ range index $.packages $setup "linux" "apt" }} {{.}}{{ end }}
         {{ range index $.packages $setup "linux" "apt" }}
         {{ $.superuser }} apk add --no-cache {{ . | quote }}
         {{ end }}
 
         {{ range index $.packages $setup "linux" "apt_junk" }}
-        {{ $.superuser }} apk del --no-cache {{ . | quote }}
+        {{ $.superuser }} apk del {{ . | quote }}
         {{ end }}
 
 
@@ -58,7 +61,7 @@ export PATH="$HOME/.local/bin/:$PATH"
         ## Arch
         echo "Installing Arch packages"
 
-        {{ $.superuser }} pacman -Syu --needed {{ range index $.packages $setup "linux" "apt" }} {{.}}{{end}}
+        {{ $.superuser }} pacman -Syu --needed --noconfirm {{ range index $.packages $setup "linux" "apt" }} {{.}}{{end}}
 
     {{ end }}
 
@@ -74,9 +77,9 @@ export PATH="$HOME/.local/bin/:$PATH"
 
     {{ range index $.packages $setup "linux" "pips" }}
       if command -v pipx &>/dev/null; then
-        {{ $.superuser }} pipx install {{ . | quote }}
+        pipx install {{ . | quote }}
       else
-        {{ $.superuser }} pip install {{ . | quote }}
+        python3 -m pip install --user {{ . | quote }}
       fi
     {{ end }}
 

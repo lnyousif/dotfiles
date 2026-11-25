@@ -1,7 +1,9 @@
+{{- /* Prefer the key from KeePassXC so rotations reach every machine; */ -}}
+{{- /* fall back to the existing file when KeePassXC isn't unlocked.  */ -}}
+{{- $key := includeTemplate "github/id_ed25519" . -}}
 {{- $targetFile := joinPath .chezmoi.homeDir ".ssh" "id_ed25519" -}}
-{{- $fileInfo := stat $targetFile -}}
-{{- if and $fileInfo (gt $fileInfo.size 0) -}}
+{{- if $key -}}
+{{-   $key -}}
+{{- else if stat $targetFile -}}
 {{-   include $targetFile -}}
-{{- else -}}
-{{-   template "github/id_ed25519" . -}}
 {{- end -}}
