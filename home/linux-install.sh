@@ -45,7 +45,8 @@ switch_git_remote() {
     cd "$(chezmoi source-path)" || error_exit "Could not cd into chezmoi source"
 
     echo "Toggling origin remote between HTTPS and SSH..."
-    current_url=$(git remote get-url origin)
+    # Raw config value: `get-url` would apply any url.*.insteadOf rewrite
+    current_url=$(git config --get remote.origin.url)
 
     if [[ $current_url == https://* ]]; then
         # https://github.com/user/repo.git -> git@github.com:user/repo.git

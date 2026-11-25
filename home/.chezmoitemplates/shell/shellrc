@@ -1,6 +1,6 @@
 
 # Consolidated PATH management - add all custom paths first
-PATH=".local/bin:$HOME/bin:$HOME/.myscripts/bin:/root/.local/bin:/usr/local/bin:/usr/bin:$PATH"
+PATH="$HOME/.local/bin:$HOME/bin:$HOME/.myscripts/bin:/usr/local/bin:/usr/bin:$PATH"
 
 # Remove duplicate PATH entries
 if command -v awk &> /dev/null; then
@@ -10,28 +10,14 @@ fi
 export PATH
 export EDITOR=micro
 
-# Add custom commands directory to PATH
-if [ -d "$HOME/.myscripts/bin" ] && ! [[ "$PATH" =~ "$HOME/.myscripts/bin" ]]; then
-    PATH="$HOME/.myscripts/bin:$PATH"
-fi
-export PATH
-
-# Load cross-compatible Bash functions declarations from separate file.
-if [ -f "$HOME"/.myscripts/bash_functions ]; then
-    \. "$HOME"/.myscripts/_functions
-fi
-
-# Load cross-compatible Bash extra functions declarations from separate file.
-if [ -f "$HOME"/.myscripts/bash_extra ]; then
-    \. "$HOME"/.myscripts/_extra
-fi
-
-
-# Load cross-compatible Bash alias definitions from separate file.
-if [ -f "$HOME"/.myscripts/bash_aliases ]; then
-    \. "$HOME"/.myscripts/_aliases
-fi
-
+# Load shared functions, extras and aliases (bash and zsh compatible)
+for rc_file in _functions _extra _aliases; do
+    if [ -f "$HOME/.myscripts/$rc_file" ]; then
+        # shellcheck source=/dev/null
+        \. "$HOME/.myscripts/$rc_file"
+    fi
+done
+unset rc_file
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm

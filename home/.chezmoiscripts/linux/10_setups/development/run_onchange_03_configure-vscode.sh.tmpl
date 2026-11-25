@@ -1,6 +1,11 @@
 #!/bin/bash
 set -eufo pipefail
 
+if ! command -v code &> /dev/null; then
+  echo "VS Code CLI (code) not found; skipping extension install."
+  exit 0
+fi
+
 {{ range .vscode.extensions.global }}
     code --install-extension {{ . }}
 {{ end -}}

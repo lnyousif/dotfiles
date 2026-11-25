@@ -30,6 +30,12 @@ while IFS= read -r -d '' tmpl; do
     echo "::error file=$tmpl::ShellCheck failed (rendered output above)"
     status=1
   fi
-done < <(find "$repo_root/home" -name '*.sh.tmpl' -print0)
+done < <(find "$repo_root/home" \( -name '*.sh.tmpl' -o -name 'dot_bashrc.tmpl' -o -name 'dot_zshrc.tmpl' \) -print0)
+
+# Sourced helper files have no extension or shebang, so name the shell explicitly
+if ! shellcheck --severity=warning --shell=bash "$repo_root"/home/dot_myscripts/_*; then
+  echo "::error::ShellCheck failed for dot_myscripts helpers"
+  status=1
+fi
 
 exit "$status"
