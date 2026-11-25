@@ -20,10 +20,8 @@ mkdir -p "$HOME/.ssh"
 chmod 700 "$HOME/.ssh"
 
 # Get SSH public key from Chezmoi data
-SSH_KEY="{{ includeTemplate "k0s/pub_key" . }}"
-
-
-echo "$SSH_KEY"
+# $(...) strips any trailing newline from the rendered template
+SSH_KEY="$(printf '%s' "{{ includeTemplate "k0s/pub_key" . }}")"
 
 if [ -z "$SSH_KEY" ]; then
   log "${YELLOW}Warning: No SSH key found in Chezmoi data. Skipping.${NC}"
@@ -34,7 +32,7 @@ fi
 if [ -f "$HOME/.ssh/authorized_keys" ]; then
   log "Found existing authorized_keys file"
 
-  if grep -q "$SSH_KEY" "$HOME/.ssh/authorized_keys"; then
+  if grep -qxF "$SSH_KEY" "$HOME/.ssh/authorized_keys"; then
     log "${GREEN}SSH key already exists in authorized_keys. No changes made.${NC}"
   else
     log "Appending SSH key to authorized_keys file"

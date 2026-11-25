@@ -1,0 +1,24 @@
+name: Lint
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  shell:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install chezmoi
+        run: sh -c "$(curl -fsLS get.chezmoi.io)" -- -b "$HOME/.local/bin"
+
+      - name: ShellCheck plain scripts
+        # shellcheck is preinstalled on ubuntu runners
+        run: |
+          # .chezmoitemplates/*.sh are Go templates, not runnable shell
+          find . -name '*.sh' -not -path './.git/*' -not -path './home/.chezmoitemplates/*' -print0 \
+            | xargs -0 shellcheck --severity=warning
+
+      - name: Render templates and ShellCheck them
+        run: PATH="$HOME/.local/bin:$PATH" ./scripts/lint-templates.sh

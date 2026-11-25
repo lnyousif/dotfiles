@@ -35,7 +35,6 @@ fi
         echo "Installing RPM packages"
 
 
-        {{ $.superuser }} dnf install -y {{ range index $.packages $setup "linux" "apt" }} {{.}}{{ end }}
         {{ range index $.packages $setup "linux" "apt" }}
         {{ $.superuser }} dnf install -y {{ . | quote }}
         {{ end }}
@@ -49,13 +48,12 @@ fi
         ## Alpine
         echo "Installing APK packages"
 
-        {{ $.superuser }} apk add --no-cache {{ range index $.packages $setup "linux" "apt" }} {{.}}{{ end }}
         {{ range index $.packages $setup "linux" "apt" }}
         {{ $.superuser }} apk add --no-cache {{ . | quote }}
         {{ end }}
 
         {{ range index $.packages $setup "linux" "apt_junk" }}
-        {{ $.superuser }} apk del --no-cache {{ . | quote }}
+        {{ $.superuser }} apk del {{ . | quote }}
         {{ end }}
 
 
@@ -63,7 +61,7 @@ fi
         ## Arch
         echo "Installing Arch packages"
 
-        {{ $.superuser }} pacman -Syu --needed {{ range index $.packages $setup "linux" "apt" }} {{.}}{{end}}
+        {{ $.superuser }} pacman -Syu --needed --noconfirm {{ range index $.packages $setup "linux" "apt" }} {{.}}{{end}}
 
     {{ end }}
 
@@ -79,9 +77,9 @@ fi
 
     {{ range index $.packages $setup "linux" "pips" }}
       if command -v pipx &>/dev/null; then
-        {{ $.superuser }} pipx install {{ . | quote }}
+        pipx install {{ . | quote }}
       else
-        {{ $.superuser }} pip install {{ . | quote }}
+        python3 -m pip install --user {{ . | quote }}
       fi
     {{ end }}
 

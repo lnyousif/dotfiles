@@ -48,28 +48,8 @@ for tool in "${TOOLS[@]}"; do
   fi
 done
 
-# Configure git if needed
-if command_exists git; then
-  status_msg "Configuring Git settings..."
-
-  # Set up comprehensive Git configuration
-  git config --global commit.gpgsign true
-  git config --global core.autocrlf false
-  git config --global init.defaultBranch main
-  git config --global merge.ff only
-  git config --global tag.forceSignAnnotated true
-  git config --global user.email {{ .email }}
-  git config --global user.name {{ .name }}
-  git config --global user.signingkey EA6B1EE06E66135725CCA17ED7101733BB16C507
-
-  echo "Git is Configured!"
-
-
-
-  # Set GPG signing key
-  git config --global user.signingkey EA6B1EE06E66135725CCA17ED7101733BB16C507
-
-  success_msg "Git configuration complete"
+if [ "$MISSING" -eq 1 ]; then
+  error_msg "Some tools are missing; parts of the setup may not work."
 fi
 
 # Create or update local dotfiles specific to this container
@@ -77,16 +57,15 @@ status_msg "Setting up container-specific configurations..."
 
 # Create useful aliases for the container environment
 ALIASES_FILE="$HOME/.bash_aliases"
-if [ ! -f "$ALIASES_FILE" ]; then
-  touch "$ALIASES_FILE"
-fi
-
-cat << 'EOF' >> "$ALIASES_FILE"
+# Only append once; this script re-runs whenever its contents change
+if ! grep -qF "# CodeSpace specific aliases" "$ALIASES_FILE" 2>/dev/null; then
+  cat << 'EOF' >> "$ALIASES_FILE"
 
 # CodeSpace specific aliases
 alias proj="cd $CODESPACE_VSCODE_FOLDER"
 alias update-dotfiles="chezmoi update"
 EOF
+fi
 success_msg "Added CodeSpace-specific aliases"
 
 # Setup project-specific environment if detected
